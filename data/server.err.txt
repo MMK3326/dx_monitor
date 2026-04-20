@@ -1,0 +1,23 @@
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5050
+ * Running on http://220.94.200.90:5050
+Press CTRL+C to quit
+127.0.0.1 - - [13/Apr/2026 15:56:57] "GET /api/dashboard HTTP/1.1" 200 -
+127.0.0.1 - - [13/Apr/2026 15:57:22] "POST /api/viewers/heartbeat HTTP/1.1" 200 -
+127.0.0.1 - - [13/Apr/2026 15:57:22] "GET /api/dashboard HTTP/1.1" 200 -
+127.0.0.1 - - [13/Apr/2026 15:57:22] "GET /api/history/1 HTTP/1.1" 200 -
+127.0.0.1 - - [13/Apr/2026 15:57:22] "GET /api/history/2 HTTP/1.1" 200 -
+127.0.0.1 - - [13/Apr/2026 15:57:22] "GET /api/history/3 HTTP/1.1" 200 -
+127.0.0.1 - - [13/Apr/2026 15:58:19] "POST /api/viewers/heartbeat HTTP/1.1" 200 -
+127.0.0.1 - - [13/Apr/2026 15:58:19] "GET /api/dashboard HTTP/1.1" 200 -
+127.0.0.1 - - [13/Apr/2026 15:58:20] "GET /api/dashboard HTTP/1.1" 200 -
+127.0.0.1 - - [13/Apr/2026 15:58:21] "GET /api/dashboard HTTP/1.1" 200 -
+127.0.0.1 - - [13/Apr/2026 15:58:22] "POST /api/viewers/heartbeat HTTP/1.1" 200 -
+127.0.0.1 - - [13/Apr/2026 15:58:23] "GET /api/dashboard HTTP/1.1" 200 -
+127.0.0.1 - - [13/Apr/2026 15:58:24] "GET /api/history/1 HTTP/1.1" 200 -
+127.0.0.1 - - [13/Apr/2026 15:58:24] "GET /api/history/2 HTTP/1.1" 200 -
+127.0.0.1 - - [13/Apr/2026 15:58:24] "GET /api/history/3 HTTP/1.1" 200 -
+127.0.0.1 - - [13/Apr/2026 15:58:25] "GET /api/dashboard HTTP/1.1" 200 -
+127.0.0.1 - - [13/Apr/2026 15:58:27] "POST /api/viewers/heartbeat HTTP/1.1" 200 -
+127.0.0.1 - - [13/Apr/2026 15:58:28] "GET /api/dashboard HTTP/1.1" 200 -

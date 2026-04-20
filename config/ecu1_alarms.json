@@ -1,0 +1,1602 @@
+[
+    {
+        "device":  "L1",
+        "label":  "#20-1 용접기1 카트리지 사용횟수 확인"
+    },
+    {
+        "device":  "L2",
+        "label":  "#10 높이검사기 비상정지"
+    },
+    {
+        "device":  "L3",
+        "label":  "#10 높이검사기 공압 LOW"
+    },
+    {
+        "device":  "L5",
+        "label":  "#20-1 웰딩기 공압 LOW"
+    },
+    {
+        "device":  "L6",
+        "label":  "#10 경로검사 도어 열림"
+    },
+    {
+        "device":  "L7",
+        "label":  "#20-1 웰딩기 도어 열림"
+    },
+    {
+        "device":  "L8",
+        "label":  "#10 변위센서 높이측정 NG"
+    },
+    {
+        "device":  "L9",
+        "label":  "불량파렛트 취출파트 만재"
+    },
+    {
+        "device":  "L10",
+        "label":  "취출 R/B 파트 안전플러그 해제"
+    },
+    {
+        "device":  "L11",
+        "label":  "INVERTER 01 FAULT"
+    },
+    {
+        "device":  "L12",
+        "label":  "INVERTER 02 FAULT"
+    },
+    {
+        "device":  "L13",
+        "label":  "INVERTER 03 FAULT"
+    },
+    {
+        "device":  "L14",
+        "label":  "INVERTER 04 FAULT"
+    },
+    {
+        "device":  "L15",
+        "label":  "INVERTER 05 FAULT"
+    },
+    {
+        "device":  "L16",
+        "label":  "INVERTER 06 FAULT"
+    },
+    {
+        "device":  "L21",
+        "label":  "RFID1-1 로딩파트 READING 에러"
+    },
+    {
+        "device":  "L22",
+        "label":  "RFID1-1 로딩파트 WRITE 에러"
+    },
+    {
+        "device":  "L23",
+        "label":  "RFID1-1 로딩파트 파렛No. 에러"
+    },
+    {
+        "device":  "L26",
+        "label":  "RFID1-2 높이검사 이종 NG"
+    },
+    {
+        "device":  "L27",
+        "label":  "RFID1-2 높이검사 READING 에러"
+    },
+    {
+        "device":  "L28",
+        "label":  "RFID1-2 높이검사 전공정 미작업"
+    },
+    {
+        "device":  "L29",
+        "label":  "RFID1-3 비젼검사 PC판정 NG"
+    },
+    {
+        "device":  "L30",
+        "label":  "RFID1-3 비젼검사 TimeOut"
+    },
+    {
+        "device":  "L33",
+        "label":  "RFID1-4 경로선택 이종 NG"
+    },
+    {
+        "device":  "L34",
+        "label":  "RFID1-4 경로선택 READING 에러"
+    },
+    {
+        "device":  "L35",
+        "label":  "RFID1-4 경로선택 전공정 미작업"
+    },
+    {
+        "device":  "L38",
+        "label":  "RFID2-1 #20-1 웰딩파트 이종 NG"
+    },
+    {
+        "device":  "L39",
+        "label":  "RFID2-1 #20-1 웰딩파트 READING 에러"
+    },
+    {
+        "device":  "L40",
+        "label":  "RFID2-1 #20-1 웰딩파트 전공정 미작업"
+    },
+    {
+        "device":  "L43",
+        "label":  "RFID2-2 취출 이종 NG"
+    },
+    {
+        "device":  "L44",
+        "label":  "RFID2-2 취출 READING 에러"
+    },
+    {
+        "device":  "L45",
+        "label":  "RFID2-2 취출 전공정 미작업"
+    },
+    {
+        "device":  "L46",
+        "label":  "RFID2-2 취출 NG 제품"
+    },
+    {
+        "device":  "L50",
+        "label":  "RFID1-3 비젼검사 이종 NG"
+    },
+    {
+        "device":  "L51",
+        "label":  "RFID1-3 비젼검사 READING 에러"
+    },
+    {
+        "device":  "L52",
+        "label":  "RFID1-3 비젼검사 전공정 미작업"
+    },
+    {
+        "device":  "L53",
+        "label":  "용접 노즐 청소 알람"
+    },
+    {
+        "device":  "L101",
+        "label":  "RFID2-1 #20-2 웰딩파트 이종 NG"
+    },
+    {
+        "device":  "L102",
+        "label":  "RFID2-1 #20-2 웰딩파트 READING 에러"
+    },
+    {
+        "device":  "L103",
+        "label":  "RFID2-1 #20-2 웰딩파트 전공정 미작업"
+    },
+    {
+        "device":  "L104",
+        "label":  "#20-2 웰딩기 비상정지"
+    },
+    {
+        "device":  "L105",
+        "label":  "#20-2 웰딩기 공압 LOW"
+    },
+    {
+        "device":  "L106",
+        "label":  "#20-2 웰딩기 도어 열림"
+    },
+    {
+        "device":  "L107",
+        "label":  "#20-2 용접기2 카트리지 사용횟수 확인"
+    },
+    {
+        "device":  "L108",
+        "label":  "#20-2 용접　노즐　청소　알람"
+    },
+    {
+        "device":  "L110",
+        "label":  "#20-1 용접기 Ready 이상"
+    },
+    {
+        "device":  "L111",
+        "label":  "#20-1 용접기 이상"
+    },
+    {
+        "device":  "L112",
+        "label":  "#20-2 용접기 Ready 이상"
+    },
+    {
+        "device":  "L113",
+        "label":  "#20-2 용접기 이상"
+    },
+    {
+        "device":  "L301",
+        "label":  "#30 피어싱 SUB_OP 비상정지"
+    },
+    {
+        "device":  "L302",
+        "label":  "#30 피어싱 공압 LOW"
+    },
+    {
+        "device":  "L303",
+        "label":  "#30 도어 오픈"
+    },
+    {
+        "device":  "L304",
+        "label":  "#30 CONVEYOR #2 인버터 에러"
+    },
+    {
+        "device":  "L305",
+        "label":  "F305 FAULT"
+    },
+    {
+        "device":  "L306",
+        "label":  "RFID READING 에러"
+    },
+    {
+        "device":  "L307",
+        "label":  "F307 FAULT"
+    },
+    {
+        "device":  "L308",
+        "label":  "F308 FAULT"
+    },
+    {
+        "device":  "L309",
+        "label":  "F309 FAULT"
+    },
+    {
+        "device":  "L310",
+        "label":  "F310 FAULT"
+    },
+    {
+        "device":  "L311",
+        "label":  "F311 FAULT"
+    },
+    {
+        "device":  "L312",
+        "label":  "F312 FAULT"
+    },
+    {
+        "device":  "L313",
+        "label":  "F313 FAULT"
+    },
+    {
+        "device":  "L314",
+        "label":  "F314 FAULT"
+    },
+    {
+        "device":  "L315",
+        "label":  "#30 피어싱 센터링 안착이상(푸셔 하강센서)"
+    },
+    {
+        "device":  "L316",
+        "label":  "F316 FAULT"
+    },
+    {
+        "device":  "L317",
+        "label":  "F317 FAULT"
+    },
+    {
+        "device":  "L318",
+        "label":  "F318 FAULT"
+    },
+    {
+        "device":  "L319",
+        "label":  "F319 FAULT"
+    },
+    {
+        "device":  "L320",
+        "label":  "F320 FAULT"
+    },
+    {
+        "device":  "L321",
+        "label":  "RFID3-1 로딩파트 READING 에러"
+    },
+    {
+        "device":  "L322",
+        "label":  "RFID3-1 로딩파트 WRITE 에러"
+    },
+    {
+        "device":  "L323",
+        "label":  "RFID3-1 로딩파트 파렛No. 에러"
+    },
+    {
+        "device":  "L324",
+        "label":  "F324 FAULT"
+    },
+    {
+        "device":  "L325",
+        "label":  "F325 FAULT"
+    },
+    {
+        "device":  "L326",
+        "label":  "RFID3-2 피어싱 이종 NG"
+    },
+    {
+        "device":  "L327",
+        "label":  "RFID3-2 피어싱 READING 에러"
+    },
+    {
+        "device":  "L328",
+        "label":  "RFID3-2 피어싱 전공정 미작업"
+    },
+    {
+        "device":  "L329",
+        "label":  "RFID3-2 피어싱 패스"
+    },
+    {
+        "device":  "L330",
+        "label":  "F330"
+    },
+    {
+        "device":  "L331",
+        "label":  "F331"
+    },
+    {
+        "device":  "L332",
+        "label":  "F332 FAULT"
+    },
+    {
+        "device":  "L333",
+        "label":  "F333 FAULT"
+    },
+    {
+        "device":  "L334",
+        "label":  "F334 FAULT"
+    },
+    {
+        "device":  "L335",
+        "label":  "F335 FAULT"
+    },
+    {
+        "device":  "L336",
+        "label":  "F336 FAULT"
+    },
+    {
+        "device":  "L337",
+        "label":  "F337 FAULT"
+    },
+    {
+        "device":  "L338",
+        "label":  "F338 FAULT"
+    },
+    {
+        "device":  "L339",
+        "label":  "F339 FAULT"
+    },
+    {
+        "device":  "L340",
+        "label":  "F340 FAULT"
+    },
+    {
+        "device":  "L341",
+        "label":  "F341 FAULT"
+    },
+    {
+        "device":  "L342",
+        "label":  "F342 FAULT"
+    },
+    {
+        "device":  "L343",
+        "label":  "F343 FAULT"
+    },
+    {
+        "device":  "L344",
+        "label":  "F344 FAULT"
+    },
+    {
+        "device":  "L345",
+        "label":  "F345 FAULT"
+    },
+    {
+        "device":  "L346",
+        "label":  "F346 FAULT"
+    },
+    {
+        "device":  "L347",
+        "label":  "F347 FAULT"
+    },
+    {
+        "device":  "L348",
+        "label":  "F348 FAULT"
+    },
+    {
+        "device":  "L349",
+        "label":  "F349 FAULT"
+    },
+    {
+        "device":  "L350",
+        "label":  "F350 FAULT"
+    },
+    {
+        "device":  "L351",
+        "label":  "F351 FAULT"
+    },
+    {
+        "device":  "L352",
+        "label":  "F352 FAULT"
+    },
+    {
+        "device":  "L353",
+        "label":  "F353 FAULT"
+    },
+    {
+        "device":  "L354",
+        "label":  "F354 FAULT"
+    },
+    {
+        "device":  "L355",
+        "label":  "F355 FAULT"
+    },
+    {
+        "device":  "L356",
+        "label":  "F356 FAULT"
+    },
+    {
+        "device":  "L357",
+        "label":  "F357 FAULT"
+    },
+    {
+        "device":  "L358",
+        "label":  "F358 FAULT"
+    },
+    {
+        "device":  "L359",
+        "label":  "F359 FAULT"
+    },
+    {
+        "device":  "L360",
+        "label":  "F360 FAULT"
+    },
+    {
+        "device":  "L361",
+        "label":  "F361 FAULT"
+    },
+    {
+        "device":  "L362",
+        "label":  "F362 FAULT"
+    },
+    {
+        "device":  "L363",
+        "label":  "F363 FAULT"
+    },
+    {
+        "device":  "L364",
+        "label":  "F364 FAULT"
+    },
+    {
+        "device":  "L365",
+        "label":  "F365 FAULT"
+    },
+    {
+        "device":  "L366",
+        "label":  "F366 FAULT"
+    },
+    {
+        "device":  "L367",
+        "label":  "F367 FAULT"
+    },
+    {
+        "device":  "L368",
+        "label":  "F368 FAULT"
+    },
+    {
+        "device":  "L369",
+        "label":  "F369 FAULT"
+    },
+    {
+        "device":  "L370",
+        "label":  "F370 FAULT"
+    },
+    {
+        "device":  "L371",
+        "label":  "F371 FAULT"
+    },
+    {
+        "device":  "L372",
+        "label":  "F372 FAULT"
+    },
+    {
+        "device":  "L373",
+        "label":  "F373 FAULT"
+    },
+    {
+        "device":  "L374",
+        "label":  "F374 FAULT"
+    },
+    {
+        "device":  "L375",
+        "label":  "F375 FAULT"
+    },
+    {
+        "device":  "L376",
+        "label":  "F376 FAULT"
+    },
+    {
+        "device":  "L377",
+        "label":  "F377 FAULT"
+    },
+    {
+        "device":  "L378",
+        "label":  "F378 FAULT"
+    },
+    {
+        "device":  "L379",
+        "label":  "F379 FAULT"
+    },
+    {
+        "device":  "L380",
+        "label":  "F380 FAULT"
+    },
+    {
+        "device":  "L381",
+        "label":  "F381 FAULT"
+    },
+    {
+        "device":  "L382",
+        "label":  "F382 FAULT"
+    },
+    {
+        "device":  "L383",
+        "label":  "F383 FAULT"
+    },
+    {
+        "device":  "L384",
+        "label":  "F384 FAULT"
+    },
+    {
+        "device":  "L385",
+        "label":  "F385 FAULT"
+    },
+    {
+        "device":  "L386",
+        "label":  "F386 FAULT"
+    },
+    {
+        "device":  "L387",
+        "label":  "F387 FAULT"
+    },
+    {
+        "device":  "L388",
+        "label":  "F388 FAULT"
+    },
+    {
+        "device":  "L389",
+        "label":  "F389 FAULT"
+    },
+    {
+        "device":  "L390",
+        "label":  "F390 FAULT"
+    },
+    {
+        "device":  "L391",
+        "label":  "F391 FAULT"
+    },
+    {
+        "device":  "L392",
+        "label":  "F392 FAULT"
+    },
+    {
+        "device":  "L393",
+        "label":  "F393 FAULT"
+    },
+    {
+        "device":  "L394",
+        "label":  "F394 FAULT"
+    },
+    {
+        "device":  "L395",
+        "label":  "F395 FAULT"
+    },
+    {
+        "device":  "L396",
+        "label":  "F396 FAULT"
+    },
+    {
+        "device":  "L397",
+        "label":  "F397 FAULT"
+    },
+    {
+        "device":  "L398",
+        "label":  "F398 FAULT"
+    },
+    {
+        "device":  "L399",
+        "label":  "F399 FAULT"
+    },
+    {
+        "device":  "L400",
+        "label":  "F400 FAULT"
+    },
+    {
+        "device":  "L401",
+        "label":  "#40 리크테스터 OP 비상정지"
+    },
+    {
+        "device":  "L402",
+        "label":  "#40 리크네스터 고압 LOW"
+    },
+    {
+        "device":  "L403",
+        "label":  "#40 리크테스터 도어 열림"
+    },
+    {
+        "device":  "L404",
+        "label":  "F404 FAULT"
+    },
+    {
+        "device":  "L405",
+        "label":  "F405 LEAK TEST_1 클램프 동작 압력센서 체크"
+    },
+    {
+        "device":  "L406",
+        "label":  "F406 LEAK TEST_2 클램프 동작 압력센서 체크"
+    },
+    {
+        "device":  "L407",
+        "label":  "F407 FAULT"
+    },
+    {
+        "device":  "L408",
+        "label":  "F408 FAULT"
+    },
+    {
+        "device":  "L409",
+        "label":  "#40 디버링 홈 MISS FAULT"
+    },
+    {
+        "device":  "L410",
+        "label":  "#40 리크 테스트-1 홈 MISS FAULT"
+    },
+    {
+        "device":  "L411",
+        "label":  "#40 리크 테스트-2 홈 MISS FAULT"
+    },
+    {
+        "device":  "L412",
+        "label":  "파트-3 홈 MISS FAULT"
+    },
+    {
+        "device":  "L413",
+        "label":  "#40 리크 테스트-1 모델변경 MISS FAULT"
+    },
+    {
+        "device":  "L414",
+        "label":  "#40 리크 테스트-2 모델변경 MISS FAULT"
+    },
+    {
+        "device":  "L415",
+        "label":  "F415 FAULT"
+    },
+    {
+        "device":  "L416",
+        "label":  "F416 리크 테스트-1 OK 마스터 점검 요망"
+    },
+    {
+        "device":  "L417",
+        "label":  "F417 리크 테스트-1 NG 마스터 점검 요망"
+    },
+    {
+        "device":  "L418",
+        "label":  "F418 리크 테스트-2 OK 마스터 점검 요망"
+    },
+    {
+        "device":  "L419",
+        "label":  "F419 리크 테스트-2 NG 마스터 점검 요망"
+    },
+    {
+        "device":  "L420",
+        "label":  "F420 FAULT"
+    },
+    {
+        "device":  "L421",
+        "label":  "RFID4-1 리크테스트-1 3회연속 NG"
+    },
+    {
+        "device":  "L422",
+        "label":  "RFID4-1 L-Test1 READING 에러"
+    },
+    {
+        "device":  "L423",
+        "label":  "RFID4-1 L-Test1 전공정 미작업"
+    },
+    {
+        "device":  "L424",
+        "label":  "F424 FAULT"
+    },
+    {
+        "device":  "L425",
+        "label":  "F425 FAULT"
+    },
+    {
+        "device":  "L426",
+        "label":  "RFID4-2 L-Test2 이종 NG"
+    },
+    {
+        "device":  "L427",
+        "label":  "RFID4-2 L-Test2 READING 에러"
+    },
+    {
+        "device":  "L428",
+        "label":  "RFID4-2 L-Test2 전공정 미작업"
+    },
+    {
+        "device":  "L429",
+        "label":  "F429 FAULT"
+    },
+    {
+        "device":  "L430",
+        "label":  "F430 FAULT"
+    },
+    {
+        "device":  "L431",
+        "label":  "디버링 하강 未동작 Alarm"
+    },
+    {
+        "device":  "L432",
+        "label":  "#40 리크테스트-1 제품 확인"
+    },
+    {
+        "device":  "L433",
+        "label":  "#40 리크테스트-2 제품 확인"
+    },
+    {
+        "device":  "L434",
+        "label":  "완제품 취출파트 불량제품 만제"
+    },
+    {
+        "device":  "L435",
+        "label":  "CP2 배출 로보트 충돌 확인 요망"
+    },
+    {
+        "device":  "L436",
+        "label":  "F436 FAULT"
+    },
+    {
+        "device":  "L437",
+        "label":  "F437 FAULT"
+    },
+    {
+        "device":  "L438",
+        "label":  "F438 FAULT"
+    },
+    {
+        "device":  "L439",
+        "label":  "F439 FAULT"
+    },
+    {
+        "device":  "L440",
+        "label":  "P-3 에어커튼 감지"
+    },
+    {
+        "device":  "L441",
+        "label":  "파트2 리프트-3 상승 에러"
+    },
+    {
+        "device":  "L442",
+        "label":  "파트2 리프트-3 하강 에러"
+    },
+    {
+        "device":  "L443",
+        "label":  "파트2 회전 턴 에러"
+    },
+    {
+        "device":  "L444",
+        "label":  "파트2 회전 리턴 에러"
+    },
+    {
+        "device":  "L445",
+        "label":  "파트2 푸셔 전진 에러"
+    },
+    {
+        "device":  "L446",
+        "label":  "파트2 푸셔 후진 에러"
+    },
+    {
+        "device":  "L447",
+        "label":  "파트2 포지션 상승 에러"
+    },
+    {
+        "device":  "L448",
+        "label":  "파트2 포지션 하강 에러"
+    },
+    {
+        "device":  "L449",
+        "label":  "센터링 포지션 상승 에러"
+    },
+    {
+        "device":  "L450",
+        "label":  "센터링 포지션 하강 에러"
+    },
+    {
+        "device":  "L451",
+        "label":  "센터링 로케이션 전진 에러"
+    },
+    {
+        "device":  "L452",
+        "label":  "센터링 로케이션 후진 에러"
+    },
+    {
+        "device":  "L453",
+        "label":  "센터링 클램프 전진 에러"
+    },
+    {
+        "device":  "L454",
+        "label":  "센터링 클램프 후진 에러"
+    },
+    {
+        "device":  "L455",
+        "label":  "센터링 푸셔 상승 에러"
+    },
+    {
+        "device":  "L456",
+        "label":  "센터링 푸셔 하강 에러"
+    },
+    {
+        "device":  "L457",
+        "label":  "피어싱 포지션 상승 에러"
+    },
+    {
+        "device":  "L458",
+        "label":  "피어싱 포지션 하강 에러"
+    },
+    {
+        "device":  "L459",
+        "label":  "피어싱 로케이션 전진 에러"
+    },
+    {
+        "device":  "L460",
+        "label":  "피어싱 로케이션 후진 에러"
+    },
+    {
+        "device":  "L461",
+        "label":  "피어싱 클램프 전진 에러"
+    },
+    {
+        "device":  "L462",
+        "label":  "피어싱 클램프 후진 에러"
+    },
+    {
+        "device":  "L463",
+        "label":  "디버링 포지션 상승 에러"
+    },
+    {
+        "device":  "L464",
+        "label":  "디버링 포지션 하강 에러"
+    },
+    {
+        "device":  "L465",
+        "label":  "디버링 로케이션 전진 에러"
+    },
+    {
+        "device":  "L466",
+        "label":  "디버링 로케이션 하강 에러"
+    },
+    {
+        "device":  "L467",
+        "label":  "디버링 클램프 전진 에러"
+    },
+    {
+        "device":  "L468",
+        "label":  "디버링 클램프 후진 에러"
+    },
+    {
+        "device":  "L469",
+        "label":  "디버링 상승 에러"
+    },
+    {
+        "device":  "L470",
+        "label":  "디버링 하강 에러"
+    },
+    {
+        "device":  "L471",
+        "label":  "디버링 전진 에러"
+    },
+    {
+        "device":  "L472",
+        "label":  "디버링 후진 에러"
+    },
+    {
+        "device":  "L473",
+        "label":  "리크#1 포지션 상승 에러"
+    },
+    {
+        "device":  "L474",
+        "label":  "리크#1 포지션 하강 에러"
+    },
+    {
+        "device":  "L475",
+        "label":  "리크#1 클램프 상승 에러"
+    },
+    {
+        "device":  "L476",
+        "label":  "리크#1 클램프 하강 에러"
+    },
+    {
+        "device":  "L477",
+        "label":  "리크#1 TESTER 전진 에러"
+    },
+    {
+        "device":  "L478",
+        "label":  "리크#1 TESTER 후진 에러"
+    },
+    {
+        "device":  "L479",
+        "label":  "리크#1 락킹 상승 에러"
+    },
+    {
+        "device":  "L480",
+        "label":  "리크#1 락킹 하강 에러"
+    },
+    {
+        "device":  "L481",
+        "label":  "리크#1 클램프 전진 에러"
+    },
+    {
+        "device":  "L482",
+        "label":  "리크#1 클램프 후진 에러"
+    },
+    {
+        "device":  "L483",
+        "label":  "리크#1 마킹 전진 에러"
+    },
+    {
+        "device":  "L484",
+        "label":  "리크#2 포지션 상승 에러"
+    },
+    {
+        "device":  "L485",
+        "label":  "리크#2 포지션 하강 에러"
+    },
+    {
+        "device":  "L486",
+        "label":  "리크#2 클램프 상승 에러"
+    },
+    {
+        "device":  "L487",
+        "label":  "리크#2 클램프 하강 에러"
+    },
+    {
+        "device":  "L488",
+        "label":  "리크#2 TESTER 전진 에러"
+    },
+    {
+        "device":  "L489",
+        "label":  "리크#2 TESTER 후진 에러"
+    },
+    {
+        "device":  "L490",
+        "label":  "리크#2 락킹 상승 에러"
+    },
+    {
+        "device":  "L491",
+        "label":  "리크#2 락킹 하강 에러"
+    },
+    {
+        "device":  "L492",
+        "label":  "리크#2 클램프 전진 에러"
+    },
+    {
+        "device":  "L493",
+        "label":  "리크#2 클램프 후진 에러"
+    },
+    {
+        "device":  "L494",
+        "label":  "리크#2 마킹 전진 에러"
+    },
+    {
+        "device":  "L495",
+        "label":  "F495 FAULT"
+    },
+    {
+        "device":  "L496",
+        "label":  "F496 FAULT"
+    },
+    {
+        "device":  "L497",
+        "label":  "F497 FAULT"
+    },
+    {
+        "device":  "L498",
+        "label":  "F498 FAULT"
+    },
+    {
+        "device":  "L499",
+        "label":  "F499 FAULT"
+    },
+    {
+        "device":  "L500",
+        "label":  "F500 브러쉬 교체 요망"
+    },
+    {
+        "device":  "L502",
+        "label":  "#50 리벳팅 공압 LOW"
+    },
+    {
+        "device":  "L503",
+        "label":  "#50 리벳팅 도어 열림"
+    },
+    {
+        "device":  "L504",
+        "label":  "#50 INV03 에러"
+    },
+    {
+        "device":  "L509",
+        "label":  "#50 리벳1,2 홈 MISS FAULT"
+    },
+    {
+        "device":  "L510",
+        "label":  "#50 리벳3,4 홈 MISS FAULT"
+    },
+    {
+        "device":  "L511",
+        "label":  "#50 리벳3 홈 MISS FAULT"
+    },
+    {
+        "device":  "L512",
+        "label":  "#50 리벳4 홈 MISS FAULT"
+    },
+    {
+        "device":  "L513",
+        "label":  "파트-4 홈 MISS FAULT"
+    },
+    {
+        "device":  "L521",
+        "label":  "RFID5-1 리벳-1/2 이종 NG"
+    },
+    {
+        "device":  "L522",
+        "label":  "RFID5-1 리벳-1/2 READING 에러"
+    },
+    {
+        "device":  "L523",
+        "label":  "RFID5-1 리벳-1/2 전공정 미작업"
+    },
+    {
+        "device":  "L526",
+        "label":  "RFID5-2 리벳-3/4 이종 NG"
+    },
+    {
+        "device":  "L527",
+        "label":  "RFID5-2 리벳-3/4 READING 에러"
+    },
+    {
+        "device":  "L528",
+        "label":  "RFID5-2 리벳-3/4 전공정 미작업"
+    },
+    {
+        "device":  "L529",
+        "label":  "리벳팅기 알람"
+    },
+    {
+        "device":  "L531",
+        "label":  "#50 리벳-1,2 리벳너트 2,5t 자재 소진에러"
+    },
+    {
+        "device":  "L532",
+        "label":  "#50 리벳-3,4 리벳너트 1,5t 자재 소진에러"
+    },
+    {
+        "device":  "L533",
+        "label":  "#50 리벳-3 후크 브라켓트 자재 소진에러"
+    },
+    {
+        "device":  "L534",
+        "label":  "#50 리벳-4 후크 브라켓트 자재 소진에러"
+    },
+    {
+        "device":  "L535",
+        "label":  "#50 리벳-3 라인피더 소재공급알람"
+    },
+    {
+        "device":  "L536",
+        "label":  "#50 리벳-4 라인피더 소재공급알람"
+    },
+    {
+        "device":  "L540",
+        "label":  "#50 Door Pass On"
+    },
+    {
+        "device":  "L601",
+        "label":  "#60 검사공정 OP 비상정지"
+    },
+    {
+        "device":  "L602",
+        "label":  "#60 검사공정 공압 LOW"
+    },
+    {
+        "device":  "L603",
+        "label":  "#60 검사공정 도어 열림"
+    },
+    {
+        "device":  "L604",
+        "label":  "#60 INV04 에러"
+    },
+    {
+        "device":  "L605",
+        "label":  "#60 검사공정 서보모터 에러"
+    },
+    {
+        "device":  "L606",
+        "label":  "#60 검사공정 서보모터 하한리미트 에러"
+    },
+    {
+        "device":  "L607",
+        "label":  "#60 검사공정 서보모터 상한리미트 에러"
+    },
+    {
+        "device":  "L608",
+        "label":  "#60 검사공정 출구C/V 열림"
+    },
+    {
+        "device":  "L609",
+        "label":  "로테이션 홈 MISS FAULT"
+    },
+    {
+        "device":  "L610",
+        "label":  "#60 검사공정 평탄도검사 홈 MISS FAULT"
+    },
+    {
+        "device":  "L611",
+        "label":  "#60 검사공정 비젼검사 홈 MISS FAULT"
+    },
+    {
+        "device":  "L612",
+        "label":  "#60 검사공정 마킹 홈 MISS FAULT"
+    },
+    {
+        "device":  "L613",
+        "label":  "#60 검사공정 서보모터 원점 작업후 홈 MISS FAULT"
+    },
+    {
+        "device":  "L614",
+        "label":  "#60 검사공정 평탄도검사 모델변경 MISS FAULT"
+    },
+    {
+        "device":  "L615",
+        "label":  "완제품 취출 R/B 파트 안전PLUG 해제"
+    },
+    {
+        "device":  "L616",
+        "label":  "#70 Door Open"
+    },
+    {
+        "device":  "L621",
+        "label":  "RFID6-1 #60 검사공정 평탄검사 3회연속NG"
+    },
+    {
+        "device":  "L622",
+        "label":  "RFID6-1 #60 검사공정 평탄검사 READING 에러"
+    },
+    {
+        "device":  "L623",
+        "label":  "RFID6-1 #60 검사공정 평탄검사 전공정 미작업"
+    },
+    {
+        "device":  "L626",
+        "label":  "RFID6-2 #60 검사공정 비젼검사이종NG"
+    },
+    {
+        "device":  "L627",
+        "label":  "RFID6-2 #60 검사공정 비젼검사 READING 에러"
+    },
+    {
+        "device":  "L628",
+        "label":  "RFID6-2 #60 검사공정 비젼검사 전공정 미작업"
+    },
+    {
+        "device":  "L629",
+        "label":  "RFID6-2 #60 검사공정 비젼검사 연속3회 NG"
+    },
+    {
+        "device":  "L630",
+        "label":  "RFID6-2 #60 검사공정 비젼검사 TimeOut"
+    },
+    {
+        "device":  "L631",
+        "label":  "RFID6-3 #60 검사공정 마킹 이종 NG"
+    },
+    {
+        "device":  "L632",
+        "label":  "RFID6-3 #60 검사공정 마킹 READING 에러"
+    },
+    {
+        "device":  "L633",
+        "label":  "RFID6-3 #60 검사공정 마킹 전공정 미작업"
+    },
+    {
+        "device":  "L634",
+        "label":  "RFID6-3 #60 검사공정 마킹 Data 전송NG"
+    },
+    {
+        "device":  "L635",
+        "label":  "#60 검사공정 마킹 결과 NG"
+    },
+    {
+        "device":  "L701",
+        "label":  "완제품취출 파트 SUB_OP 비상정지"
+    },
+    {
+        "device":  "L702",
+        "label":  "완제품취출 파트 CONVEYOR #1 인버터 에러"
+    },
+    {
+        "device":  "L703",
+        "label":  "완제품취출 파트 CONVEYOR #5 인버터 에러"
+    },
+    {
+        "device":  "L704",
+        "label":  "완제품취출 로봇 JIG 확인!!"
+    },
+    {
+        "device":  "L705",
+        "label":  "F705 FAULT"
+    },
+    {
+        "device":  "L706",
+        "label":  "F706 FAULT"
+    },
+    {
+        "device":  "L707",
+        "label":  "F707 FAULT"
+    },
+    {
+        "device":  "L708",
+        "label":  "F708 FAULT"
+    },
+    {
+        "device":  "L709",
+        "label":  "완제품취출 파트 홈 MISS FAULT"
+    },
+    {
+        "device":  "L710",
+        "label":  "파트-1 홈 MISS FAULT"
+    },
+    {
+        "device":  "L711",
+        "label":  "파트-2 홈 MISS FAULT"
+    },
+    {
+        "device":  "L712",
+        "label":  "F712 FAULT"
+    },
+    {
+        "device":  "L713",
+        "label":  "F713 FAULT"
+    },
+    {
+        "device":  "L714",
+        "label":  "F714 FAULT"
+    },
+    {
+        "device":  "L715",
+        "label":  "F715 FAULT"
+    },
+    {
+        "device":  "L716",
+        "label":  "F716 FAULT"
+    },
+    {
+        "device":  "L717",
+        "label":  "F717 FAULT"
+    },
+    {
+        "device":  "L718",
+        "label":  "F718 FAULT"
+    },
+    {
+        "device":  "L719",
+        "label":  "F719 FAULT"
+    },
+    {
+        "device":  "L720",
+        "label":  "F720 FAULT"
+    },
+    {
+        "device":  "L721",
+        "label":  "RFID6-4 완제품취출 파트 이종 NG"
+    },
+    {
+        "device":  "L722",
+        "label":  "RFID6-4 완제품취출 파트 READING 에러"
+    },
+    {
+        "device":  "L723",
+        "label":  "RFID6-4 완제품취출 파트 전공정 미작업"
+    },
+    {
+        "device":  "L724",
+        "label":  "F724 FAULT"
+    },
+    {
+        "device":  "L725",
+        "label":  "리벳1,2 포지션 상승 에러"
+    },
+    {
+        "device":  "L726",
+        "label":  "리벳1,2 포지션 하강 에러"
+    },
+    {
+        "device":  "L727",
+        "label":  "리벳1,2 로케이션 전진 에러"
+    },
+    {
+        "device":  "L728",
+        "label":  "리벳1,2 로케이션 후진 에러"
+    },
+    {
+        "device":  "L729",
+        "label":  "리벳1,2 클램프 전진 에러"
+    },
+    {
+        "device":  "L730",
+        "label":  "리벳1,2 클램프 후진 에러"
+    },
+    {
+        "device":  "L731",
+        "label":  "리벳3,4 포지션 상승 에러"
+    },
+    {
+        "device":  "L732",
+        "label":  "리벳3,4 포지션 하강 에러"
+    },
+    {
+        "device":  "L733",
+        "label":  "리벳3,4 로케이션 전진 에러"
+    },
+    {
+        "device":  "L734",
+        "label":  "리벳3,4 로케이션 후진 에러"
+    },
+    {
+        "device":  "L735",
+        "label":  "리벳3,4 클램프 전진 에러"
+    },
+    {
+        "device":  "L736",
+        "label":  "리벳3,4 클램프 후진 에러"
+    },
+    {
+        "device":  "L737",
+        "label":  "리벳3 이스케이프 전진 에러"
+    },
+    {
+        "device":  "L738",
+        "label":  "리벳3 이스케이프 후진 에러"
+    },
+    {
+        "device":  "L739",
+        "label":  "리벳3 공급실린더 전진 에러"
+    },
+    {
+        "device":  "L740",
+        "label":  "리벳3 공급실린더 후진 에러"
+    },
+    {
+        "device":  "L741",
+        "label":  "리벳3 공급 2단 상승 에러"
+    },
+    {
+        "device":  "L742",
+        "label":  "리벳3 공급 2단 하강 에러"
+    },
+    {
+        "device":  "L743",
+        "label":  "리벳3 공급 1단 상승 에러"
+    },
+    {
+        "device":  "L744",
+        "label":  "리벳3 공급 1단 하강 에러"
+    },
+    {
+        "device":  "L745",
+        "label":  "리벳3 그리퍼1 열림 에러"
+    },
+    {
+        "device":  "L746",
+        "label":  "리벳3 그리퍼1 닫힘 에러"
+    },
+    {
+        "device":  "L747",
+        "label":  "리벳3 그리퍼2 열림 에러"
+    },
+    {
+        "device":  "L748",
+        "label":  "리벳3 그리퍼2 닫힘 에러"
+    },
+    {
+        "device":  "L749",
+        "label":  "리벳4 이스케이프 전진 에러"
+    },
+    {
+        "device":  "L750",
+        "label":  "리벳4 이스케이프 후진 에러"
+    },
+    {
+        "device":  "L751",
+        "label":  "리벳4 공급실린더 전진 에러"
+    },
+    {
+        "device":  "L752",
+        "label":  "리벳4 공급실린더 후진 에러"
+    },
+    {
+        "device":  "L753",
+        "label":  "리벳4 공급 2단 상승 에러"
+    },
+    {
+        "device":  "L754",
+        "label":  "리벳4 공급 2단 하강 에러"
+    },
+    {
+        "device":  "L755",
+        "label":  "리벳4 공급 1단 상승 에러"
+    },
+    {
+        "device":  "L756",
+        "label":  "리벳4 공급 1단 하강 에러"
+    },
+    {
+        "device":  "L757",
+        "label":  "리벳4 그리퍼1 열림 에러"
+    },
+    {
+        "device":  "L758",
+        "label":  "리벳4 그리퍼1 닫힘 에러"
+    },
+    {
+        "device":  "L759",
+        "label":  "리벳4 그리퍼2 열림 에러"
+    },
+    {
+        "device":  "L760",
+        "label":  "리벳4 그리퍼2 닫힘 에러"
+    },
+    {
+        "device":  "L761",
+        "label":  "파트4 리프트4 상승 에러"
+    },
+    {
+        "device":  "L762",
+        "label":  "파트4 리프트4 하강 에러"
+    },
+    {
+        "device":  "L763",
+        "label":  "파트4 회전4 턴 에러"
+    },
+    {
+        "device":  "L764",
+        "label":  "파트4 회전4 리턴 에러"
+    },
+    {
+        "device":  "L765",
+        "label":  "파트4 푸셔3 전진 에러"
+    },
+    {
+        "device":  "L766",
+        "label":  "파트4 푸셔3 후진 에러"
+    },
+    {
+        "device":  "L767",
+        "label":  "로테이션 포지션 상승 에러"
+    },
+    {
+        "device":  "L768",
+        "label":  "로테이션 포지션 하강 에러"
+    },
+    {
+        "device":  "L769",
+        "label":  "로테이션 전진 에러"
+    },
+    {
+        "device":  "L770",
+        "label":  "로테이션 후진 에러"
+    },
+    {
+        "device":  "L771",
+        "label":  "로테이션 클램프 전진 에러"
+    },
+    {
+        "device":  "L772",
+        "label":  "로테이션 클램프 후진 에러"
+    },
+    {
+        "device":  "L773",
+        "label":  "로테이션 푸셔 상승 에러"
+    },
+    {
+        "device":  "L774",
+        "label":  "로테이션 푸셔 하강 에러"
+    },
+    {
+        "device":  "L775",
+        "label":  "로테이션 턴 에러"
+    },
+    {
+        "device":  "L776",
+        "label":  "로테이션 리턴 에러"
+    },
+    {
+        "device":  "L777",
+        "label":  "평탄도 포지션 상승 에러"
+    },
+    {
+        "device":  "L778",
+        "label":  "평탄도 포지션 하강 에러"
+    },
+    {
+        "device":  "L779",
+        "label":  "평탄도 LVDT 1 상승 에러"
+    },
+    {
+        "device":  "L780",
+        "label":  "평탄도 LVDT 1 하강 에러"
+    },
+    {
+        "device":  "L781",
+        "label":  "평탄도 LVDT 2 상승 에러"
+    },
+    {
+        "device":  "L782",
+        "label":  "평탄도 LVDT 2 하강 에러"
+    },
+    {
+        "device":  "L783",
+        "label":  "평탄도 LVDT 3 상승 에러"
+    },
+    {
+        "device":  "L784",
+        "label":  "평탄도 LVDT 3 하강 에러"
+    },
+    {
+        "device":  "L785",
+        "label":  "비전 포지션 상승 에러"
+    },
+    {
+        "device":  "L786",
+        "label":  "비전 포지션 하강 에러"
+    },
+    {
+        "device":  "L787",
+        "label":  "비전 무빙 좌측 에러"
+    },
+    {
+        "device":  "L788",
+        "label":  "비전 무빙 우측 에러"
+    },
+    {
+        "device":  "L789",
+        "label":  "비전 가이드 실린더 전진 에러"
+    },
+    {
+        "device":  "L790",
+        "label":  "비전 가이드 실린더 후진 에러"
+    },
+    {
+        "device":  "L791",
+        "label":  "비전 클램프 실린더 전진 에러"
+    },
+    {
+        "device":  "L792",
+        "label":  "비전 클램프 실린더 후진 에러"
+    },
+    {
+        "device":  "L793",
+        "label":  "레이져마킹 포지션 상승 에러"
+    },
+    {
+        "device":  "L794",
+        "label":  "레이져마킹 포지션 하강 에러"
+    },
+    {
+        "device":  "L795",
+        "label":  "레이져마킹 석션후드 상승 에러"
+    },
+    {
+        "device":  "L796",
+        "label":  "레이져마킹 석션후드 하강 에러"
+    },
+    {
+        "device":  "L797",
+        "label":  "F797 FAULT"
+    },
+    {
+        "device":  "L798",
+        "label":  "F798 FAULT"
+    },
+    {
+        "device":  "L799",
+        "label":  "F799 FAULT"
+    },
+    {
+        "device":  "L800",
+        "label":  "F800 FAULT"
+    }
+]

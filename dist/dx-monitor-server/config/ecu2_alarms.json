@@ -1,0 +1,2667 @@
+[
+    {
+        "device":  "D12000.F",
+        "label":  "PLC 배터리 부족"
+    },
+    {
+        "device":  "D12001.0",
+        "label":  "C/V #1 제품공급 부족"
+    },
+    {
+        "device":  "D12002.0",
+        "label":  "H201 C/V#1 서보 ERROR"
+    },
+    {
+        "device":  "D12002.1",
+        "label":  "H201 C/V#1 서보 상한(+ 리미트)"
+    },
+    {
+        "device":  "D12002.2",
+        "label":  "H201 C/V#1 서보 하한(- 리미트)"
+    },
+    {
+        "device":  "D12002.3",
+        "label":  "H201 C/V#1 서보 READY OFF ERROR"
+    },
+    {
+        "device":  "D12002.4",
+        "label":  "C/V #1 ALIGN(L) 실린더 전진 ERROR (X1023)"
+    },
+    {
+        "device":  "D12002.5",
+        "label":  "C/V #1 ALIGN(L) 실린더 후진 ERROR (X1024)"
+    },
+    {
+        "device":  "D12002.6",
+        "label":  "C/V #1 ALIGN(R) 실린더 전진 ERROR (X1025)"
+    },
+    {
+        "device":  "D12002.7",
+        "label":  "C/V #1 ALIGN(R) 실린더 후진 ERROR (X1026)"
+    },
+    {
+        "device":  "D12002.8",
+        "label":  "C/V #1 1809 제품감지 이상 (X1027)"
+    },
+    {
+        "device":  "D12002.9",
+        "label":  "C/V #1 1812 제품감지 이상 (X1028)"
+    },
+    {
+        "device":  "D12002.A",
+        "label":  "C/V #1 1815 제품감지 이상 (X1029)"
+    },
+    {
+        "device":  "D12002.B",
+        "label":  "C/V #1 1818 제품감지 이상 (X102A)"
+    },
+    {
+        "device":  "D12002.C",
+        "label":  "C/V #1 제품배출 이상 (X1022)"
+    },
+    {
+        "device":  "D12004.0",
+        "label":  "C/V #2 제품공급 부족"
+    },
+    {
+        "device":  "D12005.0",
+        "label":  "H202 C/V#2 서보 ERROR"
+    },
+    {
+        "device":  "D12005.1",
+        "label":  "H202 C/V#2 서보 상한(+ 리미트)"
+    },
+    {
+        "device":  "D12005.2",
+        "label":  "H202 C/V#2 서보 하한(- 리미트)"
+    },
+    {
+        "device":  "D12005.3",
+        "label":  "H202 C/V#2 서보 READY OFF ERROR"
+    },
+    {
+        "device":  "D12005.4",
+        "label":  "C/V #2 ALIGN(L) 실린더 전진 ERROR (X1043)"
+    },
+    {
+        "device":  "D12005.5",
+        "label":  "C/V #2 ALIGN(L) 실린더 후진 ERROR (X1044)"
+    },
+    {
+        "device":  "D12005.6",
+        "label":  "C/V #2 ALIGN(R) 실린더 전진 ERROR (X1045)"
+    },
+    {
+        "device":  "D12005.7",
+        "label":  "C/V #2 ALIGN(R) 실린더 후진 ERROR (X1046)"
+    },
+    {
+        "device":  "D12005.8",
+        "label":  "C/V #2 1809 제품감지 이상 (X1048)"
+    },
+    {
+        "device":  "D12005.9",
+        "label":  "C/V #2 1812 제품감지 이상 (X1049)"
+    },
+    {
+        "device":  "D12005.A",
+        "label":  "C/V #2 1815 제품감지 이상 (X104A)"
+    },
+    {
+        "device":  "D12005.B",
+        "label":  "C/V #2 1818 제품감지 이상 (X104B)"
+    },
+    {
+        "device":  "D12005.C",
+        "label":  "C/V #2 제품배출 이상 (X1042)"
+    },
+    {
+        "device":  "D12007.0",
+        "label":  "NG C/V 불량제품을 제거하세요"
+    },
+    {
+        "device":  "D12008.0",
+        "label":  "H203 NG C/V 서보 ERROR"
+    },
+    {
+        "device":  "D12008.1",
+        "label":  "H203 NG C/V 서보 상한(+ 리미트)"
+    },
+    {
+        "device":  "D12008.2",
+        "label":  "H203 NG C/V 서보 하한(- 리미트)"
+    },
+    {
+        "device":  "D12008.3",
+        "label":  "H203 NG C/V 서보 READY OFF ERROR"
+    },
+    {
+        "device":  "D12008.4",
+        "label":  "NG C/V 제품배출 이상 (X104D)"
+    },
+    {
+        "device":  "D12011.0",
+        "label":  "H204 LOADER X 서보 ERROR"
+    },
+    {
+        "device":  "D12011.1",
+        "label":  "H204 LOADER X 서보 상한(+ 리미트)"
+    },
+    {
+        "device":  "D12011.2",
+        "label":  "H204 LOADER X 서보 하한(- 리미트)"
+    },
+    {
+        "device":  "D12011.3",
+        "label":  "H204 LOADER X 서보 READY OFF ERROR"
+    },
+    {
+        "device":  "D12011.4",
+        "label":  "H205 LOADER Z 서보 ERROR"
+    },
+    {
+        "device":  "D12011.5",
+        "label":  "H205 LOADER Z 서보 상한(+ 리미트)"
+    },
+    {
+        "device":  "D12011.6",
+        "label":  "H205 LOADER Z 서보 하한(- 리미트)"
+    },
+    {
+        "device":  "D12011.7",
+        "label":  "H205 LOADER Z 서보 READY OFF ERROR"
+    },
+    {
+        "device":  "D12011.8",
+        "label":  "LOADER (L) 그립 전진 ERROR (X1008)"
+    },
+    {
+        "device":  "D12011.9",
+        "label":  "LOADER (L) 그립 후진 ERROR (X1009)"
+    },
+    {
+        "device":  "D12011.A",
+        "label":  "LOADER (R) 그립 전진 ERROR (X100A)"
+    },
+    {
+        "device":  "D12011.B",
+        "label":  "LOADER (R) 그립 후진 ERROR (X100B)"
+    },
+    {
+        "device":  "D12011.C",
+        "label":  "LOADER 픽업 제품감지 안됨 ERROR (X100D)"
+    },
+    {
+        "device":  "D12011.D",
+        "label":  "LOADER Z축 높이 충돌감지 ERROR (X100C)"
+    },
+    {
+        "device":  "D12012.0",
+        "label":  "가용접 PC 통신이상 ERROR"
+    },
+    {
+        "device":  "D12012.1",
+        "label":  "가용접 PC RESPONSE ERROR"
+    },
+    {
+        "device":  "D12014.0",
+        "label":  "H206 UNLOADER X 서보 ERROR"
+    },
+    {
+        "device":  "D12014.1",
+        "label":  "H206 UNLOADER X 서보 상한(+ 리미트)"
+    },
+    {
+        "device":  "D12014.2",
+        "label":  "H206 UNLOADER X 서보 하한(- 리미트)"
+    },
+    {
+        "device":  "D12014.3",
+        "label":  "H206 UNLOADER X 서보 READY OFF ERROR"
+    },
+    {
+        "device":  "D12014.4",
+        "label":  "H207 UNLOADER Z 서보 ERROR"
+    },
+    {
+        "device":  "D12014.5",
+        "label":  "H207 UNLOADER Z 서보 상한(+ 리미트)"
+    },
+    {
+        "device":  "D12014.6",
+        "label":  "H207 UNLOADER Z 서보 하한(- 리미트)"
+    },
+    {
+        "device":  "D12014.7",
+        "label":  "H207 UNLOADER Z 서보 READY OFF ERROR"
+    },
+    {
+        "device":  "D12014.8",
+        "label":  "UNLOADER (L) 그립 전진 ERROR (X1080)"
+    },
+    {
+        "device":  "D12014.9",
+        "label":  "UNLOADER (L) 그립 후진 ERROR (X1081)"
+    },
+    {
+        "device":  "D12014.A",
+        "label":  "UNLOADER (R) 그립 전진 ERROR (X1082)"
+    },
+    {
+        "device":  "D12014.B",
+        "label":  "UNLOADER (R) 그립 후진 ERROR (X1083)"
+    },
+    {
+        "device":  "D12014.C",
+        "label":  "UNLOADER 픽업 제품감지 안됨 ERROR (X1084)"
+    },
+    {
+        "device":  "D12014.D",
+        "label":  "UNLOADER Z축 높이 충돌감지 ERROR (X1085)"
+    },
+    {
+        "device":  "D12017.0",
+        "label":  "H208 적재셔틀 Y 서보 ERROR"
+    },
+    {
+        "device":  "D12017.1",
+        "label":  "H208 적재셔틀 Y 서보 상한(+ 리미트)"
+    },
+    {
+        "device":  "D12017.2",
+        "label":  "H208 적재셔틀 Y 서보 하한(- 리미트)"
+    },
+    {
+        "device":  "D12017.3",
+        "label":  "H208 적재셔틀 Y 서보 READY OFF ERROR"
+    },
+    {
+        "device":  "D12017.4",
+        "label":  "적재셔틀 컨베어 ALARM (X1088) - CP14 전원 재투입"
+    },
+    {
+        "device":  "D12017.5",
+        "label":  "적재셔틀 ALIGN 실린더 전진 ERROR (X108C)"
+    },
+    {
+        "device":  "D12017.6",
+        "label":  "적재셔틀 ALIGN 실린더 후진 ERROR (X108D)"
+    },
+    {
+        "device":  "D12017.7",
+        "label":  "적재셔틀 STOPPER 상승 ERROR (X108E)"
+    },
+    {
+        "device":  "D12017.8",
+        "label":  "적재셔틀 STOPPER 하강 ERROR (X108F)"
+    },
+    {
+        "device":  "D12017.9",
+        "label":  "적재셔틀 컨베어 CW 구동시간 초과 ERROR"
+    },
+    {
+        "device":  "D12017.A",
+        "label":  "적재셔틀 컨베어 BOX 배출이상 ERROR"
+    },
+    {
+        "device":  "D12017.B",
+        "label":  "적재셔틀 컨베어 CCW 구동시간 초과 ERROR"
+    },
+    {
+        "device":  "D12018.0",
+        "label":  "적재셔틀 제품정보 이상"
+    },
+    {
+        "device":  "D12020.0",
+        "label":  "H209 후면 적재 Z 서보 ERROR"
+    },
+    {
+        "device":  "D12020.1",
+        "label":  "H209 후면 적재 Z 서보 상한(+ 리미트)"
+    },
+    {
+        "device":  "D12020.2",
+        "label":  "H209 후면 적재 Z 서보 하한(- 리미트)"
+    },
+    {
+        "device":  "D12020.3",
+        "label":  "H209 후면 적재 Z 서보 READY OFF ERROR"
+    },
+    {
+        "device":  "D12020.4",
+        "label":  "후면 적재 컨베어 ALARM (X10A0) - CP15 전원 재투입"
+    },
+    {
+        "device":  "D12020.5",
+        "label":  "후면 적재 STOPPER 상승 ERROR (X10A4)"
+    },
+    {
+        "device":  "D12020.6",
+        "label":  "후면 적재 STOPPER 하강 ERROR (X10A5)"
+    },
+    {
+        "device":  "D12020.7",
+        "label":  "후면 적재 BOX고정 (FL) 실린더 전진 ERROR (X10A6)"
+    },
+    {
+        "device":  "D12020.8",
+        "label":  "후면 적재 BOX고정 (FL) 실린더 후진 ERROR (X10A7)"
+    },
+    {
+        "device":  "D12020.9",
+        "label":  "후면 적재 BOX고정 (FR) 실린더 전진 ERROR (X10A8)"
+    },
+    {
+        "device":  "D12020.A",
+        "label":  "후면 적재 BOX고정 (FR) 실린더 후진 ERROR (X10A9)"
+    },
+    {
+        "device":  "D12020.B",
+        "label":  "후면 적재 BOX고정 (RL) 실린더 전진 ERROR (X10AA)"
+    },
+    {
+        "device":  "D12020.C",
+        "label":  "후면 적재 BOX고정 (RL) 실린더 후진 ERROR (X10AB)"
+    },
+    {
+        "device":  "D12020.D",
+        "label":  "후면 적재 BOX고정 (RR) 실린더 전진 ERROR (X10AC)"
+    },
+    {
+        "device":  "D12020.E",
+        "label":  "후면 적재 BOX고정 (RR) 실린더 후진 ERROR (X10AD)"
+    },
+    {
+        "device":  "D12020.F",
+        "label":  "후면 적재 컨베어 구동시간 초과 ERROR"
+    },
+    {
+        "device":  "D12021.0",
+        "label":  "후면 적재 컨베어 BOX 배출이상 ERROR"
+    },
+    {
+        "device":  "D12021.1",
+        "label":  "후면 버퍼 컨베어 ALARM (X10C0) - CP16 전원 재투입"
+    },
+    {
+        "device":  "D12021.2",
+        "label":  "후면 버퍼 STOPPER 상승 ERROR (X10C4)"
+    },
+    {
+        "device":  "D12021.3",
+        "label":  "후면 버퍼 STOPPER 하강 ERROR (X10C5)"
+    },
+    {
+        "device":  "D12021.4",
+        "label":  "후면 버퍼 컨베어 구동시간 초과 ERROR"
+    },
+    {
+        "device":  "D12021.5",
+        "label":  "후면 버퍼 컨베어 BOX 배출이상 ERROR"
+    },
+    {
+        "device":  "D12023.0",
+        "label":  "H210 후면 분리 Z 서보 ERROR"
+    },
+    {
+        "device":  "D12023.1",
+        "label":  "H210 후면 분리 Z 서보 상한(+ 리미트)"
+    },
+    {
+        "device":  "D12023.2",
+        "label":  "H210 후면 분리 Z 서보 하한(- 리미트)"
+    },
+    {
+        "device":  "D12023.3",
+        "label":  "H210 후면 분리 Z 서보 READY OFF ERROR"
+    },
+    {
+        "device":  "D12023.4",
+        "label":  "후면 분리 컨베어 ALARM (X10E0) - CP17 전원 재투입"
+    },
+    {
+        "device":  "D12023.5",
+        "label":  "후면 분리 STOPPER 상승 ERROR (X10E4)"
+    },
+    {
+        "device":  "D12023.6",
+        "label":  "후면 분리 STOPPER 하강 ERROR (X10E5)"
+    },
+    {
+        "device":  "D12023.7",
+        "label":  "후면 분리 BOX고정 (FL) 실린더 전진 ERROR (X10E6)"
+    },
+    {
+        "device":  "D12023.8",
+        "label":  "후면 분리 BOX고정 (FL) 실린더 후진 ERROR (X10E7)"
+    },
+    {
+        "device":  "D12023.9",
+        "label":  "후면 분리 BOX고정 (FR) 실린더 전진 ERROR (X10E8)"
+    },
+    {
+        "device":  "D12023.A",
+        "label":  "후면 분리 BOX고정 (FR) 실린더 후진 ERROR (X10E9)"
+    },
+    {
+        "device":  "D12023.B",
+        "label":  "후면 분리 BOX고정 (RL) 실린더 전진 ERROR (X10EA)"
+    },
+    {
+        "device":  "D12023.C",
+        "label":  "후면 분리 BOX고정 (RL) 실린더 후진 ERROR (X10EB)"
+    },
+    {
+        "device":  "D12023.D",
+        "label":  "후면 분리 BOX고정 (RR) 실린더 전진 ERROR (X10EC)"
+    },
+    {
+        "device":  "D12023.E",
+        "label":  "후면 분리 BOX고정 (RR) 실린더 후진 ERROR (X10ED)"
+    },
+    {
+        "device":  "D12023.F",
+        "label":  "후면 분리 컨베어 구동시간 초과 ERROR"
+    },
+    {
+        "device":  "D12024.0",
+        "label":  "후면 분리 BOX 배출이상 ERROR"
+    },
+    {
+        "device":  "D12026.0",
+        "label":  "H211 배출셔틀 Y 서보 ERROR"
+    },
+    {
+        "device":  "D12026.1",
+        "label":  "H211 배출셔틀 Y 서보 상한(+ 리미트)"
+    },
+    {
+        "device":  "D12026.2",
+        "label":  "H211 배출셔틀 Y 서보 하한(- 리미트)"
+    },
+    {
+        "device":  "D12026.3",
+        "label":  "H211 배출셔틀 Y 서보 READY OFF ERROR"
+    },
+    {
+        "device":  "D12026.4",
+        "label":  "배출셔틀 컨베어 ALARM (X1100) - CP18 전원 재투입"
+    },
+    {
+        "device":  "D12026.5",
+        "label":  "배출셔틀 ALIGN 실린더 전진 ERROR (X1104)"
+    },
+    {
+        "device":  "D12026.6",
+        "label":  "배출셔틀 ALIGN 실린더 후진 ERROR (X1105)"
+    },
+    {
+        "device":  "D12026.7",
+        "label":  "배출셔틀 STOPPER 상승 ERROR (X1106)"
+    },
+    {
+        "device":  "D12026.8",
+        "label":  "배출셔틀 STOPPER 하강 ERROR (X1107)"
+    },
+    {
+        "device":  "D12026.9",
+        "label":  "배출셔틀 컨베어 CW 구동시간 초과 ERROR"
+    },
+    {
+        "device":  "D12026.A",
+        "label":  "배출셔틀 컨베어 BOX 배출이상 ERROR"
+    },
+    {
+        "device":  "D12026.B",
+        "label":  "배출셔틀 컨베어 CCW 구동시간 초과 ERROR"
+    },
+    {
+        "device":  "D12027.0",
+        "label":  "레이저마킹 PC 통신이상 ERROR"
+    },
+    {
+        "device":  "D12027.1",
+        "label":  "레이저마킹 PC RESPONSE ERROR"
+    },
+    {
+        "device":  "D12027.2",
+        "label":  "배출셔틀 제품정보 이상"
+    },
+    {
+        "device":  "D12029.0",
+        "label":  "H212 전면 적재 Z 서보 ERROR"
+    },
+    {
+        "device":  "D12029.1",
+        "label":  "H212 전면 적재 Z 서보 상한(+ 리미트)"
+    },
+    {
+        "device":  "D12029.2",
+        "label":  "H212 전면 적재 Z 서보 하한(- 리미트)"
+    },
+    {
+        "device":  "D12029.3",
+        "label":  "H212 전면 분리 Z 서보 READY OFF ERROR"
+    },
+    {
+        "device":  "D12029.4",
+        "label":  "전면 분리 컨베어 ALARM (X1120) - CP19 전원 재투입"
+    },
+    {
+        "device":  "D12029.5",
+        "label":  "전면 적재 STOPPER 상승 ERROR (X1124)"
+    },
+    {
+        "device":  "D12029.6",
+        "label":  "전면 적재 STOPPER 하강 ERROR (X1125)"
+    },
+    {
+        "device":  "D12029.7",
+        "label":  "전면 적재 BOX고정 (FL) 실린더 전진 ERROR (X1126)"
+    },
+    {
+        "device":  "D12029.8",
+        "label":  "전면 적재 BOX고정 (FL) 실린더 후진 ERROR (X1127)"
+    },
+    {
+        "device":  "D12029.9",
+        "label":  "전면 적재 BOX고정 (FR) 실린더 전진 ERROR (X1128)"
+    },
+    {
+        "device":  "D12029.A",
+        "label":  "전면 적재 BOX고정 (FR) 실린더 후진 ERROR (X1129)"
+    },
+    {
+        "device":  "D12029.B",
+        "label":  "전면 적재 BOX고정 (RL) 실린더 전진 ERROR (X112A)"
+    },
+    {
+        "device":  "D12029.C",
+        "label":  "전면 적재 BOX고정 (RL) 실린더 후진 ERROR (X112B)"
+    },
+    {
+        "device":  "D12029.D",
+        "label":  "전면 적재 BOX고정 (RR) 실린더 전진 ERROR (X112C)"
+    },
+    {
+        "device":  "D12029.E",
+        "label":  "전면 적재 BOX고정 (RR) 실린더 후진 ERROR (X112D)"
+    },
+    {
+        "device":  "D12029.F",
+        "label":  "전면 적재 컨베어 구동시간 초과 ERROR"
+    },
+    {
+        "device":  "D12030.0",
+        "label":  "전면 적재 컨베어 BOX 배출이상 ERROR"
+    },
+    {
+        "device":  "D12030.1",
+        "label":  "전면 버퍼 컨베어 ALARM (X1140) - CP20 전원 재투입"
+    },
+    {
+        "device":  "D12030.2",
+        "label":  "전면 버퍼 STOPPER 상승 ERROR (X1144)"
+    },
+    {
+        "device":  "D12030.3",
+        "label":  "전면 버퍼 STOPPER 하강 ERROR (X1145)"
+    },
+    {
+        "device":  "D12030.4",
+        "label":  "전면 버퍼 컨베어 구동시간 초과 ERROR"
+    },
+    {
+        "device":  "D12030.5",
+        "label":  "전면 버퍼 컨베어 BOX 배출이상 ERROR"
+    },
+    {
+        "device":  "D12032.0",
+        "label":  "H213 전면 분리 Z 서보 ERROR"
+    },
+    {
+        "device":  "D12032.1",
+        "label":  "H213 전면 분리 Z 서보 상한(+ 리미트)"
+    },
+    {
+        "device":  "D12032.2",
+        "label":  "H213 전면 분리 Z 서보 하한(- 리미트)"
+    },
+    {
+        "device":  "D12032.3",
+        "label":  "H213 전면 분리 Z 서보 READY OFF ERROR"
+    },
+    {
+        "device":  "D12032.4",
+        "label":  "전면 분리 컨베어 ALARM (X1160) - CP21 전원 재투입"
+    },
+    {
+        "device":  "D12032.5",
+        "label":  "전면 분리 STOPPER 상승 ERROR (X1164)"
+    },
+    {
+        "device":  "D12032.6",
+        "label":  "전면 분리 STOPPER 하강 ERROR (X1165)"
+    },
+    {
+        "device":  "D12032.7",
+        "label":  "전면 분리 BOX고정 (FL) 실린더 전진 ERROR (X1166)"
+    },
+    {
+        "device":  "D12032.8",
+        "label":  "전면 분리 BOX고정 (FL) 실린더 후진 ERROR (X1167)"
+    },
+    {
+        "device":  "D12032.9",
+        "label":  "전면 분리 BOX고정 (FR) 실린더 전진 ERROR (X1168)"
+    },
+    {
+        "device":  "D12032.A",
+        "label":  "전면 분리 BOX고정 (FR) 실린더 후진 ERROR (X1169)"
+    },
+    {
+        "device":  "D12032.B",
+        "label":  "전면 분리 BOX고정 (RL) 실린더 전진 ERROR (X116A)"
+    },
+    {
+        "device":  "D12032.C",
+        "label":  "전면 분리 BOX고정 (RL) 실린더 후진 ERROR (X116B)"
+    },
+    {
+        "device":  "D12032.D",
+        "label":  "전면 분리 BOX고정 (RR) 실린더 전진 ERROR (X116C)"
+    },
+    {
+        "device":  "D12032.E",
+        "label":  "전면 분리 BOX고정 (RR) 실린더 후진 ERROR (X116D)"
+    },
+    {
+        "device":  "D12032.F",
+        "label":  "전면 분리 컨베어 구동시간 초과 ERROR"
+    },
+    {
+        "device":  "D12033.0",
+        "label":  "전면 분리 컨베어 BOX 배출이상 ERROR"
+    },
+    {
+        "device":  "D12040.0",
+        "label":  "EMO 오프 (긴급정지)_메인"
+    },
+    {
+        "device":  "D12040.1",
+        "label":  "메인 전원 오프_필러"
+    },
+    {
+        "device":  "D12040.2",
+        "label":  "메인 에어 다운 에러"
+    },
+    {
+        "device":  "D12040.6",
+        "label":  "EMO 오프 (긴급정지)_(X1003)"
+    },
+    {
+        "device":  "D12040.F",
+        "label":  "PLC 배터리 부족"
+    },
+    {
+        "device":  "D12042.0",
+        "label":  "H201 로딩 컨베이어 서보 레디 오프"
+    },
+    {
+        "device":  "D12042.1",
+        "label":  "H201 로딩 컨베이어\u0027 서보 에러"
+    },
+    {
+        "device":  "D12042.2",
+        "label":  "H201 로딩 서보 상한(+ 리미트)"
+    },
+    {
+        "device":  "D12042.3",
+        "label":  "H201 로딩 서보 하한(- 리미트)"
+    },
+    {
+        "device":  "D12043.0",
+        "label":  "로딩 컨베이어 정렬 전진 에러_(X1022,X1024)"
+    },
+    {
+        "device":  "D12043.1",
+        "label":  "로딩 컨베이어 정렬 후진 에러_(X1023,X1025)"
+    },
+    {
+        "device":  "D12043.2",
+        "label":  "로딩 컨베이어 MCR 리딩 에러"
+    },
+    {
+        "device":  "D12043.3",
+        "label":  "로딩 컨베이어 낙하감지(END감지) 에러(X1021)"
+    },
+    {
+        "device":  "D12043.4",
+        "label":  "로딩 컨베이어 모델정보 불일치 에러_(현재 레시피와 다름)"
+    },
+    {
+        "device":  "D12043.C",
+        "label":  "본용접=\u003e로딩컨베이어 자재안착 실패 에러"
+    },
+    {
+        "device":  "D12043.D",
+        "label":  "로딩 컨베이어 서버PC 응답지연 에러(D4900.0)"
+    },
+    {
+        "device":  "D12043.E",
+        "label":  "PLC\u003c=\u003ePC (본용접) 통신에러"
+    },
+    {
+        "device":  "D12043.F",
+        "label":  "로딩 컨베이어 제품정보 불일치"
+    },
+    {
+        "device":  "D12044.0",
+        "label":  "Leak#1 검사 배관막힘 확인 요망"
+    },
+    {
+        "device":  "D12044.1",
+        "label":  "Leak#2 검사 배관막힘 확인 요망"
+    },
+    {
+        "device":  "D12044.2",
+        "label":  "Leak#1 OK,NG 마스터 확인 요망"
+    },
+    {
+        "device":  "D12044.3",
+        "label":  "Leak#2 OK,NG 마스터 확인 요망"
+    },
+    {
+        "device":  "D12045.0",
+        "label":  "H202 픽업 X 서보 레디 오프"
+    },
+    {
+        "device":  "D12045.1",
+        "label":  "H203 픽업 Z 서보 레디 오프"
+    },
+    {
+        "device":  "D12045.2",
+        "label":  "H202 로딩 픽업 X서보 에러"
+    },
+    {
+        "device":  "D12045.3",
+        "label":  "H202 로딩 픽업-서보 상한(+ 리미트)"
+    },
+    {
+        "device":  "D12045.4",
+        "label":  "H202 로딩 픽업-서보 하한(- 리미트)"
+    },
+    {
+        "device":  "D12045.5",
+        "label":  "H203 로딩 픽업 Z서보 에러"
+    },
+    {
+        "device":  "D12045.6",
+        "label":  "H203 로딩 픽업-Z서보 상한(+ 리미트)"
+    },
+    {
+        "device":  "D12045.7",
+        "label":  "H203 로딩 픽업-Z보 하한(- 리미트)"
+    },
+    {
+        "device":  "D12045.8",
+        "label":  "로딩 픽업_X \u0026 언로딩 픽업_X충돌위험(거리확인)"
+    },
+    {
+        "device":  "D12045.9",
+        "label":  "로딩 픽업_X \u0026 언로딩 픽업_X 속도다름(속도확인)"
+    },
+    {
+        "device":  "D12046.0",
+        "label":  "로딩 픽업 그리퍼 전진 에러_(X1026)"
+    },
+    {
+        "device":  "D12046.1",
+        "label":  "로딩 픽업 그리퍼 후진 에러_(X1027)"
+    },
+    {
+        "device":  "D12046.F",
+        "label":  "로딩 픽업 제품정보 불일치"
+    },
+    {
+        "device":  "D12047.F",
+        "label":  "H205 리크 셔틀 Y1 서보 레디 오프"
+    },
+    {
+        "device":  "D12048.0",
+        "label":  "H204 리크 셔틀 Y1서보 에러"
+    },
+    {
+        "device":  "D12048.1",
+        "label":  "H204 리크 셔틀 Y2서보 상한(+)"
+    },
+    {
+        "device":  "D12048.2",
+        "label":  "H204 리크 셔틀 Y2서보 하한(-)"
+    },
+    {
+        "device":  "D12048.F",
+        "label":  "리크 (좌) 연속 검사불량 에러"
+    },
+    {
+        "device":  "D12049.0",
+        "label":  "리크 (좌) 셔틀 전면 정렬 전진 에러_(X1040)"
+    },
+    {
+        "device":  "D12049.1",
+        "label":  "리크 (좌) 셔틀 전면 정렬 후진 에러_(X1041)"
+    },
+    {
+        "device":  "D12049.2",
+        "label":  "리크 (좌) 셔틀 후면 정렬 전진 에러_(X1042)"
+    },
+    {
+        "device":  "D12049.3",
+        "label":  "리크 (좌) 셔틀 후면 정렬 후진 에러_(X1043)"
+    },
+    {
+        "device":  "D12049.4",
+        "label":  "리크 (좌) 셔틀 상부 정렬 상승 에러_(X1045)"
+    },
+    {
+        "device":  "D12049.5",
+        "label":  "리크 (좌) 셔틀 상부 정렬 하강 에러_(X1046)"
+    },
+    {
+        "device":  "D12049.6",
+        "label":  "리크 (좌) 셔틀 상부 타각 상승 에러_(X10CA)"
+    },
+    {
+        "device":  "D12049.7",
+        "label":  "리크 (좌) 셔틀 상부 타각 하강 에러_(X10CB)"
+    },
+    {
+        "device":  "D12049.8",
+        "label":  "리크 (좌) 셔틀 상부 정렬 압력저하_(X10AE)"
+    },
+    {
+        "device":  "D12049.9",
+        "label":  "리크 (좌) 셔틀 지그 현재모델과 불일치"
+    },
+    {
+        "device":  "D12049.A",
+        "label":  "리크 테스터 (좌) 서버PC 응답지연 에러(D4900.1)자재Ack"
+    },
+    {
+        "device":  "D12049.B",
+        "label":  "리크 테스터 (좌) 서버PC 응답지연 에러(D4900.2)작업중Ack"
+    },
+    {
+        "device":  "D12049.C",
+        "label":  "리크 테스터 (좌) 수동모드로 진행불가"
+    },
+    {
+        "device":  "D12049.D",
+        "label":  "리크 테스터 (좌) 검사시간 초과 에러"
+    },
+    {
+        "device":  "D12049.E",
+        "label":  "리크 테스터 (좌) 에러"
+    },
+    {
+        "device":  "D12049.F",
+        "label":  "리크 (좌) 셔틀 제품정보 불일치"
+    },
+    {
+        "device":  "D12050.0",
+        "label":  "리크 바이패스 제품정보 불일치"
+    },
+    {
+        "device":  "D12051.0",
+        "label":  "H205 리크 셔틀 Y2 서보 레디 오프"
+    },
+    {
+        "device":  "D12051.1",
+        "label":  "H205 리크 셔틀 Y2서보 에러"
+    },
+    {
+        "device":  "D12051.2",
+        "label":  "H205 리크 셔틀 Y2서보 상한(+)"
+    },
+    {
+        "device":  "D12051.3",
+        "label":  "H205 리크 셔틀 Y2서보 하한(-)"
+    },
+    {
+        "device":  "D12051.F",
+        "label":  "리크 (우) 연속 검사불량 에러"
+    },
+    {
+        "device":  "D12052.0",
+        "label":  "리크 (우) 셔틀 전면정렬 전진 에러_(X1048)"
+    },
+    {
+        "device":  "D12052.1",
+        "label":  "리크 (우) 셔틀 전면정렬 후진 에러_(X1049)"
+    },
+    {
+        "device":  "D12052.2",
+        "label":  "리크 (우) 셔틀 후면정렬 전진 에러_(X104A)"
+    },
+    {
+        "device":  "D12052.3",
+        "label":  "리크 (우) 셔틀 후면.정렬 후진 에러_(X104B)"
+    },
+    {
+        "device":  "D12052.4",
+        "label":  "리크 (우) 셔틀 상부 정렬 상승 에러_(X104D)"
+    },
+    {
+        "device":  "D12052.5",
+        "label":  "리크 (우) 셔틀 상부 정렬 하강 에러_(X104E)"
+    },
+    {
+        "device":  "D12052.6",
+        "label":  "리크 (우) 셔틀 상부 타각 상승 에러_(X10CC)"
+    },
+    {
+        "device":  "D12052.7",
+        "label":  "리크 (우) 셔틀 상부 타각 하강 에러_(X10CD)"
+    },
+    {
+        "device":  "D12052.8",
+        "label":  "리크 (우) 셔틀 상부 정렬 압력저하_(X10AF)"
+    },
+    {
+        "device":  "D12052.9",
+        "label":  "리크 (우) 셔틀 지그 현재모델과 불일치"
+    },
+    {
+        "device":  "D12052.A",
+        "label":  "리크 테스터 (우) 서버PC 응답지연 에러(D4900.3)자재Ack"
+    },
+    {
+        "device":  "D12052.B",
+        "label":  "리크 테스터 (우) 서버PC 응답지연 에러(D4900.4)작업중Ack"
+    },
+    {
+        "device":  "D12052.C",
+        "label":  "리크 테스터 (우) 수동모드로 진행불가"
+    },
+    {
+        "device":  "D12052.D",
+        "label":  "리크 테스터 (우) 검사시간 초과 에러"
+    },
+    {
+        "device":  "D12052.E",
+        "label":  "리크 테스터 (우) 에러"
+    },
+    {
+        "device":  "D12052.F",
+        "label":  "리크 (우) 셔틀 제품정보 불일치"
+    },
+    {
+        "device":  "D12054.0",
+        "label":  "H206 언로딩 픽업-X서보 레디 오프"
+    },
+    {
+        "device":  "D12054.1",
+        "label":  "H207 언로딩 픽업-Z서보 레디 오프"
+    },
+    {
+        "device":  "D12054.2",
+        "label":  "H206 언로딩 픽업 X서보 에러"
+    },
+    {
+        "device":  "D12054.3",
+        "label":  "H206 언로딩 픽업-X서보 상한(+ 리미트)"
+    },
+    {
+        "device":  "D12054.4",
+        "label":  "H206 언로딩 픽업서보 하한(- 리미트)"
+    },
+    {
+        "device":  "D12054.5",
+        "label":  "H207 언로딩 픽업 Z서보 에러"
+    },
+    {
+        "device":  "D12054.6",
+        "label":  "H207 언로딩 픽업-Z서보 상한(+ 리미트)"
+    },
+    {
+        "device":  "D12054.7",
+        "label":  "H207 언로딩 픽업-Z서보 하한(- 리미트)"
+    },
+    {
+        "device":  "D12054.8",
+        "label":  "로딩 픽업_X \u0026 언로딩 픽업_X충돌위험(거리확인)"
+    },
+    {
+        "device":  "D12054.9",
+        "label":  "로딩 픽업_X \u0026 언로딩 픽업_X 속도다름(속도확인)"
+    },
+    {
+        "device":  "D12054.A",
+        "label":  "BYPASS 제품시 무언정지"
+    },
+    {
+        "device":  "D12055.0",
+        "label":  "LEAK 언로딩 픽업 그리퍼 전진 에러_(X1028)"
+    },
+    {
+        "device":  "D12055.1",
+        "label":  "LEAK 언로딩 픽업 그리퍼 후진 에러_(X1029)"
+    },
+    {
+        "device":  "D12055.2",
+        "label":  "LEAK 언로딩 픽업 그리퍼 턴 0도 에러_(X102A,X102C)\""
+    },
+    {
+        "device":  "D12055.3",
+        "label":  "LEAK 언로딩 픽업 그리퍼 턴 90도 에러_(X102B,X102D)\""
+    },
+    {
+        "device":  "D12055.4",
+        "label":  "LEAK 언로딩 픽업 MCR 리딩 에러"
+    },
+    {
+        "device":  "D12055.F",
+        "label":  "언로딩 픽업 제품정보 불일치"
+    },
+    {
+        "device":  "D12057.0",
+        "label":  "H208 지그 투입엘리베이터 Z서보 레디 오프"
+    },
+    {
+        "device":  "D12057.1",
+        "label":  "H208 지그 투입 엘리베이터 Z서보 에러"
+    },
+    {
+        "device":  "D12057.2",
+        "label":  "H208 지그 투입Z서보 상한(+ 리미트"
+    },
+    {
+        "device":  "D12057.3",
+        "label":  "H208 지그 투입Z서보 하한(- 리미트"
+    },
+    {
+        "device":  "D12058.0",
+        "label":  "지그 투입 컨베이어 운전 에러"
+    },
+    {
+        "device":  "D12058.1",
+        "label":  "지그 투입 컨베이어 인버터 에러"
+    },
+    {
+        "device":  "D12058.2",
+        "label":  "지그 투입 컨베이어 자재걸림 에러(X1109)"
+    },
+    {
+        "device":  "D12058.E",
+        "label":  "PLC\u003c=\u003ePC (피어싱) 통신에러"
+    },
+    {
+        "device":  "D12058.F",
+        "label":  "지그 투입 컨베이어 제품정보 불일치"
+    },
+    {
+        "device":  "D12060.0",
+        "label":  "브러쉬 모터(좌) 에러"
+    },
+    {
+        "device":  "D12060.1",
+        "label":  "브러쉬 모터(우) 에러"
+    },
+    {
+        "device":  "D12060.2",
+        "label":  "브러쉬 전면 정렬 전진 에러"
+    },
+    {
+        "device":  "D12060.3",
+        "label":  "브러쉬 전면 정렬 후진 에러"
+    },
+    {
+        "device":  "D12060.4",
+        "label":  "브러쉬 후면 정렬 전진 에러"
+    },
+    {
+        "device":  "D12060.5",
+        "label":  "브러쉬 후면 정렬 후진 에러"
+    },
+    {
+        "device":  "D12060.6",
+        "label":  "브러쉬 상부 정렬 상승 에러"
+    },
+    {
+        "device":  "D12060.7",
+        "label":  "브러쉬 상부 정렬 하강 에러"
+    },
+    {
+        "device":  "D12060.8",
+        "label":  "브러쉬 카운트 도달(브러쉬를 교체해주세요)"
+    },
+    {
+        "device":  "D12061.0",
+        "label":  "버퍼 상부 컨베이어 운전 에러"
+    },
+    {
+        "device":  "D12061.1",
+        "label":  "버퍼 상부- 컨베이어 인버터 에러"
+    },
+    {
+        "device":  "D12061.2",
+        "label":  "버퍼 상부-컨베이어 스테이지 상승 에러"
+    },
+    {
+        "device":  "D12061.3",
+        "label":  "버퍼 상부-컨베이어 스테이지 하강 에러"
+    },
+    {
+        "device":  "D12061.B",
+        "label":  "버퍼상부-컨베이어#1 제품 수취시간 초과 에러"
+    },
+    {
+        "device":  "D12061.C",
+        "label":  "버퍼상부-컨베이어#1 제품의 MCR ID가 없음.(피어싱 미수신 또는 강제투입함)"
+    },
+    {
+        "device":  "D12061.D",
+        "label":  "리벳팅 투입완료 미수신 에러"
+    },
+    {
+        "device":  "D12061.E",
+        "label":  "버퍼 상부- 컨베이어#1 제품정보 불일치"
+    },
+    {
+        "device":  "D12061.F",
+        "label":  "버퍼 상부- 컨베이어#2 제품정보 불일치"
+    },
+    {
+        "device":  "D12063.0",
+        "label":  "H209 버퍼 Z 서보 레디 오프"
+    },
+    {
+        "device":  "D12063.1",
+        "label":  "H209 버퍼 Z서보 에러"
+    },
+    {
+        "device":  "D12063.2",
+        "label":  "H209 버퍼 Z서보 상한(+ 리미트)"
+    },
+    {
+        "device":  "D12063.3",
+        "label":  "H209 버퍼 Z서보 하한(- 리미트)"
+    },
+    {
+        "device":  "D12064.2",
+        "label":  "버퍼 트렌스퍼 전진 에러_(X1067)"
+    },
+    {
+        "device":  "D12064.3",
+        "label":  "버퍼 트렌스퍼 후진 에러_(X1068)"
+    },
+    {
+        "device":  "D12064.4",
+        "label":  "버퍼 트렌스퍼 그리퍼 전진 에러_(X1069)"
+    },
+    {
+        "device":  "D12064.5",
+        "label":  "버퍼 트렌스퍼 그리퍼 후진 에러_(X106A)"
+    },
+    {
+        "device":  "D12064.8",
+        "label":  "버퍼 카운트 수량 불일치 에러"
+    },
+    {
+        "device":  "D12064.9",
+        "label":  "버퍼 적재 제품이 현재 생산모델과 다릅니다."
+    },
+    {
+        "device":  "D12064.D",
+        "label":  "버퍼 트랜스퍼 서버PC 응답지연 에러(D4900.5)진입Ack"
+    },
+    {
+        "device":  "D12064.E",
+        "label":  "버퍼 트랜스퍼 서버PC 응답지연 에러(D4900.6)배출Ack"
+    },
+    {
+        "device":  "D12064.F",
+        "label":  "버퍼 트렌스퍼 제품정보 불일치"
+    },
+    {
+        "device":  "D12067.0",
+        "label":  "피어싱 리턴 컨베이어 운전 에러"
+    },
+    {
+        "device":  "D12067.1",
+        "label":  "피어싱 리턴 컨베이어 인버터 에러"
+    },
+    {
+        "device":  "D12067.E",
+        "label":  "지그투입E/V 투입완료 미수신 에러"
+    },
+    {
+        "device":  "D12070.0",
+        "label":  "버퍼 리턴 컨베이어 운전 에러"
+    },
+    {
+        "device":  "D12070.1",
+        "label":  "버퍼 리턴 컨베이어 인버터 에러"
+    },
+    {
+        "device":  "D12070.E",
+        "label":  "버퍼 리턴 컨베이어 지그 역방향 투입 에러"
+    },
+    {
+        "device":  "D12070.F",
+        "label":  "버퍼 리턴 컨베이어 제품정보 불일치"
+    },
+    {
+        "device":  "D12099.0",
+        "label":  "로딩 컨베이어 전면좌 도어 열림 에러"
+    },
+    {
+        "device":  "D12099.1",
+        "label":  "로딩 컨베이어 전면우 도어 열림 에러"
+    },
+    {
+        "device":  "D12099.2",
+        "label":  "로딩 컨베이어 후면좌 도어 열림 에러"
+    },
+    {
+        "device":  "D12099.3",
+        "label":  "로딩 컨베이어 후면우 도어 열림 에러"
+    },
+    {
+        "device":  "D12101.0",
+        "label":  "리크 검사 전면 도어 열림 에러"
+    },
+    {
+        "device":  "D12101.1",
+        "label":  "리크 검사 후면 도어 열림 에러"
+    },
+    {
+        "device":  "D12103.0",
+        "label":  "투입 컨베이어 전면 도어 열림 에러"
+    },
+    {
+        "device":  "D12103.1",
+        "label":  "투입 컨베이어 후면 도어 열림 에러"
+    },
+    {
+        "device":  "D12105.0",
+        "label":  "버퍼 전면 도어 열림 에러"
+    },
+    {
+        "device":  "D12105.1",
+        "label":  "버퍼 후면 도어 열림 에러"
+    },
+    {
+        "device":  "D12106.0",
+        "label":  "EMO OFF (긴급정지)_MAIN"
+    },
+    {
+        "device":  "D12106.1",
+        "label":  "메인 전원 OFF_필러"
+    },
+    {
+        "device":  "D12106.2",
+        "label":  "메인 에어 부족알람"
+    },
+    {
+        "device":  "D12106.6",
+        "label":  "EMO#1 OFF (긴급정지)"
+    },
+    {
+        "device":  "D12106.7",
+        "label":  "EMO#2 OFF (긴급정지)"
+    },
+    {
+        "device":  "D12106.F",
+        "label":  "PLC 배터리 부족"
+    },
+    {
+        "device":  "D12107.2",
+        "label":  "리벳대기라인 MCR리딩에러"
+    },
+    {
+        "device":  "D12107.3",
+        "label":  "리벳대기라인 상위통신 로딩 미응답에러"
+    },
+    {
+        "device":  "D12107.4",
+        "label":  "리벳대기라인 상위통신 언로딩 미응답에러"
+    },
+    {
+        "device":  "D12107.5",
+        "label":  "리벳#1작업라인 로딩 상위통신 미응답에러"
+    },
+    {
+        "device":  "D12107.6",
+        "label":  "리벳#1작업라인 언로딩 상위통신 미응답에러"
+    },
+    {
+        "device":  "D12107.7",
+        "label":  "리벳#2작업라인 로딩 상위통신 미응답에러"
+    },
+    {
+        "device":  "D12107.8",
+        "label":  "리벳#2작업라인 언로딩 상위통신 미응답에러"
+    },
+    {
+        "device":  "D12107.9",
+        "label":  "리벳#3작업라인 로딩 상위통신 미응답에러"
+    },
+    {
+        "device":  "D12107.A",
+        "label":  "리벳#3작업라인 언로딩 상위통신 미응답에러"
+    },
+    {
+        "device":  "D12107.B",
+        "label":  "리벳#4작업라인 로딩 상위통신 미응답에러"
+    },
+    {
+        "device":  "D12107.C",
+        "label":  "리벳#4작업라인 언로딩 상위통신 미응답에러"
+    },
+    {
+        "device":  "D12107.D",
+        "label":  "리벳팅#3작업라인 자재정보 불일치ERROR"
+    },
+    {
+        "device":  "D12107.E",
+        "label":  "리벳팅#4작업라인 자재정보 불일치ERROR"
+    },
+    {
+        "device":  "D12107.F",
+        "label":  "언로딩대기 자재정보 불일치ERROR"
+    },
+    {
+        "device":  "D12108.0",
+        "label":  "리벳팅 컨베어 자체에러"
+    },
+    {
+        "device":  "D12108.1",
+        "label":  "리벳팅 컨베어 동작에러"
+    },
+    {
+        "device":  "D12108.2",
+        "label":  "리벳팅#1 작업라인 위치실린더 상승에러 ( X1022 )"
+    },
+    {
+        "device":  "D12108.3",
+        "label":  "리벳팅#1 작업라인 위치실린더 하강에러 ( X1023 )"
+    },
+    {
+        "device":  "D12108.4",
+        "label":  "리벳팅#1 대기라인 자재정보 불일치에러 ( X1020 )"
+    },
+    {
+        "device":  "D12108.5",
+        "label":  "리벳팅#2 작업라인 위치실린더 상승에러 ( X1042 )"
+    },
+    {
+        "device":  "D12108.6",
+        "label":  "리벳팅#2 작업라인 위치실린더 하강에러 ( X1043 )"
+    },
+    {
+        "device":  "D12108.7",
+        "label":  "리벳팅#2 대기라인 자재정보 불일치에러 ( X1040 )"
+    },
+    {
+        "device":  "D12108.8",
+        "label":  "리벳팅#3 작업라인 위치실린더 상승에러 ( X1062 )"
+    },
+    {
+        "device":  "D12108.9",
+        "label":  "리벳팅#3 작업라인 위치실린더 하강에러 ( X1063 )"
+    },
+    {
+        "device":  "D12108.A",
+        "label":  "리벳팅#3 대기라인 자재정보 불일치에러"
+    },
+    {
+        "device":  "D12108.B",
+        "label":  "리벳팅#4 작업라인 위치실린더 상승에러 ( X1082 )"
+    },
+    {
+        "device":  "D12108.C",
+        "label":  "리벳팅#4 작업라인 위치실린더 하강에러 ( X1083 )"
+    },
+    {
+        "device":  "D12108.D",
+        "label":  "리벳팅#1 작업 측면 정렬#2(전면)실린더전진에러 ( X1024, X1025, X1026, X102"
+    },
+    {
+        "device":  "D12108.E",
+        "label":  "리벳팅#1 작업 측면 정렬#2(전면)실린더후진에러 ( X1028 )"
+    },
+    {
+        "device":  "D12108.F",
+        "label":  "리벳팅#1 작업 측면 정렬#1(후면)실린더전진에러 ( X1029 )"
+    },
+    {
+        "device":  "D12109.0",
+        "label":  "리벳팅#1 작업 측면 정렬#1(후면)실린더후진에러 ( X102A )"
+    },
+    {
+        "device":  "D12109.1",
+        "label":  "리벳팅#2 작업 측면 정렬#2(전면)실린더전진에러( X1044, X1045, X1046, X1047"
+    },
+    {
+        "device":  "D12109.2",
+        "label":  "리벳팅#2 작업 측면 정렬#2(전면)실린더후진에러 ( X1048 )"
+    },
+    {
+        "device":  "D12109.3",
+        "label":  "리벳팅#2 작업 측면 정렬#1(후면)실린더전진에러 ( X1049 )"
+    },
+    {
+        "device":  "D12109.4",
+        "label":  "리벳팅#2 작업 측면 정렬#1(후면)실린더후진에러 ( X104A )"
+    },
+    {
+        "device":  "D12109.5",
+        "label":  "리벳팅#3 작업 측면 정렬#2(전면)실린더전진에러 ( X1064, X1065, X1066, X106"
+    },
+    {
+        "device":  "D12109.6",
+        "label":  "리벳팅#3 작업 측면 정렬#2(전면)실린더후진에러 ( X1068 )"
+    },
+    {
+        "device":  "D12109.7",
+        "label":  "리벳팅#3 작업 측면 정렬#1(후면)실린더전진에러 ( X1069 )"
+    },
+    {
+        "device":  "D12109.8",
+        "label":  "리벳팅#3 작업 측면 정렬#1(후면)실린더후진에러 ( X106A )"
+    },
+    {
+        "device":  "D12109.9",
+        "label":  "리벳팅#4 작업 측면 정렬#2(전면)실린더전진에러 ( X1084, X1085, X1086 , X10"
+    },
+    {
+        "device":  "D12109.A",
+        "label":  "리벳팅#4 작업 측면 정렬#2(전면)실린더후진에러 ( X1088 )"
+    },
+    {
+        "device":  "D12109.B",
+        "label":  "리벳팅#4 작업 측면 정렬#1(후면)실린더전진에러 ( X1089 )"
+    },
+    {
+        "device":  "D12109.C",
+        "label":  "리벳팅#4 작업 측면 정렬#1(후면)실린더후진에러 ( X108A )"
+    },
+    {
+        "device":  "D12109.D",
+        "label":  "리벳팅#4 대기라인 자재정보 불일치에러 ( X1080 )"
+    },
+    {
+        "device":  "D12109.E",
+        "label":  "리벳팅#1 작업라인 자재정보 불일치에러 ( X1021 )"
+    },
+    {
+        "device":  "D12109.F",
+        "label":  "리벳팅#2 작업라인 자재정보 불일치에러 ( X1041 )"
+    },
+    {
+        "device":  "D12110.1",
+        "label":  "Tool#1 슈팅 감지 알람"
+    },
+    {
+        "device":  "D12110.2",
+        "label":  "Tool#1 소재공급 클램프 반복 알람"
+    },
+    {
+        "device":  "D12110.3",
+        "label":  "리벳팅#1 작업라인 작업시작 무응답 에러"
+    },
+    {
+        "device":  "D12110.4",
+        "label":  "리벳팅#1 비젼 자동상태체크"
+    },
+    {
+        "device":  "D12110.5",
+        "label":  "리벳팅#1 스크류 파손감지"
+    },
+    {
+        "device":  "D12110.6",
+        "label":  "리벳팅기#1 비자동상태 알람"
+    },
+    {
+        "device":  "D12110.8",
+        "label":  "리벳팅#1 Safety Pos 알람"
+    },
+    {
+        "device":  "D12111.0",
+        "label":  "H201 리벳팅#1 X 서보 에러"
+    },
+    {
+        "device":  "D12111.1",
+        "label":  "H201 리벳팅#1 X 서보 상한(+ 리미트)"
+    },
+    {
+        "device":  "D12111.2",
+        "label":  "H201 리벳팅#1 X 서보 하한(- 리미트)"
+    },
+    {
+        "device":  "D12111.3",
+        "label":  "H201 리벳팅#1 X 서보READY OFF ERROR"
+    },
+    {
+        "device":  "D12111.4",
+        "label":  "H202 리벳팅#1 Y 서보 에러"
+    },
+    {
+        "device":  "D12111.5",
+        "label":  "H202 리벳팅#1 Y 서보 상한(+ 리미트)"
+    },
+    {
+        "device":  "D12111.6",
+        "label":  "H202 리벳팅#1 Y 서보 하한(- 리미트)"
+    },
+    {
+        "device":  "D12111.7",
+        "label":  "H202 리벳팅#1 Y 서보READY OFF ERROR"
+    },
+    {
+        "device":  "D12111.8",
+        "label":  "리벳팅#1 1차 취출 상승 감지알람"
+    },
+    {
+        "device":  "D12111.9",
+        "label":  "리벳팅#1 1차 취출 하강 감지알람"
+    },
+    {
+        "device":  "D12111.A",
+        "label":  "리벳팅#1 2차 압착 상승 감지알람"
+    },
+    {
+        "device":  "D12111.B",
+        "label":  "리벳팅#1 1 2차 압착 하강 감지알람"
+    },
+    {
+        "device":  "D12111.C",
+        "label":  "리벳팅#1 소재공급 후진 감지알람"
+    },
+    {
+        "device":  "D12111.D",
+        "label":  "리벳팅#1 소재공급 전진 감지알람"
+    },
+    {
+        "device":  "D12111.E",
+        "label":  "리벳팅#1 소재 취출 감지알람"
+    },
+    {
+        "device":  "D12111.F",
+        "label":  "리벳팅 얼라인#1 마크 검출 ERROR"
+    },
+    {
+        "device":  "D12112.0",
+        "label":  "리벳팅 얼라인#1 보정값초과 ERROR"
+    },
+    {
+        "device":  "D12112.2",
+        "label":  "ALIGN#1시작 응답ERROR"
+    },
+    {
+        "device":  "D12112.3",
+        "label":  "ALIGN#1결과신호ERROR"
+    },
+    {
+        "device":  "D12112.4",
+        "label":  "ALIGN#1 INTERFACE ERROR"
+    },
+    {
+        "device":  "D12112.9",
+        "label":  "리벳팅#1 누적NG초과 에러"
+    },
+    {
+        "device":  "D12112.A",
+        "label":  "리벳팅#1 소재공급 클램프 감지알람"
+    },
+    {
+        "device":  "D12112.B",
+        "label":  "리벳팅#1 소재공급 언클램프 감지알람"
+    },
+    {
+        "device":  "D12112.C",
+        "label":  "리벳팅기#1 안전위치체크 알람"
+    },
+    {
+        "device":  "D12112.E",
+        "label":  "리벳#1작업라인 작업중 상위통신 미응답에러"
+    },
+    {
+        "device":  "D12112.F",
+        "label":  "리벳#1작업라인 작업완료 상위통신 미응답에러"
+    },
+    {
+        "device":  "D12113.1",
+        "label":  "Tool#2 슈팅 감지알람"
+    },
+    {
+        "device":  "D12113.2",
+        "label":  "Tool#2 소재공급 클램프 반복알람"
+    },
+    {
+        "device":  "D12113.3",
+        "label":  "리벳팅#2작업라인 작업시작 무응답 에러"
+    },
+    {
+        "device":  "D12113.4",
+        "label":  "리벳팅#2 비젼 자동상태체크"
+    },
+    {
+        "device":  "D12113.5",
+        "label":  "리벳팅#2 스크류 파손감지"
+    },
+    {
+        "device":  "D12113.6",
+        "label":  "리벳팅기#2 비자동상태 알람"
+    },
+    {
+        "device":  "D12114.0",
+        "label":  "H203 리벳팅#2 X 서보 에러"
+    },
+    {
+        "device":  "D12114.1",
+        "label":  "H203 리벳팅#2 X 서보 상한(+ 리미트)"
+    },
+    {
+        "device":  "D12114.2",
+        "label":  "H203 리벳팅#2 X 서보 하한(- 리미트)"
+    },
+    {
+        "device":  "D12114.3",
+        "label":  "H203 리벳팅#2 X 서보READY OFF ERROR"
+    },
+    {
+        "device":  "D12114.4",
+        "label":  "H204 리벳팅#2 Y 서보 에러"
+    },
+    {
+        "device":  "D12114.5",
+        "label":  "H204 리벳팅#2 Y 서보 상한(+ 리미트)"
+    },
+    {
+        "device":  "D12114.6",
+        "label":  "H204 리벳팅#2 Y 서보 하한(- 리미트)"
+    },
+    {
+        "device":  "D12114.7",
+        "label":  "H204 리벳팅#2 Y 서보READY OFF ERROR"
+    },
+    {
+        "device":  "D12114.8",
+        "label":  "리벳팅#2 1차 취출 상승 감지 알람"
+    },
+    {
+        "device":  "D12114.9",
+        "label":  "리벳팅#2 1차 취출 하강 감지 알람"
+    },
+    {
+        "device":  "D12114.A",
+        "label":  "리벳팅#2 2차 압착 상승 감지 알람"
+    },
+    {
+        "device":  "D12114.B",
+        "label":  "리벳팅#2 2차 압착 하강 감지 알람"
+    },
+    {
+        "device":  "D12114.C",
+        "label":  "리벳팅#2 소재공급 후진 감지 알람"
+    },
+    {
+        "device":  "D12114.D",
+        "label":  "리벳팅#2 소재공급 전진 감지 알람"
+    },
+    {
+        "device":  "D12114.E",
+        "label":  "리벳팅#2 소재 취출 감지 알람"
+    },
+    {
+        "device":  "D12114.F",
+        "label":  "리벳팅 얼라인#2 마크 검출 ERROR"
+    },
+    {
+        "device":  "D12115.0",
+        "label":  "리벳팅 얼라인#2 보정값초과 ERROR"
+    },
+    {
+        "device":  "D12115.2",
+        "label":  "리벳팅 얼라인#2시작 응답ERROR"
+    },
+    {
+        "device":  "D12115.3",
+        "label":  "리벳팅 얼라인#2결과신호ERROR"
+    },
+    {
+        "device":  "D12115.4",
+        "label":  "리벳팅 얼라인#2 INTERFACE ERROR"
+    },
+    {
+        "device":  "D12115.9",
+        "label":  "리벳팅#2 누적NG초과 에러"
+    },
+    {
+        "device":  "D12115.A",
+        "label":  "리벳팅#2 소재공급 클램프 감지 알람"
+    },
+    {
+        "device":  "D12115.B",
+        "label":  "리벳팅#2 소재공급 언클램프 감지 알람"
+    },
+    {
+        "device":  "D12115.C",
+        "label":  "리벳팅기#2 안전위치체크 알람"
+    },
+    {
+        "device":  "D12115.E",
+        "label":  "리벳#2작업라인 작업중 상위통신 미응답에러"
+    },
+    {
+        "device":  "D12115.F",
+        "label":  "리벳#2작업라인 작업완료 상위통신 미응답에러"
+    },
+    {
+        "device":  "D12116.1",
+        "label":  "Tool#3 슈팅 감지 알람"
+    },
+    {
+        "device":  "D12116.2",
+        "label":  "Tool#3 소재공급 클램프 반복 알람"
+    },
+    {
+        "device":  "D12116.3",
+        "label":  "리벳팅#3 작업라인 작업시작 무응답 에러"
+    },
+    {
+        "device":  "D12116.4",
+        "label":  "리벳#3 비젼 자동상태체크"
+    },
+    {
+        "device":  "D12116.5",
+        "label":  "리벳#3 스크류 파손감지"
+    },
+    {
+        "device":  "D12116.6",
+        "label":  "리벳팅기#3 비자동상태 알람"
+    },
+    {
+        "device":  "D12116.8",
+        "label":  "리벳팅#2 Safety Pos 알람"
+    },
+    {
+        "device":  "D12117.0",
+        "label":  "H205 리벳팅#3 X 서보 ERROR"
+    },
+    {
+        "device":  "D12117.1",
+        "label":  "H205 리벳팅#3 X 서보 상한(+ 리미트)"
+    },
+    {
+        "device":  "D12117.2",
+        "label":  "H205 리벳팅#3 X 서보 하한(- 리미트)"
+    },
+    {
+        "device":  "D12117.3",
+        "label":  "H205 리벳팅#3 X 서보READY OFF ERROR"
+    },
+    {
+        "device":  "D12117.4",
+        "label":  "H206 리벳팅#3 Y 서보 ERROR"
+    },
+    {
+        "device":  "D12117.5",
+        "label":  "H206 리벳팅#3 Y 서보 상한(+ 리미트)"
+    },
+    {
+        "device":  "D12117.6",
+        "label":  "H206 리벳팅#3 Y 서보 하한(- 리미트)"
+    },
+    {
+        "device":  "D12117.7",
+        "label":  "H206 리벳팅#3 Y 서보READY OFF ERROR"
+    },
+    {
+        "device":  "D12117.8",
+        "label":  "리벳팅#3 1차 취출 상승 감지 알람"
+    },
+    {
+        "device":  "D12117.9",
+        "label":  "리벳팅#3 1차 취출 하강 감지 알람"
+    },
+    {
+        "device":  "D12117.A",
+        "label":  "리벳팅#3 2차 압착 상승 감지 알람"
+    },
+    {
+        "device":  "D12117.B",
+        "label":  "리벳팅#3 2차 압착 하강 감지 알람"
+    },
+    {
+        "device":  "D12117.C",
+        "label":  "리벳팅#3 소재공급 후진 감지 알람"
+    },
+    {
+        "device":  "D12117.D",
+        "label":  "리벳팅#3 소재공급 전진 감지 알람"
+    },
+    {
+        "device":  "D12117.E",
+        "label":  "리벳팅#3 소재공급 클램프 감지 알람"
+    },
+    {
+        "device":  "D12117.F",
+        "label":  "리벳팅#3 소재공급 언클램프 감지 알람"
+    },
+    {
+        "device":  "D12118.0",
+        "label":  "리벳팅#3 소재 취출 감지 알람"
+    },
+    {
+        "device":  "D12118.4",
+        "label":  "리벳기 유닛#3 브라켓실린더 전진에러 ( X10AC )"
+    },
+    {
+        "device":  "D12118.5",
+        "label":  "리벳기 유닛#3 브라켓실린더 후진에러 ( X10AD )"
+    },
+    {
+        "device":  "D12118.6",
+        "label":  "리벳기 유닛#3 브라켓실린더 그립에러 ( X10AE )"
+    },
+    {
+        "device":  "D12118.7",
+        "label":  "리벳기 유닛#3 브라켓실린더 언그립에러 ( X10AF )"
+    },
+    {
+        "device":  "D12118.8",
+        "label":  "리벳기 유닛#3 브라켓실린더 상승에러 ( X10AA )"
+    },
+    {
+        "device":  "D12118.9",
+        "label":  "리벳기 유닛#3 브라켓실린더 하강에러 ( X10AB )"
+    },
+    {
+        "device":  "D12118.A",
+        "label":  "리벳팅#3 브라켓 미감지 에러"
+    },
+    {
+        "device":  "D12118.B",
+        "label":  "ALIGN#3 마크 검출 ERROR"
+    },
+    {
+        "device":  "D12118.C",
+        "label":  "ALIGN#3 보정값초과 ERROR"
+    },
+    {
+        "device":  "D12118.D",
+        "label":  "ALIGN#3시작 응답ERROR"
+    },
+    {
+        "device":  "D12118.E",
+        "label":  "ALIGN#3결과신호ERROR"
+    },
+    {
+        "device":  "D12118.F",
+        "label":  "ALIGN#3 INTERFACE ERROR"
+    },
+    {
+        "device":  "D12119.3",
+        "label":  "리벳기 유닛#3 브라켓 그립 실린더 자재정보 불일치에러"
+    },
+    {
+        "device":  "D12119.B",
+        "label":  "리벳팅#3 누적NG초과 에러"
+    },
+    {
+        "device":  "D12119.C",
+        "label":  "리벳팅기#3 안전위치체크 알람"
+    },
+    {
+        "device":  "D12119.E",
+        "label":  "리벳#3작업라인 작업중 상위통신 미응답에러"
+    },
+    {
+        "device":  "D12119.F",
+        "label":  "리벳#3작업라인 작업완료 상위통신 미응답에러"
+    },
+    {
+        "device":  "D12120.1",
+        "label":  "Tool#4 슈팅 감지 알람"
+    },
+    {
+        "device":  "D12120.2",
+        "label":  "Tool#4 소재공급 클램프 반복 알람"
+    },
+    {
+        "device":  "D12120.3",
+        "label":  "리벳팅#4 작업라인 작업시작 무응답 에러"
+    },
+    {
+        "device":  "D12120.4",
+        "label":  "리벳#4 비젼 자동상태체크"
+    },
+    {
+        "device":  "D12120.5",
+        "label":  "리벳#4 스크류 파손감지"
+    },
+    {
+        "device":  "D12120.6",
+        "label":  "리벳팅기#4 비자동상태 알람"
+    },
+    {
+        "device":  "D12120.8",
+        "label":  "리벳팅#2 Work Complete 알람"
+    },
+    {
+        "device":  "D12121.0",
+        "label":  "H207 리벳팅#4 X 서보 에러"
+    },
+    {
+        "device":  "D12121.1",
+        "label":  "H207 리벳팅#4 X 서보 상한(+ 리미트)"
+    },
+    {
+        "device":  "D12121.2",
+        "label":  "H207 리벳팅#4 X 서보 하한(- 리미트)"
+    },
+    {
+        "device":  "D12121.3",
+        "label":  "H207 리벳팅#4 X 서보READY OFF ERROR"
+    },
+    {
+        "device":  "D12121.4",
+        "label":  "H208 리벳팅#4 Y 서보 ERROR"
+    },
+    {
+        "device":  "D12121.5",
+        "label":  "H208 리벳팅#4 Y 서보 상한(+ 리미트)"
+    },
+    {
+        "device":  "D12121.6",
+        "label":  "H208 리벳팅#4 Y 서보 하한(- 리미트)"
+    },
+    {
+        "device":  "D12121.7",
+        "label":  "H208 리벳팅#4 Y 서보READY OFF ERROR"
+    },
+    {
+        "device":  "D12121.8",
+        "label":  "리벳팅#4 1차 취출 상승 감지 알람"
+    },
+    {
+        "device":  "D12121.9",
+        "label":  "리벳팅#4 1차 취출 하강 감지 알람"
+    },
+    {
+        "device":  "D12121.A",
+        "label":  "리벳팅#4 2차 압착 상승 감지 알람"
+    },
+    {
+        "device":  "D12121.B",
+        "label":  "리벳팅#4 2차 압착 하강 감지 알람"
+    },
+    {
+        "device":  "D12121.C",
+        "label":  "리벳팅#4 소재공급 후진 감지 알람"
+    },
+    {
+        "device":  "D12121.D",
+        "label":  "리벳팅#4 소재공급 전진 감지 알람"
+    },
+    {
+        "device":  "D12121.E",
+        "label":  "리벳팅#4 소재공급 클램프 감지 알람"
+    },
+    {
+        "device":  "D12121.F",
+        "label":  "리벳팅#4 소재공급 언클램프 감지 알람"
+    },
+    {
+        "device":  "D12122.0",
+        "label":  "리벳팅#4 소재 취출 감지 알람"
+    },
+    {
+        "device":  "D12122.4",
+        "label":  "리벳기 유닛#4 브라켓실린더 전진에러 ( X10CC )"
+    },
+    {
+        "device":  "D12122.5",
+        "label":  "리벳기 유닛#4 브라켓실린더 후진에러 ( X10CD )"
+    },
+    {
+        "device":  "D12122.6",
+        "label":  "리벳기 유닛#4 브라켓실린더 그립에러 ( X10CE )"
+    },
+    {
+        "device":  "D12122.7",
+        "label":  "리벳기 유닛#4 브라켓실린더 언그립에러 ( X10CF )"
+    },
+    {
+        "device":  "D12122.8",
+        "label":  "리벳기 유닛#4 브라켓실린더 상승에러 ( X10CA )"
+    },
+    {
+        "device":  "D12122.9",
+        "label":  "리벳기 유닛#4 브라켓실린더 하강에러 ( X10CB )"
+    },
+    {
+        "device":  "D12122.A",
+        "label":  "리벳팅#4 브라켓 미감지 에러"
+    },
+    {
+        "device":  "D12122.B",
+        "label":  "ALIGN#4 마크 검출 ERROR"
+    },
+    {
+        "device":  "D12122.C",
+        "label":  "ALIGN#4 보정값초과 ERROR"
+    },
+    {
+        "device":  "D12122.D",
+        "label":  "ALIGN#4시작 응답ERROR"
+    },
+    {
+        "device":  "D12122.E",
+        "label":  "ALIGN#4결과신호ERROR"
+    },
+    {
+        "device":  "D12122.F",
+        "label":  "ALIGN#4 INTERFACE ERROR"
+    },
+    {
+        "device":  "D12123.3",
+        "label":  "리벳기 유닛#4 브라켓 그립 실린더 자재정보 불일치에러"
+    },
+    {
+        "device":  "D12123.B",
+        "label":  "리벳팅#4 누적NG초과 에러"
+    },
+    {
+        "device":  "D12123.C",
+        "label":  "리벳팅기#4 안전위치체크 알람"
+    },
+    {
+        "device":  "D12123.E",
+        "label":  "리벳#4작업라인 작업중 상위통신 미응답에러"
+    },
+    {
+        "device":  "D12123.F",
+        "label":  "리벳#4작업라인 작업완료 상위통신 미응답에러"
+    },
+    {
+        "device":  "D12124.1",
+        "label":  "RIVET BOLT피더#1 Escape 분배 복귀 감지 알람"
+    },
+    {
+        "device":  "D12124.2",
+        "label":  "RIVET BOLT피더#1 Escape 분배 작동 감지 알람"
+    },
+    {
+        "device":  "D12124.3",
+        "label":  "RIVET BOLT피더#1 소재 부족"
+    },
+    {
+        "device":  "D12124.4",
+        "label":  "RIVET 브라켓피더#3소재 부족"
+    },
+    {
+        "device":  "D12125.0",
+        "label":  "RIVET BRACKET#3 FEEDER ERROR ( X10A0 )"
+    },
+    {
+        "device":  "D12125.1",
+        "label":  "브라켓 피더#3 자재배출 전진에러 ( X10A2 )"
+    },
+    {
+        "device":  "D12125.2",
+        "label":  "브라켓 피더#3 자재배출 후진에러 ( X10A3 )"
+    },
+    {
+        "device":  "D12125.3",
+        "label":  "브라켓 피더#3 진공ON 에러 ( X10A1 )"
+    },
+    {
+        "device":  "D12125.4",
+        "label":  "브라켓 피더#3 진공OFF 에러 ( X10A1 )"
+    },
+    {
+        "device":  "D12125.6",
+        "label":  "리벳팅#3 브라켓공급실린더 공급위치 에러 ( X10A4 )"
+    },
+    {
+        "device":  "D12125.7",
+        "label":  "리벳팅#3 브라켓공급실린더 픽업위치 에러 ( X10A5 )"
+    },
+    {
+        "device":  "D12125.8",
+        "label":  "리벳팅#3 브라켓 피더픽업실린더 1차 상승에러 ( X10A6 )"
+    },
+    {
+        "device":  "D12125.9",
+        "label":  "리벳팅#3 브라켓 피더픽업실린더 1차 하강에러 ( X10A7 )"
+    },
+    {
+        "device":  "D12125.A",
+        "label":  "리벳팅#3 브라켓 피더픽업실린더 2차 상승에러 ( X10A8 )"
+    },
+    {
+        "device":  "D12125.B",
+        "label":  "리벳팅#3 브라켓 피더픽업실린더 2차 하강에러 ( X10A9 )"
+    },
+    {
+        "device":  "D12125.C",
+        "label":  "리벳팅#3 브라켓 피더픽업실린더 자재취출에러 ( X106E )"
+    },
+    {
+        "device":  "D12125.D",
+        "label":  "리벳팅#3 브라켓 피더픽업실린더 자재수취에러 ( X106F )"
+    },
+    {
+        "device":  "D12125.F",
+        "label":  "브라켓 피더#3 볼 피더자재 걸림에러"
+    },
+    {
+        "device":  "D12126.0",
+        "label":  "브라켓 피더#3 직진 피더자재 걸림에러"
+    },
+    {
+        "device":  "D12126.2",
+        "label":  "리벳팅#3 브라켓 피더픽업실린더 자재정보에러"
+    },
+    {
+        "device":  "D12127.1",
+        "label":  "RIVET BOLT피더#2 Escape 분배 복귀 감지 알람"
+    },
+    {
+        "device":  "D12127.2",
+        "label":  "RIVET BOLT피더#2 Escape 분배 작동 감지 알람"
+    },
+    {
+        "device":  "D12127.3",
+        "label":  "RIVET BOLT피더#2 소재 부족"
+    },
+    {
+        "device":  "D12127.4",
+        "label":  "RIVET 브라켓피더#4소재 부족"
+    },
+    {
+        "device":  "D12128.0",
+        "label":  "RIVET BRACKET#4 FEEDER ERROR ( X10C0 )"
+    },
+    {
+        "device":  "D12128.1",
+        "label":  "브라켓 피더#4 자재배출 전진에러 ( X10C2 )"
+    },
+    {
+        "device":  "D12128.2",
+        "label":  "브라켓 피더#4 자재배출 후진에러 ( X10C3 )"
+    },
+    {
+        "device":  "D12128.3",
+        "label":  "브라켓 피더#4 진공ON 에러 ( X10C1 )"
+    },
+    {
+        "device":  "D12128.4",
+        "label":  "브라켓 피더#4 진공OFF 에러 ( X10C1 )"
+    },
+    {
+        "device":  "D12128.6",
+        "label":  "리벳팅#4 브라켓공급실린더 공급위치 에러 ( X10C4 )"
+    },
+    {
+        "device":  "D12128.7",
+        "label":  "리벳팅#4 브라켓공급실린더 픽업위치 에러 ( X10C5 )"
+    },
+    {
+        "device":  "D12128.8",
+        "label":  "리벳팅#4 브라켓 피더픽업실린더 1차 상승에러 ( X10C6 )"
+    },
+    {
+        "device":  "D12128.9",
+        "label":  "리벳팅#4 브라켓 피더픽업실린더 1차 하강에러 ( X10C7 )"
+    },
+    {
+        "device":  "D12128.A",
+        "label":  "리벳팅#4 브라켓 피더픽업실린더 2차 상승에러 ( X10C8 )"
+    },
+    {
+        "device":  "D12128.B",
+        "label":  "리벳팅#4 브라켓 피더픽업실린더 2차 하강에러 ( X10C9 )"
+    },
+    {
+        "device":  "D12128.C",
+        "label":  "리벳팅#4 브라켓 피더픽업실린더 자재취출에러 ( X108E )"
+    },
+    {
+        "device":  "D12128.D",
+        "label":  "리벳팅#4 브라켓 피더픽업실린더 자재수취에러 ( X108F )"
+    },
+    {
+        "device":  "D12128.F",
+        "label":  "브라켓 피더#4 볼 피더자재 걸림에러"
+    },
+    {
+        "device":  "D12129.0",
+        "label":  "브라켓 피더#4 직진 피더자재 걸림에러"
+    },
+    {
+        "device":  "D12129.2",
+        "label":  "리벳팅#4 브라켓 피더픽업실린더 자재정보에러"
+    },
+    {
+        "device":  "D12130.0",
+        "label":  "치수검사 비젼알람발생"
+    },
+    {
+        "device":  "D12130.1",
+        "label":  "치수검사 비젼 자동상태체크"
+    },
+    {
+        "device":  "D12131.0",
+        "label":  "검사컨베어 자체에러"
+    },
+    {
+        "device":  "D12131.1",
+        "label":  "검사컨베어 동작에러"
+    },
+    {
+        "device":  "D12131.2",
+        "label":  "검사진입컨베어 MCR읽기에러"
+    },
+    {
+        "device":  "D12131.3",
+        "label":  "검사IN CV MCR ERROR"
+    },
+    {
+        "device":  "D12131.4",
+        "label":  "검사ULD CV MCR READING ERROR"
+    },
+    {
+        "device":  "D12131.5",
+        "label":  "검사ULD CV MCR ERROR"
+    },
+    {
+        "device":  "D12131.6",
+        "label":  "치수검사 위치실린더 상승에러 ( X1108 )"
+    },
+    {
+        "device":  "D12131.7",
+        "label":  "치수검사 위치실린더 하강에러 ( X1109 )"
+    },
+    {
+        "device":  "D12131.8",
+        "label":  "치수검사고정실린더 전진에러 ( X110A )"
+    },
+    {
+        "device":  "D12131.9",
+        "label":  "치수검사고정실린더 후진에러( X110B )"
+    },
+    {
+        "device":  "D12131.A",
+        "label":  "치수검사NG누적카운트 에러"
+    },
+    {
+        "device":  "D12131.C",
+        "label":  "회전유닛 제품 실린더 상승에러 ( X1120 )"
+    },
+    {
+        "device":  "D12131.D",
+        "label":  "회전유닛 제품 실린더 하강에러 ( X1121 )"
+    },
+    {
+        "device":  "D12131.E",
+        "label":  "평탄스테이지 실린더 상승에러 ( X1140 )"
+    },
+    {
+        "device":  "D12131.F",
+        "label":  "평탄스테이지 실린더 하강에러 ( X1141 )"
+    },
+    {
+        "device":  "D12132.0",
+        "label":  "언로딩 컨베어 배출지연에러"
+    },
+    {
+        "device":  "D12132.1",
+        "label":  "검사진입라인 상위서버 로딩 미응답에러"
+    },
+    {
+        "device":  "D12132.2",
+        "label":  "검사진입라인 상위서버 언로딩 미응답에러"
+    },
+    {
+        "device":  "D12132.3",
+        "label":  "치수검사라인 상위서버 로딩 미응답에러"
+    },
+    {
+        "device":  "D12132.4",
+        "label":  "치수검사라인 상위서버 언로딩 미응답에러"
+    },
+    {
+        "device":  "D12132.5",
+        "label":  "평탄검사라인 상위서버 로딩 미응답에러"
+    },
+    {
+        "device":  "D12132.6",
+        "label":  "평탄검사라인 상위서버 언로딩 미응답에러"
+    },
+    {
+        "device":  "D12132.9",
+        "label":  "치수대기 제품정보 불일치 ( X1100 )"
+    },
+    {
+        "device":  "D12132.A",
+        "label":  "치수검사 제품정보 불일치 ( X1101 )"
+    },
+    {
+        "device":  "D12132.B",
+        "label":  "회전유닛 제품정보 불일치 ( X1102 )"
+    },
+    {
+        "device":  "D12132.C",
+        "label":  "평탄검사 제품정보 불일치 ( X1103 )"
+    },
+    {
+        "device":  "D12132.D",
+        "label":  "배출버퍼#1 제품정보 불일치 ( X1104 )"
+    },
+    {
+        "device":  "D12132.E",
+        "label":  "배출버퍼#2 제품정보 불일치 ( X1105 )"
+    },
+    {
+        "device":  "D12132.F",
+        "label":  "검사배출 제품정보 불일치 ( X1106 )"
+    },
+    {
+        "device":  "D12134.6",
+        "label":  "치수검사 시작 무응답 에러"
+    },
+    {
+        "device":  "D12134.7",
+        "label":  "치수검사 INTERFACE ERROR"
+    },
+    {
+        "device":  "D12134.8",
+        "label":  "치수검사 결과값 FEEDBACK ERROR"
+    },
+    {
+        "device":  "D12137.2",
+        "label":  "회전유닛 상부 리프트실린더 상승에러 ( X112D )"
+    },
+    {
+        "device":  "D12137.3",
+        "label":  "회전유닛 상부 리프트실린더 하강에러 ( X112E )"
+    },
+    {
+        "device":  "D12137.4",
+        "label":  "회전유닛회전 실린더 180º에러 ( X1129, X112B )"
+    },
+    {
+        "device":  "D12137.5",
+        "label":  "회전유닛회전 실린더 0º에러 ( X112A, X112C )"
+    },
+    {
+        "device":  "D12137.6",
+        "label":  "회전유닛 전면 고정 실린더 전진에러 ( X1122, X1123, X1124, X1125 )"
+    },
+    {
+        "device":  "D12137.7",
+        "label":  "회전유닛 전면 고정 실린더 후진에러 ( X1126 )"
+    },
+    {
+        "device":  "D12137.8",
+        "label":  "회전유닛 후면 고정 실린더 전진에러 ( X1127 )"
+    },
+    {
+        "device":  "D12137.9",
+        "label":  "회전유닛 후면 고정 실린더 후진에러 ( X1128 )"
+    },
+    {
+        "device":  "D12139.0",
+        "label":  "평탄검사 비젼알람발생"
+    },
+    {
+        "device":  "D12139.1",
+        "label":  "평탄검사 비젼 자동상태체크"
+    },
+    {
+        "device":  "D12140.0",
+        "label":  "평탄검사 상승에러 ( X1142 )"
+    },
+    {
+        "device":  "D12140.1",
+        "label":  "평탄검사 하강에러 ( X1143 )"
+    },
+    {
+        "device":  "D12140.2",
+        "label":  "타격실린더 전진에러"
+    },
+    {
+        "device":  "D12140.3",
+        "label":  "타격실린더 후진에러"
+    },
+    {
+        "device":  "D12140.5",
+        "label":  "\" 평탄검사 모델센서 배치에러 ( X1144, X1145, X1146, X1147, X1148, X11"
+    },
+    {
+        "device":  "D12140.6",
+        "label":  "평탄검사NG누적카운트 에러"
+    },
+    {
+        "device":  "D12140.7",
+        "label":  "타격준비 고정실린더 상승에러"
+    },
+    {
+        "device":  "D12140.8",
+        "label":  "타격준비 고정실린더 하강에러"
+    },
+    {
+        "device":  "D12142.D",
+        "label":  "H214 지그리턴 엘리베이터Z 서보 ERROR"
+    },
+    {
+        "device":  "D12142.E",
+        "label":  "H214 지그리턴 엘리베이터Z 서보 상한(+ 리미트)"
+    },
+    {
+        "device":  "D12142.F",
+        "label":  "H214 지그리턴 엘리베이터Z 서보 하한(- 리미트)"
+    },
+    {
+        "device":  "D12143.0",
+        "label":  "H214 지그리턴 엘리베이터Z 서보레디오프 에러"
+    },
+    {
+        "device":  "D12143.1",
+        "label":  "H214 지그리턴 엘리베이터Z 서보부하지정값 초과에러"
+    },
+    {
+        "device":  "D12143.5",
+        "label":  "지그리턴 엘리베이터컨베어 리프트실린더 상승에러 ( X1181 )"
+    },
+    {
+        "device":  "D12143.6",
+        "label":  "지그리턴 엘리베이터컨베어 리프트실린더 하강에러 ( X1182 )"
+    },
+    {
+        "device":  "D12143.8",
+        "label":  "지그리턴 엘리베이터컨베어 자체에러"
+    },
+    {
+        "device":  "D12143.9",
+        "label":  "지그리턴 엘리베이터컨베어 동작에러"
+    },
+    {
+        "device":  "D12143.A",
+        "label":  "지그리턴 엘리베이터컨베어 자재배출 자재끼임에러 ( X1185 )"
+    },
+    {
+        "device":  "D12143.B",
+        "label":  "지그리턴 엘리베이터컨베어 제품정보 불일치 ( X1180 )"
+    },
+    {
+        "device":  "D12143.C",
+        "label":  "지그리턴 엘리베이터 라인 상위서버 로딩 미응답에러"
+    },
+    {
+        "device":  "D12143.D",
+        "label":  "지그리턴 엘리베이터 라인 상위서버 언로딩 미응답에러"
+    },
+    {
+        "device":  "D12143.E",
+        "label":  "지그리턴 엘리베이터 지그배출 시간초과 에러"
+    },
+    {
+        "device":  "D12145.D",
+        "label":  "H209 언로딩트랜스퍼 X 서보 ERROR"
+    },
+    {
+        "device":  "D12145.E",
+        "label":  "H209 언로딩트랜스퍼 X 서보 상한(+ 리미트)"
+    },
+    {
+        "device":  "D12145.F",
+        "label":  "H209 언로딩트랜스퍼 X 서보 하한(- 리미트)"
+    },
+    {
+        "device":  "D12146.0",
+        "label":  "H209 언로딩트랜스퍼 X 서보READY OFF ERROR"
+    },
+    {
+        "device":  "D12146.1",
+        "label":  "H210 언로딩트랜스퍼 Y 서보 ERROR"
+    },
+    {
+        "device":  "D12146.2",
+        "label":  "H210 언로딩트랜스퍼 Y 서보 상한(+ 리미트)"
+    },
+    {
+        "device":  "D12146.3",
+        "label":  "H210 언로딩트랜스퍼 Y 서보 하한(- 리미트)"
+    },
+    {
+        "device":  "D12146.4",
+        "label":  "H210 언로딩트랜스퍼 Y 서보READY OFF ERROR"
+    },
+    {
+        "device":  "D12146.5",
+        "label":  "H211 언로딩트랜스퍼 Z 서보 ERROR"
+    },
+    {
+        "device":  "D12146.6",
+        "label":  "H211 언로딩트랜스퍼 Z 서보 상한(+ 리미트)"
+    },
+    {
+        "device":  "D12146.7",
+        "label":  "H211 언로딩트랜스퍼 Z 서보 하한(- 리미트)"
+    },
+    {
+        "device":  "D12146.8",
+        "label":  "H211 언로딩트랜스퍼 Z 서보READY OFF ERROR"
+    },
+    {
+        "device":  "D12146.9",
+        "label":  "언로딩트랜스퍼 상부실린더 회전수평 0° ERROR"
+    },
+    {
+        "device":  "D12146.A",
+        "label":  "언로딩트랜스퍼 상부실린더 회전수평 180° ERROR"
+    },
+    {
+        "device":  "D12146.B",
+        "label":  "언로딩트랜스퍼 상부실린더 회전수직 0° ERROR"
+    },
+    {
+        "device":  "D12146.C",
+        "label":  "언로딩트랜스퍼 상부실린더 회전수직 90° ERROR"
+    },
+    {
+        "device":  "D12146.D",
+        "label":  "언로딩 트랜스퍼 그립실린더 그립에러"
+    },
+    {
+        "device":  "D12146.E",
+        "label":  "언로딩 트랜스퍼 그립실린더 언그립에러"
+    },
+    {
+        "device":  "D12146.F",
+        "label":  "언로딩 트랜스퍼 제품정보불일치"
+    },
+    {
+        "device":  "D12147.D",
+        "label":  "NG컨베어#1 자재만재경고 ( X116B )"
+    },
+    {
+        "device":  "D12147.E",
+        "label":  "NG 컨베어#1 자재만재에러 ( X116C )"
+    },
+    {
+        "device":  "D12148.D",
+        "label":  "H212 NG 컨베어#1 서보 ERROR"
+    },
+    {
+        "device":  "D12149.0",
+        "label":  "H212 NG 컨베어#1 서보READY OFF ERROR"
+    },
+    {
+        "device":  "D12149.2",
+        "label":  "NG 컨베어#1 이동감지센서 체크ERROR"
+    },
+    {
+        "device":  "D12149.E",
+        "label":  "NG 컨베어#1 자재투입미감지에러 ( X116A )"
+    },
+    {
+        "device":  "D12150.D",
+        "label":  "NG 컨베어#2 자재만재경고 ( X116E )"
+    },
+    {
+        "device":  "D12150.E",
+        "label":  "NG 컨베어#2 자재만재에러 ( X116F )"
+    },
+    {
+        "device":  "D12151.D",
+        "label":  "H213 NG 컨베어#2 서보 ERROR"
+    },
+    {
+        "device":  "D12152.0",
+        "label":  "H213 NG 컨베어#2 서보레디 OFF에러"
+    },
+    {
+        "device":  "D12152.2",
+        "label":  "NG 컨베어#2 이동감지센서 체크ERROR"
+    },
+    {
+        "device":  "D12152.D",
+        "label":  "NG 컨베어#2 자재만재에러 ( X116F )"
+    },
+    {
+        "device":  "D12152.E",
+        "label":  "NG 컨베어#2 자재투입미감지에러 ( X116D )"
+    },
+    {
+        "device":  "D12154.D",
+        "label":  "하부 순환 컨베어#1 자체에러"
+    },
+    {
+        "device":  "D12154.E",
+        "label":  "하부 순환 컨베어#1 동작에러"
+    },
+    {
+        "device":  "D12157.D",
+        "label":  "Return Conveyor #1 Error"
+    },
+    {
+        "device":  "D12160.D",
+        "label":  "RETURN CONVEYOR#2 ERROR"
+    },
+    {
+        "device":  "D12160.E",
+        "label":  "RETURN CONVEYOR#2  RUN ERROR"
+    },
+    {
+        "device":  "D12511.C",
+        "label":  "메인 전원 OFF_필러"
+    }
+]
+

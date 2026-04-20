@@ -1,0 +1,93 @@
+{
+  "poll_interval_sec": 2,
+  "day_start_hour": 7,
+  "day_start_time": "07:30",
+  "day_start_effective_day": "2026-04-15",
+  "server_port": 5050,
+  "lines": [
+    {
+      "id": 1,
+      "name": "ECU Housing 1",
+      "host": "192.168.2.174",
+      "port": 5000,
+      "cycle_time_sec": 13,
+      "targets": {
+        "daily": 0
+      },
+      "devices": {
+        "ok": "D2548",
+        "ng": "D2648"
+      },
+      "status": {
+        "run_bit": "M20",
+        "alarm_bit": "M104"
+      },
+      "alarm_scan_requires_total_bit": false,
+      "model": {
+        "default_label": "1809"
+      },
+      "alarm_sources_file": "ecu1_alarms.json",
+      "notes": "키엔스 취합 PLC 기준. ECU 1/2는 동일 PLC(192.168.2.174:5000)를 사용함. total은 ok+ng로 계산"
+    },
+    {
+      "id": 2,
+      "name": "ECU Housing 2",
+      "host": "192.168.2.174",
+      "port": 5000,
+      "cycle_time_sec": 20,
+      "targets": {
+        "daily": 0
+      },
+      "devices": {
+        "ok": "D8348",
+        "ng": "D8448"
+      },
+      "status": {
+        "run_bit": "M510",
+        "alarm_bit": "M512"
+      },
+      "alarm_scan_requires_total_bit": false,
+      "model": {
+        "bits": {
+          "M430": "1809",
+          "M431": "1812",
+          "M432": "1815"
+        },
+        "default_label": "-"
+      },
+      "alarm_sources_file": "ecu2_alarms.json",
+      "notes": "키엔스 취합 PLC 기준. ECU 1/2는 동일 PLC(192.168.2.174:5000)를 사용함. total은 ok+ng로 계산"
+    },
+    {
+      "id": 3,
+      "name": "LP EGR-VV",
+      "display_name": "LP EGR-V/V",
+      "host": "192.168.2.50",
+      "port": 5000,
+      "cycle_time_sec": 13,
+      "targets": {
+        "daily": 3300
+      },
+      "devices": {
+        "ok": "D8248",
+        "ng": "D8348"
+      },
+      "status": {
+        "run_bit": "M100",
+        "alarm_bit": "L1000"
+      },
+      "alarm_scan_requires_total_bit": false,
+      "model": {
+        "bits": {
+          "M71": "감마2 Euro-6",
+          "M72": "3기통",
+          "M73": "4기통",
+          "M74": "감마2 Euro-7"
+        },
+        "default_label": "-"
+      },
+      "alarm_sources_file": "lp_egr_alarms.json",
+      "notes": "키엔스 PLC 기준. LP EGR 전용 PLC(192.168.2.50:5000)를 사용함. total은 ok+ng로 계산"
+    }
+  ]
+}
