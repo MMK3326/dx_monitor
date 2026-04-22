@@ -2,13 +2,24 @@
     const C_CHART = '#6366f1';
     const C_TEAL = '#14b8a6';
     const ST_COLORS = { YEST: '#6B7280' };
-    const TL_COLORS = { RUN: C_TEAL, STOP: '#fbbf24', ALARM: '#ef4444', MEAL: '#a78bfa', ONLINE: '#38bdf8', OFFLINE: '#6b7280', NO_DATA: '#374151', OFF: '#2C2C2E' };
+    const TL_COLORS = {
+      RUN: '#008000',
+      STOP: '#FFD700',
+      ALARM: '#FF0000',
+      MEAL: '#505763',
+      ONLINE: '#66d4cf',
+      OFFLINE: '#3f4650',
+      NO_DATA: '#2f3440',
+      OFF: '#2c2c2e'
+    };
     const CHART_DATA = {};
     const STRIP_LABEL_GUTTER = 36;
     const STRIP_RIGHT_GUTTER = 24;
     const STATUS_STRIP_HEIGHT = 15;
     const STATUS_STRIP_GAP = 3;
     const STATUS_AXIS_HEIGHT = 18;
+    const STATUS_STRIP_REVEAL_MS = 320;
+    const STATUS_STRIP_HIDE_DELAY_MS = 360;
     const MEAL_BREAKS = [
       { label: '식사', start: '12:00', end: '13:00' },
       { label: '식사', start: '17:00', end: '17:30' },
@@ -165,7 +176,7 @@
       const hh = String(now.getHours()).padStart(2, '0');
       const mm = String(now.getMinutes()).padStart(2, '0');
       const ss = String(now.getSeconds()).padStart(2, '0');
-      return `동일 시간 기준 비교 ${hh}:${mm}:${ss}`;
+      return `Same-time comparison ${hh}:${mm}:${ss}`;
     }
 
     function formatProdSecond(seconds, startMinute = DAY_START_MINUTE) {
@@ -247,6 +258,10 @@
       return '#fff';
     }
 
+    function tooltipStatusColor(status) {
+      return statusColor(status);
+    }
+
     function findTimelineBlock(blocks, seconds) {
       const sec = Math.max(0, Math.min(86399, Number(seconds || 0)));
       return (blocks || []).find(block => sec >= Number(block.startSec || 0) && sec < Number(block.startSec || 0) + Number(block.duration || 0)) || null;
@@ -263,7 +278,9 @@
     }
 
     function fixedYAxisMax(lineId) {
-      return Number(lineId) === 3 ? 300 : 500;
+      if (Number(lineId) === 1) return 400;
+      if (Number(lineId) === 3) return 250;
+      return 500;
     }
 
     function isNoDataSlot(blocks, hourIndex) {
@@ -328,13 +345,13 @@
                 <input class="target-input" type="number" min="0" step="1" inputmode="numeric" data-ref="target-input" onkeydown="handleTargetKey(event, ${line.id})" aria-label="${line.name} 일일 목표 수량">
                 <button class="target-save" type="button" data-ref="target-save" onclick="saveLineTarget(${line.id})">저장</button>
               </div>
-              <div class="status-inline" data-ref="ctx-panel"><span class="status-inline-label">STATUS</span><span class="status-inline-value" data-ref="ctx-status">-</span></div>
+              <div class="status-inline" data-ref="ctx-panel"><span class="status-inline-label">STATUS</span><span class="status-inline-dot" aria-hidden="true"></span><span class="status-inline-value" data-ref="ctx-status">-</span></div>
             </div>
           </div>
           <div class="kpi-section">
             <div class="kpi-section-head">
               <div class="kpi-section-title-wrap"><span class="kpi-section-title">주요 KPI</span></div>
-              <span class="kpi-section-time" data-ref="cmp-shared-time">동일 시간 기준 비교</span>
+              <span class="kpi-section-legend"><span class="legend-good"><span class="legend-dot legend-dot-good"></span>Good</span><span class="legend-bad"><span class="legend-dot legend-dot-bad"></span>Bad</span></span>
             </div>
             <div class="kpi-row">
             <div class="kpi-card kpi-card-action" role="button" tabindex="0" onclick="openKpiHistory(${line.id}, 'production')" onkeydown="handleKpiLinkKey(event, () => openKpiHistory(${line.id}, 'production'))" aria-label="생산 수량 이력 보기">
@@ -669,7 +686,8 @@
     function updateComparisonCards(panelEl, data, historySummary = null) {
       const comparisons = data.comparisons || {};
       const asOf = comparisons.as_of || null;
-      panelEl.querySelector('[data-ref="cmp-shared-time"]').textContent = currentAsOfLabel();
+      const headerCompareTimeEl = document.getElementById('headerCompareTime');
+      if (headerCompareTimeEl) headerCompareTimeEl.textContent = currentAsOfLabel();
       const mttrUnitEl = panelEl.querySelector('[data-ref="cmp-mttr-today"]')?.nextElementSibling;
       const mtbfUnitEl = panelEl.querySelector('[data-ref="cmp-mtbf-today"]')?.nextElementSibling;
       if (mttrUnitEl) mttrUnitEl.textContent = 'hr';
@@ -750,7 +768,7 @@
     function updatePanel(id, data) {
       const previousChart = CHART_DATA[id] || {};
       const startMinute = Number(data.day_start_minute ?? DAY_START_MINUTE);
-      CHART_DATA[id] = {
+      Object.assign(previousChart, {
         dayStartMinute: startMinute,
         yest: normalizeHourlyArray(data.hourly_yesterday || [], startMinute, true),
         today: normalizeHourlyArray(data.hourly_today || [], startMinute),
@@ -761,8 +779,13 @@
         hourlyComparison: previousChart.hourlyComparison || null,
         hourlyComparisonLoadedAt: previousChart.hourlyComparisonLoadedAt || 0,
         hourlyCompareRange: previousChart.hourlyCompareRange || null,
-        hourlyCompareLoading: previousChart.hourlyCompareLoading || false
-      };
+        hourlyCompareLoading: previousChart.hourlyCompareLoading || false,
+        stripReveal: Number(previousChart.stripReveal ?? 0),
+        stripRevealTarget: Number(previousChart.stripRevealTarget ?? 0),
+        stripRevealFrame: previousChart.stripRevealFrame || null,
+        stripHideTimer: previousChart.stripHideTimer || null
+      });
+      CHART_DATA[id] = previousChart;
       const el = document.getElementById(`panel-${id}`);
       if (!el) return;
       const style = getStatusStyle(data.status.label);
@@ -843,6 +866,13 @@
       if (comparePanel) comparePanel.classList.toggle('open', mode === 'compare');
       if (trendLegend) trendLegend.style.display = mode === 'compare' ? 'none' : 'flex';
       if (compareLegend) compareLegend.style.display = mode === 'compare' ? 'flex' : 'none';
+      if (mode === 'compare') {
+        if (data.stripHideTimer) {
+          clearTimeout(data.stripHideTimer);
+          data.stripHideTimer = null;
+        }
+        setStatusStripReveal(id, false);
+      }
       panel.querySelectorAll('.strip-label').forEach(label => {
         label.style.display = mode === 'compare' ? 'none' : 'flex';
       });
@@ -1031,9 +1061,8 @@
 
     function startClock() {
       const render = () => {
-        document.querySelectorAll('[data-ref="cmp-shared-time"]').forEach(el => {
-          el.textContent = currentAsOfLabel();
-        });
+        const headerCompareTimeEl = document.getElementById('headerCompareTime');
+        if (headerCompareTimeEl) headerCompareTimeEl.textContent = currentAsOfLabel();
       };
       render();
       setInterval(render, 1000);
@@ -1453,9 +1482,18 @@
     function renderProductionMatrixCell(value, maxValue) {
       const count = Number(value || 0);
       if (count <= 0) return `<td class="matrix-cell matrix-cell-empty">-</td>`;
-      const ratio = maxValue > 0 ? Math.max(0.12, Math.min(1, count / maxValue)) : 0.12;
-      const alpha = 0.08 + (ratio * 0.34);
-      return `<td class="matrix-cell" style="background:rgba(34,197,94,${alpha.toFixed(3)}); color:${ratio > 0.68 ? '#f0fdf4' : '#d8dce5'};">${compactNumber(count)}</td>`;
+      let background = 'rgba(21,128,61,0.12)';
+      let color = '#d8dce5';
+      if (count > 300) {
+        background = 'rgba(34,197,94,0.42)';
+      } else if (count > 200) {
+        background = 'rgba(34,197,94,0.34)';
+      } else if (count > 100) {
+        background = 'rgba(34,197,94,0.27)';
+      } else if (count > 50) {
+        background = 'rgba(34,197,94,0.19)';
+      }
+      return `<td class="matrix-cell" style="background:${background}; color:${color};">${compactNumber(count)}</td>`;
     }
 
     function compactNumber(value) {
@@ -2618,9 +2656,45 @@
 
     function closeModal() { document.getElementById('historyModal').classList.remove('open'); }
 
+    function setStatusStripReveal(id, expanded) {
+      const d = CHART_DATA[id];
+      if (!d) return;
+      if ((d.chartMode || 'trend') === 'compare') expanded = false;
+      const target = expanded ? 1 : 0;
+      if ((d.stripRevealTarget ?? 0) === target) return;
+      d.stripRevealTarget = target;
+      if (d.stripRevealFrame) cancelAnimationFrame(d.stripRevealFrame);
+      const from = Number(d.stripReveal ?? 0);
+      const startedAt = performance.now();
+      const duration = STATUS_STRIP_REVEAL_MS;
+      const ease = progress => 1 - Math.pow(1 - progress, 3);
+      const step = now => {
+        const progress = Math.min(1, (now - startedAt) / duration);
+        d.stripReveal = from + ((target - from) * ease(progress));
+        drawCombinedChart(id, d.yest || [], d.today || [], d.timeline_yesterday || [], d.timeline_today || []);
+        if (progress < 1) {
+          d.stripRevealFrame = requestAnimationFrame(step);
+        } else {
+          d.stripReveal = target;
+          d.stripRevealFrame = null;
+          drawCombinedChart(id, d.yest || [], d.today || [], d.timeline_yesterday || [], d.timeline_today || []);
+        }
+      };
+      d.stripRevealFrame = requestAnimationFrame(step);
+    }
+
     function setupInteractions(id) {
       const w = document.getElementById(`wrapper-${id}`);
       const tt = document.getElementById(`tooltip-${id}`);
+      w.addEventListener('mouseenter', () => {
+        const d = CHART_DATA[id];
+        if (d?.stripHideTimer) {
+          clearTimeout(d.stripHideTimer);
+          d.stripHideTimer = null;
+        }
+        if ((d?.chartMode || 'trend') === 'compare') return;
+        setStatusStripReveal(id, true);
+      });
       w.addEventListener('mousemove', e => {
         const r = w.getBoundingClientRect();
         const x = e.clientX - r.left;
@@ -2668,8 +2742,10 @@
         }
         if (hoverTime) hoverTime.textContent = formatProdSecond(cursorSec, d.dayStartMinute);
         const strips = d.stripMeta || {};
-        const isYestStrip = y >= (strips.yesterdayY || -1) && y <= (strips.yesterdayY || -1) + STATUS_STRIP_HEIGHT;
-        const isTodayStrip = y >= (strips.todayY || -1) && y <= (strips.todayY || -1) + STATUS_STRIP_HEIGHT;
+        const reveal = Number(d.stripReveal ?? 0);
+        const stripHeight = STATUS_STRIP_HEIGHT * reveal;
+        const isYestStrip = reveal > 0.12 && y >= (strips.yesterdayY || -1) && y <= (strips.yesterdayY || -1) + stripHeight;
+        const isTodayStrip = reveal > 0.12 && y >= (strips.todayY || -1) && y <= (strips.todayY || -1) + stripHeight;
         if (isYestStrip || isTodayStrip) {
           const rowLabel = isTodayStrip ? '금일' : '전일';
           const blocks = timelineBlocksForDisplay(isTodayStrip ? d.timeline_today : d.timeline_yesterday);
@@ -2686,7 +2762,7 @@
           tt.innerHTML = `
             <div class="tooltip-time">${rowLabel} 상태</div>
             <div class="tooltip-row"><span>구간</span><span class="val-ct">${formatProdSecond(startSec, d.dayStartMinute)}~${formatProdSecond(endSec, d.dayStartMinute)}</span></div>
-            <div class="tooltip-row"><span>상태</span><span style="color:${statusColor(block.status)}; font-weight:700;">${statusNameKo(block.status)}</span></div>
+            <div class="tooltip-row"><span>상태</span><span style="color:${tooltipStatusColor(block.status)}; font-weight:700;">${statusNameKo(block.status)}</span></div>
                       `;
         } else {
           if (d.hoverStripKey) {
@@ -2724,6 +2800,13 @@
           d.hoverStrip = null;
           drawCombinedChart(id, d.yest, d.today, d.timeline_yesterday || [], d.timeline_today || []);
         }
+        if (d?.stripHideTimer) clearTimeout(d.stripHideTimer);
+        if (d) {
+          d.stripHideTimer = setTimeout(() => {
+            d.stripHideTimer = null;
+            setStatusStripReveal(id, false);
+          }, STATUS_STRIP_HIDE_DELAY_MS);
+        }
       });
     }
 
@@ -2734,7 +2817,10 @@
       const rect = cvs.parentElement.getBoundingClientRect();
       const dpr = window.devicePixelRatio || 1;
       if (cvs.width !== rect.width * dpr) { cvs.width = rect.width * dpr; cvs.height = rect.height * dpr; ctx.scale(dpr, dpr); }
-      const W = rect.width, H = rect.height, stH = STATUS_STRIP_HEIGHT, stGap = STATUS_STRIP_GAP, cH = H - (stH * 2) - stGap - STATUS_AXIS_HEIGHT - 12;
+      const reveal = Math.max(0, Math.min(1, Number(CHART_DATA[id]?.stripReveal ?? 0)));
+      const W = rect.width, H = rect.height, stH = STATUS_STRIP_HEIGHT, stGap = STATUS_STRIP_GAP;
+      const stripReserve = reveal * ((stH * 2) + stGap + 4);
+      const cH = H - stripReserve - STATUS_AXIS_HEIGHT - 12;
       const plotX = STRIP_LABEL_GUTTER;
       const plotW = Math.max(W - STRIP_LABEL_GUTTER - STRIP_RIGHT_GUTTER, 1);
       const startMinute = CHART_DATA[id]?.dayStartMinute ?? DAY_START_MINUTE;
@@ -2804,7 +2890,7 @@
           const c = block.status === 'RUN' ? TL_COLORS.RUN : (TL_COLORS[block.status] || TL_COLORS.OFF);
           const isHovered = hoverStrip && hoverStrip.row === rowKey && Number(hoverStrip.block?.startSec || 0) === Number(block.startSec || 0) && Number(hoverStrip.block?.duration || 0) === Number(block.duration || 0) && String(hoverStrip.block?.status || '') === String(block.status || '');
           ctx.fillStyle = c;
-          ctx.globalAlpha = isHovered ? 1 : (faded ? 0.4 : 0.9);
+          ctx.globalAlpha = 1;
           ctx.fillRect(x, y, w, stH);
           if (isHovered) {
             ctx.save();
@@ -2816,15 +2902,25 @@
           ctx.globalAlpha = 1;
         });
       };
-      const yestStripY = H - STATUS_AXIS_HEIGHT - (stH * 2) - stGap - 4;
-      const todayStripY = H - STATUS_AXIS_HEIGHT - stH - 4;
-      drawStrip(timelineBlocksForDisplay(tYest), yestStripY, true, 'yesterday');
-      drawStrip(timelineBlocksForDisplay(tToday), todayStripY, false, 'today');
+      const yestStripY = H - STATUS_AXIS_HEIGHT - stripReserve + (reveal * 1);
+      const todayStripY = yestStripY + (reveal * (stH + stGap));
+      if (reveal > 0.02) {
+        drawStrip(timelineBlocksForDisplay(tYest), yestStripY, true, 'yesterday');
+        drawStrip(timelineBlocksForDisplay(tToday), todayStripY, false, 'today');
+      }
       const wrapper = cvs.parentElement;
       const yestLabel = wrapper.querySelector('[data-strip-label="yesterday"]');
       const todayLabel = wrapper.querySelector('[data-strip-label="today"]');
-      if (yestLabel) yestLabel.style.top = `${yestStripY}px`;
-      if (todayLabel) todayLabel.style.top = `${todayStripY}px`;
+      if (yestLabel) {
+        yestLabel.style.top = `${yestStripY}px`;
+        yestLabel.style.opacity = `${reveal}`;
+        yestLabel.style.display = reveal > 0.02 ? 'block' : 'none';
+      }
+      if (todayLabel) {
+        todayLabel.style.top = `${todayStripY}px`;
+        todayLabel.style.opacity = `${reveal}`;
+        todayLabel.style.display = reveal > 0.02 ? 'block' : 'none';
+      }
       CHART_DATA[id].stripMeta = { yesterdayY: yestStripY, todayY: todayStripY };
 
       ctx.font = '9px sans-serif';
@@ -2836,10 +2932,11 @@
       for (let hour = 0; hour <= 24; hour += 2) {
         const x = plotX + (hour / 24) * plotW;
         ctx.beginPath();
-        ctx.moveTo(x, todayStripY + stH + 2);
-        ctx.lineTo(x, todayStripY + stH + 6);
+        const axisBaseY = H - STATUS_AXIS_HEIGHT;
+        ctx.moveTo(x, axisBaseY + 2);
+        ctx.lineTo(x, axisBaseY + 6);
         ctx.stroke();
-        ctx.fillText(slotLabel(hour, startMinute), x, todayStripY + stH + 7);
+        ctx.fillText(slotLabel(hour, startMinute), x, axisBaseY + 7);
       }
 
       const currentSec = latestDataSecond(tToday);

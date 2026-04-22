@@ -6,9 +6,9 @@
   <title>EMTES 설비 모니터링</title>
   <style>
     :root {
-      --bg-app:#000; --bg-card:#1c1c1e; --border:#2c2c2e; --c-chart:#6366f1; --c-timeline:#14b8a6;
-      --st-run:#10b981; --st-stop:#fbbf24; --st-alarm:#ef4444; --st-online:#38bdf8; --st-offline:#6b7280;
-      --c-yest:#6b7280; --c-model:#9ca3af; --text-primary:#fff; --text-secondary:#8e8e93;
+      --bg-app:#000000; --bg-card:#1c1c1e; --border:#2c2c2e; --c-chart:#5e5ce6; --c-timeline:#64d2ff;
+      --st-run:#30d158; --st-stop:#ffd60a; --st-alarm:#ff453a; --st-online:#0a84ff; --st-offline:#8e8e93;
+      --c-yest:#8e8e93; --c-model:#9fc0e8; --text-primary:#ffffff; --text-secondary:#8e8e93;
     }
     * { box-sizing:border-box; }
     .min-h-screen { min-height:100vh; }
@@ -39,6 +39,7 @@
     .text-xl { font-size:1.25rem; line-height:1.75rem; }
     .font-bold { font-weight:700; }
     .tracking-tight { letter-spacing:-0.025em; }
+    .app-title { color:#74839a; }
     .text-\[\#5E6673\] { color:#5E6673; }
     .space-y-0 > :not([hidden]) ~ :not([hidden]) { margin-top:0; margin-bottom:0; }
     .mb-4 { margin-bottom:1rem; }
@@ -56,7 +57,7 @@
       font-family:"Pretendard",sans-serif;
     }
     .dashboard-card { background:var(--bg-card); border:1px solid var(--border); border-radius:14px; display:flex; flex-direction:column; overflow:hidden; height:auto; align-self:start; position:relative; }
-    .dashboard-card::before { content:""; position:absolute; top:0; left:0; width:72px; height:72px; pointer-events:none; background:linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0) 62%); opacity:0; transition:opacity 0.25s ease, background 0.25s ease; }
+    .dashboard-card::before { content:none; }
     @keyframes accentPulse { 0% { opacity:0.55; } 100% { opacity:1; } }
     .card-accent-run::before { opacity:1; background:linear-gradient(135deg, rgba(16,185,129,0.34), rgba(16,185,129,0.1) 38%, rgba(16,185,129,0) 70%); }
     .card-accent-stop::before { opacity:1; background:linear-gradient(135deg, rgba(251,191,36,0.34), rgba(251,191,36,0.1) 38%, rgba(251,191,36,0) 70%); }
@@ -67,11 +68,35 @@
     .panel-header::after { content:""; position:absolute; left:0; right:20px; bottom:0; height:1px; background:linear-gradient(90deg, rgba(255,255,255,0.16), rgba(255,255,255,0.08) 42%, rgba(255,255,255,0) 100%); pointer-events:none; }
     .panel-title-wrap { display:flex; flex-direction:column; gap:4px; min-width:0; flex:1; }
     .panel-title-row { display:flex; align-items:center; gap:10px; min-width:0; width:100%; }
-    .panel-title { margin:0; font-size:20px; font-weight:800; color:#fff; line-height:1.1; letter-spacing:-0.4px; min-width:0; flex:1; }
+    .panel-title {
+      margin:0;
+      font-size:20px;
+      font-weight:800;
+      line-height:1.1;
+      letter-spacing:-0.4px;
+      min-width:0;
+      flex:1;
+      color:#f5f5f7;
+      background:linear-gradient(180deg, #ffffff 0%, #edf2f8 52%, #9ca8b8 100%);
+      -webkit-background-clip:text;
+      background-clip:text;
+      -webkit-text-fill-color:transparent;
+      text-shadow:0 1px 0 rgba(0,0,0,0.18);
+    }
     .panel-meta-row { display:flex; align-items:center; gap:8px; min-width:0; min-height:16px; }
-    .panel-model-label { font-size:9px; font-weight:800; color:#5f6774; letter-spacing:0.6px; text-transform:uppercase; }
-    .panel-model-value { font-size:11px; font-weight:600; color:#98a1af; letter-spacing:-0.1px; line-height:1.2; }
-    .header-status-wrap { display:flex; align-items:center; gap:10px; }
+    .panel-model-label { font-size:10px; font-weight:800; color:#6f89ab; letter-spacing:0.7px; text-transform:uppercase; }
+    .panel-model-value {
+      font-size:13px;
+      font-weight:700;
+      letter-spacing:-0.15px;
+      line-height:1.2;
+      background:linear-gradient(180deg, #eaf1f8 0%, #c8d6e6 36%, #90a7c2 68%, #dbe6f1 100%);
+      -webkit-background-clip:text;
+      background-clip:text;
+      -webkit-text-fill-color:transparent;
+      text-shadow:0 1px 0 rgba(0,0,0,0.18);
+    }
+    .header-status-wrap { display:flex; flex-direction:column; align-items:flex-end; gap:4px; }
     .header-status {
       display:inline-flex;
       align-items:center;
@@ -89,12 +114,19 @@
       white-space:nowrap;
     }
     .header-status-online {
-      color:#eef2ff;
-      background:linear-gradient(90deg, rgba(99,102,241,0.26), rgba(20,184,166,0.16) 72%, rgba(255,255,255,0.04));
+      color:#f5f5f7;
+      background:linear-gradient(90deg, rgba(10,132,255,0.26), rgba(100,210,255,0.14) 72%, rgba(255,255,255,0.04));
     }
     .header-status-offline {
       color:#d1d5db;
       background:linear-gradient(90deg, rgba(107,114,128,0.22), rgba(255,255,255,0.05));
+    }
+    .header-compare-time {
+      font-size:10px;
+      font-weight:800;
+      color:#8f98a7;
+      letter-spacing:0.25px;
+      white-space:nowrap;
     }
     .header-clock {
       font-size:12px;
@@ -107,8 +139,16 @@
       text-shadow:0 0 12px rgba(255,255,255,0.08);
       white-space:nowrap;
     }
-    .status-inline { display:inline-flex; align-items:center; gap:6px; align-self:center; padding:5px 9px; border-radius:9px; background:rgba(255,255,255,0.025); border:1px solid rgba(255,255,255,0.04); box-shadow:inset 0 1px 0 rgba(255,255,255,0.03); transition:all 0.3s ease; }
+    .status-inline { display:inline-flex; align-items:center; gap:7px; align-self:center; padding:5px 9px; border-radius:9px; background:rgba(255,255,255,0.025); border:1px solid rgba(255,255,255,0.04); box-shadow:inset 0 1px 0 rgba(255,255,255,0.03); transition:all 0.3s ease; }
     .status-inline-label { font-size:9px; font-weight:800; color:#6f7784; letter-spacing:0.6px; text-transform:uppercase; }
+    .status-inline-dot {
+      width:8px;
+      height:8px;
+      border-radius:999px;
+      background:#6b7280;
+      box-shadow:0 0 0 1px rgba(255,255,255,0.08), 0 0 0 rgba(107,114,128,0);
+      flex:0 0 auto;
+    }
     .status-inline-value { font-size:12px; font-weight:800; letter-spacing:-0.15px; }
     .panel-actions { display:flex; align-items:center; justify-content:flex-end; gap:8px; flex-wrap:wrap; }
     .target-control { display:none; align-items:center; gap:6px; padding:4px 6px; border:1px solid rgba(255,255,255,0.06); border-radius:8px; background:rgba(255,255,255,0.025); }
@@ -125,6 +165,13 @@
     .accent-online { border-left-color:var(--st-online); background:linear-gradient(90deg, rgba(56,189,248,0.1) 0%, transparent 100%); }
     .accent-offline { border-left-color:var(--st-offline); background:linear-gradient(90deg, rgba(107,114,128,0.1) 0%, transparent 100%); }
     @keyframes blink-bg { 0% { opacity:0.7; } 100% { opacity:1; } }
+    @keyframes statusPulseSoft { 0% { transform:scale(0.96); opacity:0.78; } 100% { transform:scale(1.08); opacity:1; } }
+    @keyframes statusPulseAlarm { 0% { transform:scale(0.9); opacity:0.72; box-shadow:0 0 0 1px rgba(255,255,255,0.08), 0 0 0 rgba(239,68,68,0.14); } 100% { transform:scale(1.14); opacity:1; box-shadow:0 0 0 1px rgba(255,255,255,0.08), 0 0 14px rgba(239,68,68,0.52); } }
+    .accent-run .status-inline-dot { background:var(--st-run); box-shadow:0 0 0 1px rgba(16,185,129,0.18), 0 0 10px rgba(16,185,129,0.32); animation:statusPulseSoft 1.8s ease-in-out infinite alternate; }
+    .accent-stop .status-inline-dot { background:var(--st-stop); box-shadow:0 0 0 1px rgba(251,191,36,0.18), 0 0 8px rgba(251,191,36,0.22); animation:statusPulseSoft 2.8s ease-in-out infinite alternate; }
+    .accent-alarm .status-inline-dot { background:var(--st-alarm); animation:statusPulseAlarm 0.85s ease-in-out infinite alternate; }
+    .accent-online .status-inline-dot { background:var(--st-online); box-shadow:0 0 0 1px rgba(56,189,248,0.18), 0 0 10px rgba(56,189,248,0.28); animation:statusPulseSoft 2.1s ease-in-out infinite alternate; }
+    .accent-offline .status-inline-dot { background:var(--st-offline); opacity:0.75; }
     .ctx-label { font-size:10px; color:var(--text-secondary); font-weight:700; margin-bottom:2px; letter-spacing:0.6px; }
     .ctx-val-base { font-size:15px; font-weight:800; letter-spacing:-0.3px; }
     .tx-run { color:var(--st-run); } .tx-stop { color:var(--st-stop); } .tx-alarm { color:var(--st-alarm); } .tx-online { color:var(--st-online); } .tx-offline { color:var(--st-offline); }
@@ -136,28 +183,11 @@
     .kpi-section-title { font-size:11px; font-weight:800; color:#e5e7eb; letter-spacing:0.3px; white-space:nowrap; }
     .kpi-section-title-wrap::before { content:""; width:3px; height:12px; border-radius:999px; background:#c7ccd6; box-shadow:0 0 10px rgba(199,204,214,0.18); }
     .kpi-section-title-wrap::after { content:""; flex:1; height:1px; background:linear-gradient(90deg, rgba(199,204,214,0.4), rgba(255,255,255,0.12), transparent); }
-    .kpi-section-time {
-      position:relative;
-      font-size:10px;
-      font-weight:700;
-      color:#aeb6c5;
-      padding-left:12px;
-      letter-spacing:0.35px;
-      white-space:nowrap;
-      text-transform:none;
-    }
-    .kpi-section-time::before {
-      content:"";
-      position:absolute;
-      left:0;
-      top:50%;
-      width:6px;
-      height:6px;
-      border-radius:999px;
-      transform:translateY(-50%);
-      background:linear-gradient(180deg, rgba(99,102,241,0.95), rgba(99,102,241,0.3));
-      box-shadow:0 0 10px rgba(99,102,241,0.3);
-    }
+    .kpi-section-legend { display:flex; align-items:center; gap:12px; color:#9aa4b2; font-size:10px; font-weight:800; letter-spacing:0.2px; white-space:nowrap; }
+    .legend-good, .legend-bad { display:inline-flex; align-items:center; gap:5px; }
+    .legend-dot { width:6px; height:6px; border-radius:999px; flex:0 0 auto; }
+    .legend-dot-good { background:#0a84ff; box-shadow:0 0 8px rgba(10,132,255,0.22); }
+    .legend-dot-bad { background:#ff453a; box-shadow:0 0 8px rgba(255,69,58,0.2); }
     .kpi-row { display:grid; grid-template-columns:minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr); gap:12px; padding:14px 0 0; }
     .kpi-card { display:flex; flex-direction:column; justify-content:flex-start; position:relative; min-width:0; border:1px solid rgba(255,255,255,0.1); border-radius:12px; background:linear-gradient(180deg, rgba(255,255,255,0.065), rgba(255,255,255,0.022) 48%, rgba(0,0,0,0.08)); padding:10px 10px 8px; min-height:106px; box-shadow:inset 0 1px 0 rgba(255,255,255,0.08), 0 1px 0 rgba(255,255,255,0.025), 0 8px 18px rgba(0,0,0,0.2); }
     .kpi-card-action {
@@ -165,13 +195,13 @@
       transition:transform 0.18s ease, border-color 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
     }
     .kpi-card-action:hover {
-      border-color:rgba(99,102,241,0.36);
-      background:linear-gradient(180deg, rgba(99,102,241,0.13), rgba(255,255,255,0.035) 48%, rgba(0,0,0,0.06));
-      box-shadow:inset 0 1px 0 rgba(255,255,255,0.12), 0 1px 0 rgba(255,255,255,0.035), 0 12px 26px rgba(0,0,0,0.28), 0 0 0 1px rgba(99,102,241,0.06);
+      border-color:rgba(10,132,255,0.4);
+      background:linear-gradient(180deg, rgba(10,132,255,0.14), rgba(255,255,255,0.035) 48%, rgba(0,0,0,0.06));
+      box-shadow:inset 0 1px 0 rgba(255,255,255,0.12), 0 1px 0 rgba(255,255,255,0.035), 0 12px 26px rgba(0,0,0,0.28), 0 0 0 1px rgba(10,132,255,0.08);
       transform:translateY(-2px);
     }
     .kpi-card-action:hover .kpi-label {
-      color:#c7d2fe;
+      color:#dbeafe;
     }
     .kpi-card-action:hover .compare-main-value {
       color:#f8fafc;
@@ -185,7 +215,7 @@
       color:#b8c1d4;
     }
     .kpi-card-action:hover .compare-delta {
-      border-color:rgba(99,102,241,0.16);
+      border-color:rgba(10,132,255,0.18);
       background:#1d1d22;
     }
     .kpi-card-action:active {
@@ -194,7 +224,7 @@
       box-shadow:inset 0 2px 5px rgba(0,0,0,0.34), 0 3px 8px rgba(0,0,0,0.16);
     }
     .kpi-card-action:focus-visible {
-      outline:2px solid rgba(99,102,241,0.75);
+      outline:2px solid rgba(10,132,255,0.78);
       outline-offset:2px;
     }
     .kpi-label { font-size:13px; color:var(--text-secondary); margin-bottom:0; font-weight:600; transition:color 0.18s ease; }
@@ -217,9 +247,9 @@
     .compare-delta-label { font-size:12px; color:#9ca3af; font-weight:700; white-space:nowrap; transition:color 0.18s ease; }
     .compare-delta-value { font-size:13px; font-weight:800; color:#fff; white-space:nowrap; justify-self:end; text-align:right; }
     .compare-delta-left { display:flex; align-items:center; justify-content:flex-start; gap:6px; min-width:0; white-space:nowrap; overflow:hidden; }
-    .delta-good { color:#6a8cff; }
-    .delta-bad { color:#ff7373; }
-    .delta-neutral { color:#d1d5db; }
+    .delta-good { color:#0a84ff; }
+    .delta-bad { color:#ff453a; }
+    .delta-neutral { color:#aeaeb2; }
     .compare-delta-sep { display:none; }
     .compare-delta-meta { color:#9ca3af; font-size:12px; font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; text-align:left; transition:color 0.18s ease; }
     .compare-delta-spacer { margin-left:auto; }
@@ -228,8 +258,8 @@
     .list-header { display:flex; justify-content:space-between; align-items:center; gap:12px; padding:10px 20px 8px; border-bottom:none; background:transparent; box-shadow:none; position:relative; }
     .list-header::after { display:none; }
     .header-alarm { color:inherit; }
-    .alarm-history-button { border:1px solid rgba(99,102,241,0.32); background:linear-gradient(180deg, rgba(99,102,241,0.13), rgba(255,255,255,0.035) 48%, rgba(0,0,0,0.06)); color:#c7d2fe; border-radius:6px; padding:4px 9px; font-size:11px; font-weight:800; cursor:pointer; white-space:nowrap; }
-    .alarm-history-button:hover { border-color:rgba(99,102,241,0.48); background:#1d1d22; color:#fff; }
+    .alarm-history-button { border:1px solid rgba(10,132,255,0.34); background:linear-gradient(180deg, rgba(10,132,255,0.14), rgba(255,255,255,0.035) 48%, rgba(0,0,0,0.06)); color:#dbeafe; border-radius:6px; padding:4px 9px; font-size:11px; font-weight:800; cursor:pointer; white-space:nowrap; }
+    .alarm-history-button:hover { border-color:rgba(10,132,255,0.54); background:#1d1d22; color:#fff; }
     .list-body { height:108px; overflow-y:auto; padding:0; }
     .list-item { padding:8px 20px; display:flex; justify-content:space-between; align-items:center; font-size:12px; border-bottom:1px dashed #2c2c2e; }
     .alarm-item { display:grid; grid-template-columns:minmax(0, 1fr) auto; gap:12px; align-items:center; width:100%; }
@@ -245,33 +275,33 @@
     .chart-title { font-size:11px; font-weight:800; color:#e5e7eb; letter-spacing:0.3px; white-space:nowrap; }
     .history-button {
       font-size:11px;
-      color:#c7d2fe;
+      color:#dbeafe;
       background:linear-gradient(180deg, rgba(46,48,64,0.92), rgba(28,29,37,0.92));
       padding:4px 10px;
       cursor:pointer;
       border-radius:7px;
-      border:1px solid rgba(99,102,241,0.26);
+      border:1px solid rgba(10,132,255,0.28);
       box-shadow:inset 0 1px 0 rgba(255,255,255,0.05), 0 1px 6px rgba(0,0,0,0.18);
       transition:all 0.18s ease;
     }
     .history-button:hover {
-      color:#eef2ff;
-      border-color:rgba(99,102,241,0.48);
+      color:#f5f5f7;
+      border-color:rgba(10,132,255,0.54);
       background:linear-gradient(180deg, rgba(66,69,92,0.98), rgba(35,37,48,0.98));
-      box-shadow:inset 0 1px 0 rgba(255,255,255,0.08), 0 0 0 1px rgba(99,102,241,0.08), 0 6px 18px rgba(0,0,0,0.24);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,0.08), 0 0 0 1px rgba(10,132,255,0.1), 0 6px 18px rgba(0,0,0,0.24);
       transform:translateY(-1px);
     }
     .history-button-yield {
-      color:#c7d2fe;
-      border-color:rgba(99,102,241,0.24);
+      color:#dbeafe;
+      border-color:rgba(10,132,255,0.24);
       background:linear-gradient(180deg, rgba(46,48,64,0.98), rgba(28,29,37,0.98));
       align-self:auto;
       margin:0;
       padding:3px 9px;
     }
     .history-button-yield:hover {
-      color:#eef2ff;
-      border-color:rgba(99,102,241,0.52);
+      color:#f5f5f7;
+      border-color:rgba(10,132,255,0.56);
       background:linear-gradient(180deg, rgba(66,69,92,0.98), rgba(35,37,48,0.98));
     }
     .compare-main-with-button {
@@ -297,10 +327,10 @@
     .chart-mode-tabs { display:flex; gap:6px; align-items:center; }
     .compare-range-label { display:none; color:#aeb6c5; font-size:10px; font-weight:800; white-space:nowrap; max-width:230px; overflow:hidden; text-overflow:ellipsis; }
     .dashboard-card.compare-mode .compare-range-label { display:inline-flex; }
-    .chart-mode-tab { border:1px solid rgba(99,102,241,0.24); background:#1a1a1c; color:#aeb6c5; border-radius:6px; padding:3px 8px; font-size:10px; font-weight:800; cursor:pointer; }
-    .chart-mode-tab:hover { border-color:rgba(99,102,241,0.36); background:#1d1d22; color:#c7d2fe; }
-    .chart-mode-tab.active { color:#c7d2fe; border-color:rgba(99,102,241,0.48); background:linear-gradient(180deg, rgba(99,102,241,0.13), rgba(255,255,255,0.035) 48%, rgba(0,0,0,0.06)); }
-    .hourly-compare-panel { display:none; position:absolute; top:-46px; right:20px; z-index:24; padding:8px 10px; background:rgba(17,17,19,0.96); border:1px solid rgba(99,102,241,0.24); border-radius:8px; box-shadow:0 12px 28px rgba(0,0,0,0.36), inset 0 1px 0 rgba(255,255,255,0.06); backdrop-filter:blur(6px); }
+    .chart-mode-tab { border:1px solid rgba(10,132,255,0.24); background:#1a1a1c; color:#aeb6c5; border-radius:6px; padding:3px 8px; font-size:10px; font-weight:800; cursor:pointer; }
+    .chart-mode-tab:hover { border-color:rgba(10,132,255,0.38); background:#1d1d22; color:#dbeafe; }
+    .chart-mode-tab.active { color:#dbeafe; border-color:rgba(10,132,255,0.52); background:linear-gradient(180deg, rgba(10,132,255,0.14), rgba(255,255,255,0.035) 48%, rgba(0,0,0,0.06)); }
+    .hourly-compare-panel { display:none; position:absolute; top:-46px; right:20px; z-index:24; padding:8px 10px; background:rgba(17,17,19,0.96); border:1px solid rgba(10,132,255,0.24); border-radius:8px; box-shadow:0 12px 28px rgba(0,0,0,0.36), inset 0 1px 0 rgba(255,255,255,0.06); backdrop-filter:blur(6px); }
     .hourly-compare-panel.open { display:flex; align-items:center; justify-content:flex-end; }
     .chart-overlay-legend {
       position:absolute;
@@ -323,8 +353,8 @@
     .chart-overlay-legend .legend-item { flex:0 0 auto; }
     .chart-overlay-legend .legend-line { width:14px; }
     .hourly-compare-tools { display:flex; align-items:center; justify-content:flex-end; gap:8px; margin-bottom:0; color:#aeb6c5; font-size:10px; font-weight:800; flex-wrap:wrap; width:auto; }
-    .hourly-compare-tools input { height:24px; min-width:118px; padding:2px 7px; border-radius:6px; border:1px solid rgba(99,102,241,0.28); background:#1a1a1c; color:#fff; font-size:11px; font-weight:800; color-scheme:dark; }
-    .hourly-compare-tools button { height:24px; border:1px solid rgba(99,102,241,0.32); background:#1a1a1c; color:#d8dce5; border-radius:6px; padding:0 8px; font-size:10px; font-weight:800; cursor:pointer; }
+    .hourly-compare-tools input { height:24px; min-width:118px; padding:2px 7px; border-radius:6px; border:1px solid rgba(10,132,255,0.28); background:#1a1a1c; color:#fff; font-size:11px; font-weight:800; color-scheme:dark; }
+    .hourly-compare-tools button { height:24px; border:1px solid rgba(10,132,255,0.32); background:#1a1a1c; color:#d8dce5; border-radius:6px; padding:0 8px; font-size:10px; font-weight:800; cursor:pointer; }
     .judge-low td { background:rgba(239,68,68,0.12); }
     .judge-muted { color:#8e8e93; font-weight:800; }
     .judge-low-text { color:#fca5a5; font-weight:900; }
@@ -568,8 +598,8 @@
     .section-title-action .export-result-note { text-align:right; }
     .history-view-tabs { display:flex; gap:8px; align-items:center; margin:0 0 2px; flex-wrap:wrap; }
     .history-view-tab { border:1px solid rgba(148,163,184,0.22); background:linear-gradient(180deg, rgba(31,33,41,0.96), rgba(18,19,25,0.98)); color:#cbd5e1; border-radius:9px; padding:7px 14px; font-size:11px; font-weight:900; line-height:1; cursor:pointer; box-shadow:inset 0 1px 0 rgba(255,255,255,0.06), 0 6px 14px rgba(0,0,0,0.2); transition:border-color 0.18s ease, color 0.18s ease, background 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease; }
-    .history-view-tab:hover { border-color:rgba(99,102,241,0.46); color:#eef2ff; background:linear-gradient(180deg, rgba(43,47,63,0.98), rgba(24,26,35,0.98)); box-shadow:inset 0 1px 0 rgba(255,255,255,0.08), 0 8px 18px rgba(0,0,0,0.26); transform:translateY(-1px); }
-    .history-view-tab.active { color:#ffffff; border-color:rgba(99,102,241,0.72); background:linear-gradient(180deg, rgba(79,124,255,0.34), rgba(49,67,140,0.3)); box-shadow:inset 0 1px 0 rgba(255,255,255,0.12), 0 10px 22px rgba(37,99,235,0.24); }
+    .history-view-tab:hover { border-color:rgba(10,132,255,0.48); color:#f5f5f7; background:linear-gradient(180deg, rgba(36,45,60,0.98), rgba(22,27,35,0.98)); box-shadow:inset 0 1px 0 rgba(255,255,255,0.08), 0 8px 18px rgba(0,0,0,0.26); transform:translateY(-1px); }
+    .history-view-tab.active { color:#ffffff; border-color:rgba(10,132,255,0.72); background:linear-gradient(180deg, rgba(10,132,255,0.34), rgba(8,74,176,0.28)); box-shadow:inset 0 1px 0 rgba(255,255,255,0.12), 0 10px 22px rgba(10,132,255,0.22); }
     .matrix-scroll { overflow:auto; border:1px solid rgba(99,102,241,0.2); border-radius:8px; background:#171719; margin-bottom:16px; }
     .matrix-fit { overflow:hidden; border:1px solid rgba(99,102,241,0.2); border-radius:8px; background:#171719; margin-bottom:16px; }
     .production-matrix-table { width:100%; min-width:0; table-layout:fixed; border-collapse:separate; border-spacing:0; }
@@ -580,12 +610,12 @@
     .production-matrix-compact th, .production-matrix-compact td { padding:5px 3px; font-size:10px; line-height:1.05; }
     .production-matrix-compact th:first-child, .production-matrix-compact td:first-child { width:58px; min-width:58px; }
     .production-matrix-compact th:last-child, .production-matrix-compact td:last-child { width:48px; min-width:48px; border-left:1px solid rgba(255,255,255,0.08); background:#1b1b1f; font-weight:900; color:#d8dce5; }
-    .matrix-axis-title { color:#c7d2fe; font-size:10px; font-weight:900; letter-spacing:0; }
+    .matrix-axis-title { color:#dbeafe; font-size:10px; font-weight:900; letter-spacing:0; }
     .matrix-day-head { color:#d8dce5; font-size:10px; font-weight:900; }
     .matrix-total-row td { border-top:1px solid rgba(255,255,255,0.12); background:#1d1d22 !important; color:#f9fafb; font-weight:900; }
     .matrix-cell { font-variant-numeric:tabular-nums; border-left:1px solid rgba(255,255,255,0.025); }
     .matrix-cell-empty { color:#52525b; }
-    .matrix-group-title { color:#c7d2fe; font-size:11px; font-weight:800; margin:4px 0 8px; }
+    .matrix-group-title { color:#dbeafe; font-size:11px; font-weight:800; margin:4px 0 8px; }
     .history-note { color:#8e8e93; font-size:11px; font-weight:700; line-height:1.45; margin:-4px 0 12px; }
     .month-picker-wrap {
       display:flex;
@@ -603,8 +633,8 @@
       min-width:128px;
       padding:3px 8px 3px 10px;
       border-radius:7px;
-      border:1px solid rgba(99,102,241,0.28);
-      background:linear-gradient(180deg, rgba(46,48,64,0.96), rgba(26,27,34,0.96));
+      border:1px solid rgba(10,132,255,0.3);
+      background:linear-gradient(180deg, rgba(36,41,52,0.96), rgba(24,27,34,0.96));
       color:#fff;
       font-size:12px;
       font-weight:800;
@@ -615,13 +645,13 @@
       transition:border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
     }
     .month-picker:hover {
-      border-color:rgba(99,102,241,0.52);
-      background:linear-gradient(180deg, rgba(58,61,82,0.98), rgba(31,33,42,0.98));
-      box-shadow:inset 0 1px 0 rgba(255,255,255,0.09), 0 0 0 1px rgba(99,102,241,0.08), 0 6px 18px rgba(0,0,0,0.24);
+      border-color:rgba(10,132,255,0.56);
+      background:linear-gradient(180deg, rgba(46,56,74,0.98), rgba(28,34,44,0.98));
+      box-shadow:inset 0 1px 0 rgba(255,255,255,0.09), 0 0 0 1px rgba(10,132,255,0.1), 0 6px 18px rgba(0,0,0,0.24);
     }
     .month-picker:focus {
-      border-color:rgba(99,102,241,0.75);
-      box-shadow:0 0 0 2px rgba(99,102,241,0.18), inset 0 1px 0 rgba(255,255,255,0.1);
+      border-color:rgba(10,132,255,0.78);
+      box-shadow:0 0 0 2px rgba(10,132,255,0.18), inset 0 1px 0 rgba(255,255,255,0.1);
     }
     .month-picker::-webkit-calendar-picker-indicator {
       cursor:pointer;
@@ -657,7 +687,7 @@
     }
     .range-picker-button {
       height:28px;
-      border:1px solid rgba(99,102,241,0.32);
+      border:1px solid rgba(10,132,255,0.32);
       background:#1a1a1c;
       color:#d8dce5;
       border-radius:6px;
@@ -705,7 +735,7 @@
       background:linear-gradient(180deg, rgba(100,116,139,0.3), rgba(51,65,85,0.2));
       color:#ffffff;
     }
-    .range-picker-button:hover { color:#fff; border-color:rgba(99,102,241,0.56); background:#252529; }
+    .range-picker-button:hover { color:#fff; border-color:rgba(10,132,255,0.56); background:#252529; }
     .range-picker-button[disabled] { cursor:default; opacity:0.55; }
     .csv-export-button {
       min-width:104px;
@@ -759,8 +789,8 @@
 </head>
 <body class="min-h-screen flex flex-col overflow-auto">
   <header class="h-14 flex items-center justify-between px-6 border-b border-[#2C2C2E] bg-[#1C1C1E] shrink-0">
-    <div class="flex items-center gap-2"><span class="text-xl font-bold text-white tracking-tight">EMTES 설비 모니터링</span></div>
-    <div class="header-status-wrap"><div class="header-status header-status-offline" id="serverState">OFFLINE</div></div>
+    <div class="flex items-center gap-2"><span class="text-xl font-bold tracking-tight app-title">EMTES 설비 모니터링</span></div>
+    <div class="header-status-wrap"><div class="header-status header-status-offline" id="serverState">OFFLINE</div><div class="header-compare-time" id="headerCompareTime">동일 시간 기준 비교 중</div></div>
   </header>
   <main class="flex-1 p-4 grid grid-cols-1 lg:grid-cols-3 gap-4 overflow-auto bg-black" id="dashboardGrid"></main>
   <div id="historyModal" class="modal-overlay">
@@ -773,13 +803,24 @@
     const C_CHART = '#6366f1';
     const C_TEAL = '#14b8a6';
     const ST_COLORS = { YEST: '#6B7280' };
-    const TL_COLORS = { RUN: C_TEAL, STOP: '#fbbf24', ALARM: '#ef4444', MEAL: '#a78bfa', ONLINE: '#38bdf8', OFFLINE: '#6b7280', NO_DATA: '#374151', OFF: '#2C2C2E' };
+    const TL_COLORS = {
+      RUN: '#008000',
+      STOP: '#FFD700',
+      ALARM: '#FF0000',
+      MEAL: '#505763',
+      ONLINE: '#13264E',
+      OFFLINE: '#3f4650',
+      NO_DATA: '#2f3440',
+      OFF: '#2c2c2e'
+    };
     const CHART_DATA = {};
     const STRIP_LABEL_GUTTER = 36;
     const STRIP_RIGHT_GUTTER = 24;
     const STATUS_STRIP_HEIGHT = 15;
     const STATUS_STRIP_GAP = 3;
     const STATUS_AXIS_HEIGHT = 18;
+    const STATUS_STRIP_REVEAL_MS = 320;
+    const STATUS_STRIP_HIDE_DELAY_MS = 360;
     const MEAL_BREAKS = [
       { label: '식사', start: '12:00', end: '13:00' },
       { label: '식사', start: '17:00', end: '17:30' },
@@ -936,7 +977,7 @@
       const hh = String(now.getHours()).padStart(2, '0');
       const mm = String(now.getMinutes()).padStart(2, '0');
       const ss = String(now.getSeconds()).padStart(2, '0');
-      return `동일 시간 기준 비교 ${hh}:${mm}:${ss}`;
+      return `동일 시간 기준 비교 중 ${hh}:${mm}:${ss}`;
     }
 
     function formatProdSecond(seconds, startMinute = DAY_START_MINUTE) {
@@ -1018,6 +1059,10 @@
       return '#fff';
     }
 
+    function tooltipStatusColor(status) {
+      return statusColor(status);
+    }
+
     function findTimelineBlock(blocks, seconds) {
       const sec = Math.max(0, Math.min(86399, Number(seconds || 0)));
       return (blocks || []).find(block => sec >= Number(block.startSec || 0) && sec < Number(block.startSec || 0) + Number(block.duration || 0)) || null;
@@ -1034,7 +1079,9 @@
     }
 
     function fixedYAxisMax(lineId) {
-      return Number(lineId) === 3 ? 300 : 500;
+      if (Number(lineId) === 1) return 400;
+      if (Number(lineId) === 3) return 250;
+      return 500;
     }
 
     function isNoDataSlot(blocks, hourIndex) {
@@ -1099,13 +1146,13 @@
                 <input class="target-input" type="number" min="0" step="1" inputmode="numeric" data-ref="target-input" onkeydown="handleTargetKey(event, ${line.id})" aria-label="${line.name} 일일 목표 수량">
                 <button class="target-save" type="button" data-ref="target-save" onclick="saveLineTarget(${line.id})">저장</button>
               </div>
-              <div class="status-inline" data-ref="ctx-panel"><span class="status-inline-label">STATUS</span><span class="status-inline-value" data-ref="ctx-status">-</span></div>
+              <div class="status-inline" data-ref="ctx-panel"><span class="status-inline-label">STATUS</span><span class="status-inline-dot" aria-hidden="true"></span><span class="status-inline-value" data-ref="ctx-status">-</span></div>
             </div>
           </div>
           <div class="kpi-section">
             <div class="kpi-section-head">
               <div class="kpi-section-title-wrap"><span class="kpi-section-title">주요 KPI</span></div>
-              <span class="kpi-section-time" data-ref="cmp-shared-time">동일 시간 기준 비교</span>
+              <span class="kpi-section-legend"><span class="legend-good"><span class="legend-dot legend-dot-good"></span>Good</span><span class="legend-bad"><span class="legend-dot legend-dot-bad"></span>Bad</span></span>
             </div>
             <div class="kpi-row">
             <div class="kpi-card kpi-card-action" role="button" tabindex="0" onclick="openKpiHistory(${line.id}, 'production')" onkeydown="handleKpiLinkKey(event, () => openKpiHistory(${line.id}, 'production'))" aria-label="생산 수량 이력 보기">
@@ -1440,7 +1487,8 @@
     function updateComparisonCards(panelEl, data, historySummary = null) {
       const comparisons = data.comparisons || {};
       const asOf = comparisons.as_of || null;
-      panelEl.querySelector('[data-ref="cmp-shared-time"]').textContent = currentAsOfLabel();
+      const headerCompareTimeEl = document.getElementById('headerCompareTime');
+      if (headerCompareTimeEl) headerCompareTimeEl.textContent = currentAsOfLabel();
       const mttrUnitEl = panelEl.querySelector('[data-ref="cmp-mttr-today"]')?.nextElementSibling;
       const mtbfUnitEl = panelEl.querySelector('[data-ref="cmp-mtbf-today"]')?.nextElementSibling;
       if (mttrUnitEl) mttrUnitEl.textContent = 'hr';
@@ -1521,7 +1569,7 @@
     function updatePanel(id, data) {
       const previousChart = CHART_DATA[id] || {};
       const startMinute = Number(data.day_start_minute ?? DAY_START_MINUTE);
-      CHART_DATA[id] = {
+      Object.assign(previousChart, {
         dayStartMinute: startMinute,
         yest: normalizeHourlyArray(data.hourly_yesterday || [], startMinute, true),
         today: normalizeHourlyArray(data.hourly_today || [], startMinute),
@@ -1532,8 +1580,13 @@
         hourlyComparison: previousChart.hourlyComparison || null,
         hourlyComparisonLoadedAt: previousChart.hourlyComparisonLoadedAt || 0,
         hourlyCompareRange: previousChart.hourlyCompareRange || null,
-        hourlyCompareLoading: previousChart.hourlyCompareLoading || false
-      };
+        hourlyCompareLoading: previousChart.hourlyCompareLoading || false,
+        stripReveal: Number(previousChart.stripReveal ?? 0),
+        stripRevealTarget: Number(previousChart.stripRevealTarget ?? 0),
+        stripRevealFrame: previousChart.stripRevealFrame || null,
+        stripHideTimer: previousChart.stripHideTimer || null
+      });
+      CHART_DATA[id] = previousChart;
       const el = document.getElementById(`panel-${id}`);
       if (!el) return;
       const style = getStatusStyle(data.status.label);
@@ -1614,6 +1667,13 @@
       if (comparePanel) comparePanel.classList.toggle('open', mode === 'compare');
       if (trendLegend) trendLegend.style.display = mode === 'compare' ? 'none' : 'flex';
       if (compareLegend) compareLegend.style.display = mode === 'compare' ? 'flex' : 'none';
+      if (mode === 'compare') {
+        if (data.stripHideTimer) {
+          clearTimeout(data.stripHideTimer);
+          data.stripHideTimer = null;
+        }
+        setStatusStripReveal(id, false);
+      }
       panel.querySelectorAll('.strip-label').forEach(label => {
         label.style.display = mode === 'compare' ? 'none' : 'flex';
       });
@@ -1802,9 +1862,8 @@
 
     function startClock() {
       const render = () => {
-        document.querySelectorAll('[data-ref="cmp-shared-time"]').forEach(el => {
-          el.textContent = currentAsOfLabel();
-        });
+        const headerCompareTimeEl = document.getElementById('headerCompareTime');
+        if (headerCompareTimeEl) headerCompareTimeEl.textContent = currentAsOfLabel();
       };
       render();
       setInterval(render, 1000);
@@ -2224,9 +2283,18 @@
     function renderProductionMatrixCell(value, maxValue) {
       const count = Number(value || 0);
       if (count <= 0) return `<td class="matrix-cell matrix-cell-empty">-</td>`;
-      const ratio = maxValue > 0 ? Math.max(0.12, Math.min(1, count / maxValue)) : 0.12;
-      const alpha = 0.08 + (ratio * 0.34);
-      return `<td class="matrix-cell" style="background:rgba(34,197,94,${alpha.toFixed(3)}); color:${ratio > 0.68 ? '#f0fdf4' : '#d8dce5'};">${compactNumber(count)}</td>`;
+      let background = 'rgba(21,128,61,0.12)';
+      let color = '#d8dce5';
+      if (count > 300) {
+        background = 'rgba(34,197,94,0.42)';
+      } else if (count > 200) {
+        background = 'rgba(34,197,94,0.34)';
+      } else if (count > 100) {
+        background = 'rgba(34,197,94,0.27)';
+      } else if (count > 50) {
+        background = 'rgba(34,197,94,0.19)';
+      }
+      return `<td class="matrix-cell" style="background:${background}; color:${color};">${compactNumber(count)}</td>`;
     }
 
     function compactNumber(value) {
@@ -3389,9 +3457,45 @@
 
     function closeModal() { document.getElementById('historyModal').classList.remove('open'); }
 
+    function setStatusStripReveal(id, expanded) {
+      const d = CHART_DATA[id];
+      if (!d) return;
+      if ((d.chartMode || 'trend') === 'compare') expanded = false;
+      const target = expanded ? 1 : 0;
+      if ((d.stripRevealTarget ?? 0) === target) return;
+      d.stripRevealTarget = target;
+      if (d.stripRevealFrame) cancelAnimationFrame(d.stripRevealFrame);
+      const from = Number(d.stripReveal ?? 0);
+      const startedAt = performance.now();
+      const duration = STATUS_STRIP_REVEAL_MS;
+      const ease = progress => 1 - Math.pow(1 - progress, 3);
+      const step = now => {
+        const progress = Math.min(1, (now - startedAt) / duration);
+        d.stripReveal = from + ((target - from) * ease(progress));
+        drawCombinedChart(id, d.yest || [], d.today || [], d.timeline_yesterday || [], d.timeline_today || []);
+        if (progress < 1) {
+          d.stripRevealFrame = requestAnimationFrame(step);
+        } else {
+          d.stripReveal = target;
+          d.stripRevealFrame = null;
+          drawCombinedChart(id, d.yest || [], d.today || [], d.timeline_yesterday || [], d.timeline_today || []);
+        }
+      };
+      d.stripRevealFrame = requestAnimationFrame(step);
+    }
+
     function setupInteractions(id) {
       const w = document.getElementById(`wrapper-${id}`);
       const tt = document.getElementById(`tooltip-${id}`);
+      w.addEventListener('mouseenter', () => {
+        const d = CHART_DATA[id];
+        if (d?.stripHideTimer) {
+          clearTimeout(d.stripHideTimer);
+          d.stripHideTimer = null;
+        }
+        if ((d?.chartMode || 'trend') === 'compare') return;
+        setStatusStripReveal(id, true);
+      });
       w.addEventListener('mousemove', e => {
         const r = w.getBoundingClientRect();
         const x = e.clientX - r.left;
@@ -3439,8 +3543,10 @@
         }
         if (hoverTime) hoverTime.textContent = formatProdSecond(cursorSec, d.dayStartMinute);
         const strips = d.stripMeta || {};
-        const isYestStrip = y >= (strips.yesterdayY || -1) && y <= (strips.yesterdayY || -1) + STATUS_STRIP_HEIGHT;
-        const isTodayStrip = y >= (strips.todayY || -1) && y <= (strips.todayY || -1) + STATUS_STRIP_HEIGHT;
+        const reveal = Number(d.stripReveal ?? 0);
+        const stripHeight = STATUS_STRIP_HEIGHT * reveal;
+        const isYestStrip = reveal > 0.12 && y >= (strips.yesterdayY || -1) && y <= (strips.yesterdayY || -1) + stripHeight;
+        const isTodayStrip = reveal > 0.12 && y >= (strips.todayY || -1) && y <= (strips.todayY || -1) + stripHeight;
         if (isYestStrip || isTodayStrip) {
           const rowLabel = isTodayStrip ? '금일' : '전일';
           const blocks = timelineBlocksForDisplay(isTodayStrip ? d.timeline_today : d.timeline_yesterday);
@@ -3457,7 +3563,7 @@
           tt.innerHTML = `
             <div class="tooltip-time">${rowLabel} 상태</div>
             <div class="tooltip-row"><span>구간</span><span class="val-ct">${formatProdSecond(startSec, d.dayStartMinute)}~${formatProdSecond(endSec, d.dayStartMinute)}</span></div>
-            <div class="tooltip-row"><span>상태</span><span style="color:${statusColor(block.status)}; font-weight:700;">${statusNameKo(block.status)}</span></div>
+            <div class="tooltip-row"><span>상태</span><span style="color:${tooltipStatusColor(block.status)}; font-weight:700;">${statusNameKo(block.status)}</span></div>
                       `;
         } else {
           if (d.hoverStripKey) {
@@ -3495,6 +3601,13 @@
           d.hoverStrip = null;
           drawCombinedChart(id, d.yest, d.today, d.timeline_yesterday || [], d.timeline_today || []);
         }
+        if (d?.stripHideTimer) clearTimeout(d.stripHideTimer);
+        if (d) {
+          d.stripHideTimer = setTimeout(() => {
+            d.stripHideTimer = null;
+            setStatusStripReveal(id, false);
+          }, STATUS_STRIP_HIDE_DELAY_MS);
+        }
       });
     }
 
@@ -3505,7 +3618,10 @@
       const rect = cvs.parentElement.getBoundingClientRect();
       const dpr = window.devicePixelRatio || 1;
       if (cvs.width !== rect.width * dpr) { cvs.width = rect.width * dpr; cvs.height = rect.height * dpr; ctx.scale(dpr, dpr); }
-      const W = rect.width, H = rect.height, stH = STATUS_STRIP_HEIGHT, stGap = STATUS_STRIP_GAP, cH = H - (stH * 2) - stGap - STATUS_AXIS_HEIGHT - 12;
+      const reveal = Math.max(0, Math.min(1, Number(CHART_DATA[id]?.stripReveal ?? 0)));
+      const W = rect.width, H = rect.height, stH = STATUS_STRIP_HEIGHT, stGap = STATUS_STRIP_GAP;
+      const stripReserve = reveal * ((stH * 2) + stGap + 4);
+      const cH = H - stripReserve - STATUS_AXIS_HEIGHT - 12;
       const plotX = STRIP_LABEL_GUTTER;
       const plotW = Math.max(W - STRIP_LABEL_GUTTER - STRIP_RIGHT_GUTTER, 1);
       const startMinute = CHART_DATA[id]?.dayStartMinute ?? DAY_START_MINUTE;
@@ -3575,7 +3691,7 @@
           const c = block.status === 'RUN' ? TL_COLORS.RUN : (TL_COLORS[block.status] || TL_COLORS.OFF);
           const isHovered = hoverStrip && hoverStrip.row === rowKey && Number(hoverStrip.block?.startSec || 0) === Number(block.startSec || 0) && Number(hoverStrip.block?.duration || 0) === Number(block.duration || 0) && String(hoverStrip.block?.status || '') === String(block.status || '');
           ctx.fillStyle = c;
-          ctx.globalAlpha = isHovered ? 1 : (faded ? 0.4 : 0.9);
+          ctx.globalAlpha = 1;
           ctx.fillRect(x, y, w, stH);
           if (isHovered) {
             ctx.save();
@@ -3587,15 +3703,25 @@
           ctx.globalAlpha = 1;
         });
       };
-      const yestStripY = H - STATUS_AXIS_HEIGHT - (stH * 2) - stGap - 4;
-      const todayStripY = H - STATUS_AXIS_HEIGHT - stH - 4;
-      drawStrip(timelineBlocksForDisplay(tYest), yestStripY, true, 'yesterday');
-      drawStrip(timelineBlocksForDisplay(tToday), todayStripY, false, 'today');
+      const yestStripY = H - STATUS_AXIS_HEIGHT - stripReserve + (reveal * 1);
+      const todayStripY = yestStripY + (reveal * (stH + stGap));
+      if (reveal > 0.02) {
+        drawStrip(timelineBlocksForDisplay(tYest), yestStripY, true, 'yesterday');
+        drawStrip(timelineBlocksForDisplay(tToday), todayStripY, false, 'today');
+      }
       const wrapper = cvs.parentElement;
       const yestLabel = wrapper.querySelector('[data-strip-label="yesterday"]');
       const todayLabel = wrapper.querySelector('[data-strip-label="today"]');
-      if (yestLabel) yestLabel.style.top = `${yestStripY}px`;
-      if (todayLabel) todayLabel.style.top = `${todayStripY}px`;
+      if (yestLabel) {
+        yestLabel.style.top = `${yestStripY}px`;
+        yestLabel.style.opacity = `${reveal}`;
+        yestLabel.style.display = reveal > 0.02 ? 'block' : 'none';
+      }
+      if (todayLabel) {
+        todayLabel.style.top = `${todayStripY}px`;
+        todayLabel.style.opacity = `${reveal}`;
+        todayLabel.style.display = reveal > 0.02 ? 'block' : 'none';
+      }
       CHART_DATA[id].stripMeta = { yesterdayY: yestStripY, todayY: todayStripY };
 
       ctx.font = '9px sans-serif';
@@ -3607,10 +3733,11 @@
       for (let hour = 0; hour <= 24; hour += 2) {
         const x = plotX + (hour / 24) * plotW;
         ctx.beginPath();
-        ctx.moveTo(x, todayStripY + stH + 2);
-        ctx.lineTo(x, todayStripY + stH + 6);
+        const axisBaseY = H - STATUS_AXIS_HEIGHT;
+        ctx.moveTo(x, axisBaseY + 2);
+        ctx.lineTo(x, axisBaseY + 6);
         ctx.stroke();
-        ctx.fillText(slotLabel(hour, startMinute), x, todayStripY + stH + 7);
+        ctx.fillText(slotLabel(hour, startMinute), x, axisBaseY + 7);
       }
 
       const currentSec = latestDataSecond(tToday);

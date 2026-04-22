@@ -15,8 +15,8 @@
         "daily": 0
       },
       "devices": {
-        "ok": "D2548",
-        "ng": "D2648"
+        "ok": "D2524",
+        "ng": "D2624"
       },
       "status": {
         "run_bit": "M20",
@@ -39,8 +39,8 @@
         "daily": 0
       },
       "devices": {
-        "ok": "D8348",
-        "ng": "D8448"
+        "ok": "D8324",
+        "ng": "D8424"
       },
       "status": {
         "run_bit": "M510",
@@ -69,8 +69,8 @@
         "daily": 3300
       },
       "devices": {
-        "ok": "D8248",
-        "ng": "D8348"
+        "ok": "D8224",
+        "ng": "D8324"
       },
       "status": {
         "run_bit": "M100",
