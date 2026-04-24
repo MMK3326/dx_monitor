@@ -6,9 +6,9 @@
   <title>EMTES 설비 모니터링</title>
   <style>
     :root {
-      --bg-app:#000000; --bg-card:#1c1c1e; --border:#2c2c2e; --c-chart:#5e5ce6; --c-timeline:#64d2ff;
+      --bg-app:#000000; --bg-card:#1c1c1e; --border:#2c2c2e; --c-chart:#66d4cf; --c-timeline:#66d4cf;
       --st-run:#30d158; --st-stop:#ffd60a; --st-alarm:#ff453a; --st-online:#0a84ff; --st-offline:#8e8e93;
-      --c-yest:#8e8e93; --c-model:#9fc0e8; --text-primary:#ffffff; --text-secondary:#8e8e93;
+      --c-yest:#8e8e93; --c-week:#41c7b9; --c-month:#89e0d8; --c-custom:#a7f3d0; --c-model:#9fc0e8; --text-primary:#ffffff; --text-secondary:#8e8e93;
     }
     * { box-sizing:border-box; }
     .min-h-screen { min-height:100vh; }
@@ -253,14 +253,14 @@
     .compare-delta-sep { display:none; }
     .compare-delta-meta { color:#9ca3af; font-size:12px; font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; text-align:left; transition:color 0.18s ease; }
     .compare-delta-spacer { margin-left:auto; }
-    .middle-section { display:flex; flex-direction:column; gap:0; padding:0; flex:0 0 auto; border-bottom:none; overflow:hidden; background:#111113; }
-    .list-section { flex:0 0 auto; display:flex; flex-direction:column; overflow:hidden; }
+    .middle-section { display:flex; flex-direction:column; gap:0; padding:0; flex:1 1 auto; min-height:0; border-bottom:none; overflow:hidden; background:#111113; }
+    .list-section { flex:1 1 auto; min-height:0; display:flex; flex-direction:column; overflow:hidden; }
     .list-header { display:flex; justify-content:space-between; align-items:center; gap:12px; padding:10px 20px 8px; border-bottom:none; background:transparent; box-shadow:none; position:relative; }
     .list-header::after { display:none; }
     .header-alarm { color:inherit; }
     .alarm-history-button { border:1px solid rgba(10,132,255,0.34); background:linear-gradient(180deg, rgba(10,132,255,0.14), rgba(255,255,255,0.035) 48%, rgba(0,0,0,0.06)); color:#dbeafe; border-radius:6px; padding:4px 9px; font-size:11px; font-weight:800; cursor:pointer; white-space:nowrap; }
     .alarm-history-button:hover { border-color:rgba(10,132,255,0.54); background:#1d1d22; color:#fff; }
-    .list-body { height:108px; overflow-y:auto; padding:0; }
+    .list-body { flex:1 1 auto; min-height:148px; overflow-y:auto; padding:0; }
     .list-item { padding:8px 20px; display:flex; justify-content:space-between; align-items:center; font-size:12px; border-bottom:1px dashed #2c2c2e; }
     .alarm-item { display:grid; grid-template-columns:minmax(0, 1fr) auto; gap:12px; align-items:center; width:100%; }
     .list-item.alarm-item { border-bottom-color:rgba(239,68,68,0.18); }
@@ -315,7 +315,7 @@
       gap:5px;
       min-width:0;
     }
-    .chart-wrapper { position:relative; height:132px; cursor:crosshair; background:#000; }
+    .chart-wrapper { position:relative; height:92px; cursor:crosshair; background:#000; }
     canvas { display:block; width:100%; height:100%; }
     .chart-tooltip { position:absolute; top:0; left:0; z-index:50; display:none; background:rgba(28,28,30,0.95); border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:8px 12px; pointer-events:none; min-width:140px; box-shadow:0 4px 20px rgba(0,0,0,0.5); }
     .tooltip-time { font-size:11px; color:var(--text-secondary); margin-bottom:4px; text-align:center; font-weight:500; border-bottom:1px solid #3a3a3c; padding-bottom:2px; }
@@ -773,9 +773,9 @@
     @media (min-width:1024px) and (min-height:900px) {
       .dashboard-card { height:calc(100vh - 88px); align-self:stretch; }
       .donut-chart { width:clamp(100px, 11vh, 132px); height:clamp(100px, 11vh, 132px); }
-      .middle-section { flex-basis:auto; }
-      .chart-section { flex:1 1 auto; min-height:160px; }
-      .chart-wrapper { height:auto; flex:1; min-height:102px; }
+      .middle-section { flex:1 1 auto; min-height:0; }
+      .chart-section { flex:0 0 auto; min-height:0; }
+      .chart-wrapper { height:92px; flex:none; min-height:0; }
     }
     @media (max-width:1400px) {
       .kpi-row { gap:10px; }
@@ -800,7 +800,7 @@
     </div>
   </div>
   <script>
-    const C_CHART = '#6366f1';
+    const C_CHART = '#66D4CF';
     const C_TEAL = '#14b8a6';
     const ST_COLORS = { YEST: '#6B7280' };
     const TL_COLORS = {
@@ -837,7 +837,7 @@
     let DAY_START_MINUTE = 8 * 60;
     let DAY_START_HOUR = 8;
     let LINES = [];
-    let HISTORY_MODAL_STATE = { mode: 'production', period: 'today', data: null };
+    let HISTORY_MODAL_STATE = { mode: 'production', period: 'today', alarmMetricTab: 'alarmLoss', data: null };
     let PRODUCTION_RANGE_VIEW = 'summary';
     let ALARM_DAY_DETAIL_CACHE = {};
     let PRODUCTION_DAY_DETAIL_CACHE = {};
@@ -1179,7 +1179,7 @@
                 <div class="compare-delta"><span class="compare-delta-left"><span class="compare-delta-label">주간</span><span class="compare-delta-meta" data-ref="cmp-run-week">-</span></span><span class="compare-delta-value delta-neutral" data-ref="cmp-run-delta-week">-</span></div>
               </div>
             </div>
-            <div class="kpi-card kpi-card-action" role="button" tabindex="0" onclick="openKpiHistory(${line.id}, 'mttr')" onkeydown="handleKpiLinkKey(event, () => openKpiHistory(${line.id}, 'mttr'))" aria-label="MTTR 알람 이력 보기">
+            <div class="kpi-card kpi-card-action" role="button" tabindex="0" onclick="openKpiHistory(${line.id}, 'alarm', 'mttr')" onkeydown="handleKpiLinkKey(event, () => openKpiHistory(${line.id}, 'alarm', 'mttr'))" aria-label="MTTR 알람 이력 보기">
               <div class="compare-head"><span class="kpi-label">MTTR</span></div>
               <div class="compare-main"><span class="compare-main-value" data-ref="cmp-mttr-today">-</span><span class="compare-main-unit">hr</span></div>
               <div class="compare-delta-list">
@@ -1187,7 +1187,7 @@
                 <div class="compare-delta"><span class="compare-delta-left"><span class="compare-delta-label">주간</span><span class="compare-delta-meta" data-ref="cmp-mttr-week">-</span></span><span class="compare-delta-value delta-neutral" data-ref="cmp-mttr-delta-week">-</span></div>
               </div>
             </div>
-            <div class="kpi-card kpi-card-action" role="button" tabindex="0" onclick="openKpiHistory(${line.id}, 'mtbf')" onkeydown="handleKpiLinkKey(event, () => openKpiHistory(${line.id}, 'mtbf'))" aria-label="MTBF 알람 이력 보기">
+            <div class="kpi-card kpi-card-action" role="button" tabindex="0" onclick="openKpiHistory(${line.id}, 'alarm', 'mtbf')" onkeydown="handleKpiLinkKey(event, () => openKpiHistory(${line.id}, 'alarm', 'mtbf'))" aria-label="MTBF 알람 이력 보기">
               <div class="compare-head"><span class="kpi-label">MTBF</span></div>
               <div class="compare-main"><span class="compare-main-value" data-ref="cmp-mtbf-today">-</span><span class="compare-main-unit">hr</span></div>
               <div class="compare-delta-list">
@@ -1195,7 +1195,7 @@
                 <div class="compare-delta"><span class="compare-delta-left"><span class="compare-delta-label">주간</span><span class="compare-delta-meta" data-ref="cmp-mtbf-week">-</span></span><span class="compare-delta-value delta-neutral" data-ref="cmp-mtbf-delta-week">-</span></div>
               </div>
             </div>
-            <div class="kpi-card kpi-card-action" role="button" tabindex="0" onclick="openKpiHistory(${line.id}, 'alarm')" onkeydown="handleKpiLinkKey(event, () => openKpiHistory(${line.id}, 'alarm'))" aria-label="고장률 알람 이력 보기">
+            <div class="kpi-card kpi-card-action" role="button" tabindex="0" onclick="openKpiHistory(${line.id}, 'alarm', 'alarmLoss')" onkeydown="handleKpiLinkKey(event, () => openKpiHistory(${line.id}, 'alarm', 'alarmLoss'))" aria-label="고장률 알람 이력 보기">
               <div class="compare-head"><span class="kpi-label">고장률</span></div>
               <div class="compare-main"><span class="compare-main-value" data-ref="cmp-alarm-today">0</span><span class="compare-main-unit">%</span></div>
               <div class="compare-delta-list">
@@ -1210,7 +1210,7 @@
           </div>
           <div class="chart-section">
             <div class="chart-header-bar"><div class="kpi-section-title-wrap title-wrap-chart"><span class="chart-title">시간대별 생산현황</span></div><div class="flex items-center gap-3"><span class="compare-range-label" data-ref="compare-range-label">선택기간: -</span><div class="chart-mode-tabs"><button class="chart-mode-tab active" data-chart-mode-tab="trend" onclick="setChartMode(${line.id}, 'trend')">금일/전일</button><button class="chart-mode-tab" data-chart-mode-tab="compare" onclick="setChartMode(${line.id}, 'compare')">구간 비교</button></div></div></div>
-            <div class="chart-wrapper group" id="wrapper-${line.id}"><canvas id="canvas-main-${line.id}"></canvas><div class="chart-overlay-legend" data-ref="trend-legend"><div class="legend-item"><div class="legend-line" style="background:var(--c-chart)"></div>금일</div><div class="legend-item"><div class="legend-line-dash"></div>전일</div></div><div class="chart-overlay-legend" data-ref="compare-legend" style="display:none;"><div class="legend-item"><div class="legend-line" style="background:#6366f1"></div>금일</div><div class="legend-item"><div class="legend-line-dash"></div>전일</div><div class="legend-item"><div class="legend-line" style="background:#22c55e"></div>주간평균</div><div class="legend-item"><div class="legend-line" style="background:#38bdf8"></div>월간평균</div><div class="legend-item"><div class="legend-line" style="background:#facc15"></div>선택기간평균</div></div><div class="time-marker now-marker" data-ref="now-marker"><span class="time-marker-label">NOW</span></div><div class="time-marker hover-marker" data-ref="hover-marker"><span class="time-marker-label" data-ref="hover-time">--:--</span></div><span class="strip-label" data-strip-label="yesterday">전일</span><span class="strip-label" data-strip-label="today" style="color: var(--c-timeline);">금일</span><div class="chart-tooltip" id="tooltip-${line.id}"><div class="tooltip-time">00:00</div><div class="tooltip-row"><span class="val-label">어제</span><span class="val-yest">0</span></div><div class="tooltip-row"><span class="val-label">오늘</span><span class="val-today">0</span></div><div class="tooltip-row border-t border-[#3A3A3C] pt-1 mt-1"><span class="val-label">Avg C/T</span><span class="val-ct">-</span></div></div></div>
+            <div class="chart-wrapper group" id="wrapper-${line.id}"><canvas id="canvas-main-${line.id}"></canvas><div class="chart-overlay-legend" data-ref="trend-legend"><div class="legend-item"><div class="legend-line" style="background:var(--c-chart)"></div>금일</div><div class="legend-item"><div class="legend-line-dash"></div>전일</div></div><div class="chart-overlay-legend" data-ref="compare-legend" style="display:none;"><div class="legend-item"><div class="legend-line" style="background:var(--c-chart)"></div>금일</div><div class="legend-item"><div class="legend-line-dash"></div>전일</div><div class="legend-item"><div class="legend-line" style="background:var(--c-week)"></div>주간평균</div><div class="legend-item"><div class="legend-line" style="background:var(--c-month)"></div>월간평균</div><div class="legend-item"><div class="legend-line" style="background:var(--c-custom)"></div>선택기간평균</div></div><div class="time-marker now-marker" data-ref="now-marker"><span class="time-marker-label">NOW</span></div><div class="time-marker hover-marker" data-ref="hover-marker"><span class="time-marker-label" data-ref="hover-time">--:--</span></div><span class="strip-label" data-strip-label="yesterday">전일</span><span class="strip-label" data-strip-label="today" style="color: var(--c-timeline);">금일</span><div class="chart-tooltip" id="tooltip-${line.id}"><div class="tooltip-time">00:00</div><div class="tooltip-row"><span class="val-label">어제</span><span class="val-yest">0</span></div><div class="tooltip-row"><span class="val-label">오늘</span><span class="val-today">0</span></div><div class="tooltip-row border-t border-[#3A3A3C] pt-1 mt-1"><span class="val-label">Avg C/T</span><span class="val-ct">-</span></div></div></div>
             <div class="hourly-compare-panel" data-ref="hourly-compare-panel">
               <div class="hourly-compare-tools">
                 <span>특정기간 평균</span>
@@ -1891,7 +1891,13 @@
       }
     }
 
-    async function openKpiHistory(id, mode) {
+    function normalizeAlarmMetricTab(mode, tab) {
+      if (mode !== 'alarm') return null;
+      if (tab === 'mttr' || tab === 'mtbf' || tab === 'alarmLoss') return tab;
+      return 'alarmLoss';
+    }
+
+    async function openKpiHistory(id, mode, alarmMetricTab = null) {
       const modal = document.getElementById('historyModal');
       const body = document.getElementById('modalBody');
       modal.classList.add('open');
@@ -1899,7 +1905,7 @@
       try {
         const response = await fetch(historyUrl(id), { cache: 'no-store' });
         const data = await response.json();
-        HISTORY_MODAL_STATE = { mode, period: 'today', data };
+        HISTORY_MODAL_STATE = { mode, period: 'today', alarmMetricTab: normalizeAlarmMetricTab(mode, alarmMetricTab), data };
         renderHistoryModal();
       } catch (error) {
         body.innerHTML = `<div class="muted">이력 조회 실패: ${error.message}</div>`;
@@ -1920,14 +1926,14 @@
     }
 
     async function changeHistoryMonth(month) {
-      const { mode, period, data } = HISTORY_MODAL_STATE;
+      const { mode, period, data, alarmMetricTab } = HISTORY_MODAL_STATE;
       if (!data || period !== 'month' || !month) return;
       const body = document.getElementById('modalBody');
       body.textContent = 'Loading...';
       try {
         const response = await fetch(historyUrl(data.line_id, month), { cache: 'no-store' });
         const nextData = await response.json();
-        HISTORY_MODAL_STATE = { mode, period, data: nextData };
+        HISTORY_MODAL_STATE = { mode, period, alarmMetricTab, data: nextData };
         renderHistoryModal();
       } catch (error) {
         body.innerHTML = `<div class="muted">이력 조회 실패: ${error.message}</div>`;
@@ -1935,7 +1941,7 @@
     }
 
     async function changeHistoryRange() {
-      const { mode, period, data } = HISTORY_MODAL_STATE;
+      const { mode, period, data, alarmMetricTab } = HISTORY_MODAL_STATE;
       if (!data || period !== 'month') return;
       const start = document.getElementById('historyRangeStart')?.value;
       const end = document.getElementById('historyRangeEnd')?.value;
@@ -1953,7 +1959,7 @@
         const response = await fetch(historyUrl(data.line_id, { start_day: start, end_day: end }), { cache: 'no-store' });
         const nextData = await response.json();
         if (!response.ok) throw new Error(nextData.error || `HTTP ${response.status}`);
-        HISTORY_MODAL_STATE = { mode, period, data: nextData };
+        HISTORY_MODAL_STATE = { mode, period, alarmMetricTab, data: nextData };
         renderHistoryModal();
       } catch (error) {
         body.innerHTML = `<div class="muted">이력 조회 실패: ${error.message}</div>`;
@@ -1961,7 +1967,7 @@
     }
 
     async function resetHistoryRange() {
-      const { mode, period, data } = HISTORY_MODAL_STATE;
+      const { mode, period, data, alarmMetricTab } = HISTORY_MODAL_STATE;
       if (!data || period !== 'month') return;
       const todayText = data.today?.day_key;
       const today = todayText ? new Date(`${todayText}T00:00:00`) : new Date();
@@ -1977,7 +1983,7 @@
       try {
         const response = await fetch(historyUrl(data.line_id, { start_day: fmt(start), end_day: fmt(end) }), { cache: 'no-store' });
         const nextData = await response.json();
-        HISTORY_MODAL_STATE = { mode, period, data: nextData };
+        HISTORY_MODAL_STATE = { mode, period, alarmMetricTab, data: nextData };
         renderHistoryModal();
       } catch (error) {
         body.innerHTML = `<div class="muted">이력 조회 실패: ${error.message}</div>`;
@@ -2061,7 +2067,7 @@
     }
 
     function renderHistoryModal() {
-      let { mode, period, data } = HISTORY_MODAL_STATE;
+      let { mode, period, data, alarmMetricTab } = HISTORY_MODAL_STATE;
       if (!data) return;
       ALARM_DAY_DETAIL_CACHE = {};
       PRODUCTION_DAY_DETAIL_CACHE = {};
@@ -2075,7 +2081,20 @@
       const toolbarContent = mode === 'production'
         ? `<div class="production-toolbar-tabs"><div class="history-tabs">${tabs}</div></div>`
         : `<div class="history-tabs">${tabs}</div>`;
-      document.getElementById('modalBody').innerHTML = `<div class="${toolbarClass}">${toolbarContent}</div>${content}`;
+      const alarmMetricTabs = mode === 'alarm' ? renderAlarmMetricTabs(alarmMetricTab) : '';
+      document.getElementById('modalBody').innerHTML = `<div class="${toolbarClass}">${toolbarContent}${alarmMetricTabs}</div>${content}`;
+    }
+
+    function renderAlarmMetricTabs(activeTab) {
+      const current = normalizeAlarmMetricTab('alarm', activeTab);
+      const tabs = [
+        { key: 'alarmLoss', label: '고장률' },
+        { key: 'mttr', label: 'MTTR' },
+        { key: 'mtbf', label: 'MTBF' }
+      ];
+      return `<div class="history-view-tabs">${tabs.map(item => `
+        <button class="history-view-tab ${item.key === current ? 'active' : ''}" type="button" onclick="setAlarmMetricTab('${item.key}')">${item.label}</button>
+      `).join('')}</div>`;
     }
 
     function productionExportRange(data, period) {
@@ -2133,7 +2152,7 @@
 
     function historyModalTitle(mode, lineName) {
       const titles = {
-        alarm: '고장률',
+        alarm: '고장 이력',
         production: '생산 수량',
         yield: '직행률',
         availability: '가동률',
@@ -2162,13 +2181,19 @@
       renderHistoryModal();
     }
 
+    function setAlarmMetricTab(tab) {
+      if (HISTORY_MODAL_STATE.mode !== 'alarm') return;
+      HISTORY_MODAL_STATE.alarmMetricTab = normalizeAlarmMetricTab('alarm', tab);
+      renderHistoryModal();
+    }
+
     function setProductionRangeView(view) {
       PRODUCTION_RANGE_VIEW = view === 'matrix' ? 'matrix' : 'summary';
       renderHistoryModal();
     }
 
     async function refreshHistoryModalData() {
-      const { mode, period, data } = HISTORY_MODAL_STATE;
+      const { mode, period, data, alarmMetricTab } = HISTORY_MODAL_STATE;
       if (!data) return;
       const selectedMonth = period === 'month' ? data.month?.selected_month : null;
       const selectedRange = period === 'month' && data.week?.is_custom_range
@@ -2177,7 +2202,7 @@
       const response = await fetch(historyUrl(data.line_id, selectedMonth || selectedRange), { cache: 'no-store' });
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
       const nextData = await response.json();
-      HISTORY_MODAL_STATE = { mode, period, data: nextData };
+      HISTORY_MODAL_STATE = { mode, period, alarmMetricTab, data: nextData };
       renderHistoryModal();
     }
 
@@ -3353,6 +3378,9 @@
     }
 
     function renderAlarmPeriodContent(period, data) {
+      const metric = normalizeAlarmMetricTab('alarm', HISTORY_MODAL_STATE.alarmMetricTab);
+      if (metric === 'mttr') return renderMttrPeriodContent(period, data);
+      if (metric === 'mtbf') return renderMtbfPeriodContent(period, data);
       if (period === 'today') return renderAlarmHistoryBlock('금일', data.today);
       if (period === 'yesterday') return renderAlarmHistoryBlock('전일', data.yesterday);
       return data.week?.is_custom_range
@@ -3661,7 +3689,7 @@
         ctx.restore();
       }
 
-      drawLineSeries(yestSeries, '#8B93A1', 1.35, 0.72, [4, 3]);
+      drawLineSeries(yestSeries, '#8E8E93', 1.35, 0.72, [4, 3]);
       drawLineSeries(todaySeries, C_CHART, 1.75, 0.75);
 
       ctx.save();
@@ -3769,10 +3797,10 @@
       ctx.fillRect(0, 0, W, H);
       const seriesDefs = [
         { key: 'today', color: C_CHART, width: 2, dash: [] },
-        { key: 'yesterday', color: '#8B93A1', width: 1.2, dash: [4, 3] },
-        { key: 'week', color: '#22c55e', width: 1.4, dash: [] },
-        { key: 'month', color: '#38bdf8', width: 1.4, dash: [] },
-        { key: 'custom', color: '#facc15', width: 1.4, dash: [2, 3] }
+        { key: 'yesterday', color: '#8E8E93', width: 1.2, dash: [4, 3] },
+        { key: 'week', color: '#41C7B9', width: 1.4, dash: [] },
+        { key: 'month', color: '#89E0D8', width: 1.4, dash: [] },
+        { key: 'custom', color: '#A7F3D0', width: 1.4, dash: [2, 3] }
       ];
       const step = plotW / 23;
       const point = (index, value) => ({
