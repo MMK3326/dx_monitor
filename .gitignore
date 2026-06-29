@@ -1,0 +1,41 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# --- PyInstaller 빌드 산출물 (빌드 시 재생성됨) ---
+build/
+dist/
+*.spec.bak
+
+# --- 런타임 데이터 / DB (운영 중 계속 갱신됨, 백업 별도) ---
+*.db
+*.db-wal
+*.db-shm
+*.sqlite
+data/server.out.txt
+data/server.err.txt
+
+# --- 옛 DB 백업 보관소 ---
+archive/
+
+# --- 일별 생산 이력 CSV (DB에서 재생성 가능한 export 산출물) ---
+history/*.csv
+
+# --- 로그 ---
+*.log
+
+# --- 개발 임시 산출물 ---
+dashboard/__syntax_check__.js
+cwdtest.txt
+
+# --- 운영 메모/문서 (공개 저장소에 올리지 않음, 로컬 전용) ---
+docs/
+
+# --- OS / 에디터 ---
+Thumbs.db
+.DS_Store
+.idea/
+.vscode/

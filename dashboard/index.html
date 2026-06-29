@@ -3,12 +3,37 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>EMTES 설비 모니터링</title>
+  <title>EMTES Monitoring</title>
+  <meta name="theme-color" content="#000000"/>
+  <meta name="mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-title" content="DX Monitor"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+  <link rel="manifest" href="/manifest.webmanifest"/>
+  <link rel="icon" href="/icons/dx-monitor-icon.svg" type="image/svg+xml"/>
+  <link rel="apple-touch-icon" href="/icons/dx-monitor-icon-192.png"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&family=Manrope:wght@300;400;500;600;700;800&family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
   <style>
     :root {
-      --bg-app:#000000; --bg-card:#1c1c1e; --border:#2c2c2e; --c-chart:#66d4cf; --c-timeline:#66d4cf;
+      --bg-app:#000000; --bg-card:#1c1c1e; --border:#2c2c2e; --c-chart:#7DD3DC; --c-timeline:#66d4cf;
       --st-run:#30d158; --st-stop:#ffd60a; --st-alarm:#ff453a; --st-online:#0a84ff; --st-offline:#8e8e93;
       --c-yest:#8e8e93; --c-week:#41c7b9; --c-month:#89e0d8; --c-custom:#a7f3d0; --c-model:#9fc0e8; --text-primary:#ffffff; --text-secondary:#8e8e93;
+      --emtes-bg-app:#1a1917; --emtes-bg-surface:#0d0d0d; --emtes-bg-elevated:#1f1e1d;
+      --emtes-border:#2a2927; --emtes-border-strong:#3a3936; --emtes-divider-dot:#444441;
+      --emtes-text-primary:#f5f4ee; --emtes-text-secondary:#888780; --emtes-text-tertiary:#5f5e5a;
+      --emtes-accent:#d97757; --emtes-accent-soft:rgba(217,119,87,0.12);
+      --emtes-status-run:#4ade80; --emtes-status-stop:#f59e0b; --emtes-status-alarm:#ef4444; --emtes-status-idle:#f59e0b;
+      --ds-bg-base:#07090F; --ds-bg-elevated:#0D1119; --ds-bg-card:#11161F; --ds-bg-card-hover:#151B26;
+      --ds-border-subtle:rgba(255,255,255,0.04); --ds-border-soft:rgba(255,255,255,0.08); --ds-border-medium:rgba(255,255,255,0.12);
+      --ds-text-primary:#F4F6FB; --ds-text-secondary:#A8B0C0; --ds-text-tertiary:#6B7283; --ds-text-quaternary:#4A5060;
+      --ds-accent-amber:#F0B45A; --ds-accent-amber-glow:rgba(240,180,90,0.12);
+      --ds-accent-emerald:#5EE3A8; --ds-accent-emerald-glow:rgba(94,227,168,0.12);
+      --ds-accent-coral:#F47B6B; --ds-accent-coral-glow:rgba(244,123,107,0.12);
+      --ds-accent-cyan:#7DD3DC; --ds-run-green:#4ADE80; --ds-run-green-glow:rgba(74,222,128,0.4);
+      --ds-radius-card:18px; --ds-radius-chip:999px; --ds-radius-tab:10px;
+      --font-display:'Manrope','Noto Sans KR',sans-serif; --font-mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace; --font-kr:'Noto Sans KR',sans-serif;
     }
     * { box-sizing:border-box; }
     .min-h-screen { min-height:100vh; }
@@ -39,7 +64,12 @@
     .text-xl { font-size:1.25rem; line-height:1.75rem; }
     .font-bold { font-weight:700; }
     .tracking-tight { letter-spacing:-0.025em; }
-    .app-title { color:#74839a; }
+    .app-title { color:var(--emtes-text-primary); font-size:16px; font-weight:500; letter-spacing:-0.2px; }
+    .brand-lockup { position:relative; display:flex; align-items:baseline; gap:12px; min-width:0; padding-bottom:7px; }
+    .brand-lockup::after { content:""; position:absolute; left:0; right:0; bottom:0; height:2px; border-radius:999px; background:#1e3a5f; box-shadow:0 0 14px rgba(30,58,95,0.42); }
+    .brand-main { position:relative; color:var(--ds-text-primary); font-size:22px; font-weight:800; letter-spacing:0; line-height:1; }
+    .brand-main::after { content:none; }
+    .brand-sub { color:var(--ds-text-tertiary); font-family:var(--font-mono); font-size:10px; font-weight:500; letter-spacing:0.18em; line-height:1; }
     .text-\[\#5E6673\] { color:#5E6673; }
     .space-y-0 > :not([hidden]) ~ :not([hidden]) { margin-top:0; margin-bottom:0; }
     .mb-4 { margin-bottom:1rem; }
@@ -54,7 +84,7 @@
     body {
       background:var(--bg-app);
       color:var(--text-primary);
-      font-family:"Pretendard",sans-serif;
+      font-family:var(--font-display);
     }
     .dashboard-card { background:var(--bg-card); border:1px solid var(--border); border-radius:14px; display:flex; flex-direction:column; overflow:hidden; height:auto; align-self:start; position:relative; }
     .dashboard-card::before { content:none; }
@@ -64,39 +94,37 @@
     .card-accent-alarm::before { opacity:1; background:linear-gradient(135deg, rgba(239,68,68,0.82), rgba(239,68,68,0.32) 38%, rgba(239,68,68,0.08) 62%, rgba(239,68,68,0) 78%); animation:accentPulse 0.45s ease-in-out infinite alternate; }
     .card-accent-online::before { opacity:1; background:linear-gradient(135deg, rgba(56,189,248,0.34), rgba(56,189,248,0.1) 38%, rgba(56,189,248,0) 70%); }
     .card-accent-offline::before { opacity:1; background:linear-gradient(135deg, rgba(107,114,128,0.32), rgba(107,114,128,0.08) 38%, rgba(107,114,128,0) 70%); }
-    .panel-header { padding:12px 20px 11px; min-height:68px; border-bottom:none; display:flex; justify-content:space-between; align-items:center; gap:12px; background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0)); position:relative; z-index:1; }
-    .panel-header::after { content:""; position:absolute; left:0; right:20px; bottom:0; height:1px; background:linear-gradient(90deg, rgba(255,255,255,0.16), rgba(255,255,255,0.08) 42%, rgba(255,255,255,0) 100%); pointer-events:none; }
-    .panel-title-wrap { display:flex; flex-direction:column; gap:4px; min-width:0; flex:1; }
+    .panel-header { padding:18px; min-height:0; border-bottom:0.5px solid var(--emtes-border); display:flex; justify-content:space-between; align-items:baseline; gap:18px; background:var(--emtes-bg-surface); position:relative; z-index:1; }
+    .panel-header::after { content:none; }
+    .panel-title-wrap { display:flex; flex-direction:column; gap:18px; min-width:0; flex:1; }
     .panel-title-row { display:flex; align-items:center; gap:10px; min-width:0; width:100%; }
     .panel-title {
       margin:0;
-      font-size:20px;
-      font-weight:800;
+      font-size:13px;
+      font-weight:400;
       line-height:1.1;
-      letter-spacing:-0.4px;
+      letter-spacing:0;
       min-width:0;
       flex:1;
-      color:#f5f5f7;
-      background:linear-gradient(180deg, #ffffff 0%, #edf2f8 52%, #9ca8b8 100%);
-      -webkit-background-clip:text;
-      background-clip:text;
-      -webkit-text-fill-color:transparent;
-      text-shadow:0 1px 0 rgba(0,0,0,0.18);
+      color:var(--emtes-text-secondary);
+      background:none;
+      -webkit-text-fill-color:currentColor;
+      text-shadow:none;
     }
-    .panel-meta-row { display:flex; align-items:center; gap:8px; min-width:0; min-height:16px; }
-    .panel-model-label { font-size:10px; font-weight:800; color:#6f89ab; letter-spacing:0.7px; text-transform:uppercase; }
+    .panel-meta-row { display:flex; flex-direction:column; align-items:flex-start; gap:3px; min-width:0; min-height:0; }
+    .panel-model-label { font-size:10px; font-weight:400; color:var(--emtes-text-tertiary); letter-spacing:0.5px; text-transform:uppercase; }
     .panel-model-value {
-      font-size:13px;
-      font-weight:700;
-      letter-spacing:-0.15px;
-      line-height:1.2;
-      background:linear-gradient(180deg, #eaf1f8 0%, #c8d6e6 36%, #90a7c2 68%, #dbe6f1 100%);
-      -webkit-background-clip:text;
-      background-clip:text;
-      -webkit-text-fill-color:transparent;
-      text-shadow:0 1px 0 rgba(0,0,0,0.18);
+      font-size:18px;
+      font-weight:500;
+      letter-spacing:-0.3px;
+      line-height:1.1;
+      color:var(--emtes-text-primary);
+      background:none;
+      -webkit-text-fill-color:currentColor;
+      text-shadow:none;
     }
-    .header-status-wrap { display:flex; flex-direction:column; align-items:flex-end; gap:4px; }
+    .header-status-wrap { display:flex; align-items:center; justify-content:flex-end; gap:6px; }
+    .header-status-wrap .header-divider { color:var(--emtes-divider-dot); font-size:10px; font-weight:400; }
     .header-status {
       display:inline-flex;
       align-items:center;
@@ -123,11 +151,19 @@
     }
     .header-compare-time {
       font-size:10px;
-      font-weight:800;
-      color:#8f98a7;
-      letter-spacing:0.25px;
+      font-weight:400;
+      color:var(--emtes-text-secondary);
+      letter-spacing:0;
       white-space:nowrap;
+      font-variant-numeric:tabular-nums;
     }
+    .header-viewer-inline { display:inline-flex; align-items:center; justify-content:center; gap:0; color:var(--emtes-text-secondary); font-size:10px; font-weight:400; white-space:nowrap; }
+    .header-viewer-dot { width:4px; height:4px; margin-left:4px; border-radius:50%; background:var(--emtes-text-tertiary); flex:0 0 auto; }
+    .header-viewer-inline.online .header-viewer-dot { background:var(--emtes-status-run); }
+    .header-viewer-count { display:none; }
+    .mobile-line-tabs { display:none; }
+    .mobile-line-tab { min-width:0; border:0; background:transparent; color:var(--emtes-text-secondary); font:inherit; cursor:pointer; transition:color 150ms ease; }
+    .mobile-line-tab:hover { color:var(--emtes-text-primary); }
     .header-clock {
       font-size:12px;
       font-weight:700;
@@ -139,17 +175,29 @@
       text-shadow:0 0 12px rgba(255,255,255,0.08);
       white-space:nowrap;
     }
-    .status-inline { display:inline-flex; align-items:center; gap:7px; align-self:center; padding:5px 9px; border-radius:9px; background:rgba(255,255,255,0.025); border:1px solid rgba(255,255,255,0.04); box-shadow:inset 0 1px 0 rgba(255,255,255,0.03); transition:all 0.3s ease; }
-    .status-inline-label { font-size:9px; font-weight:800; color:#6f7784; letter-spacing:0.6px; text-transform:uppercase; }
+    .app-header {
+      position:sticky;
+      top:0;
+      z-index:80;
+      height:auto !important;
+      min-height:0;
+      margin:18px 18px 0;
+      padding:18px;
+      background:var(--emtes-bg-surface) !important;
+      border:0.5px solid var(--emtes-border);
+      border-radius:12px;
+    }
+    .status-inline { display:inline-flex; align-items:center; gap:6px; align-self:center; padding:0; border-radius:0; background:transparent; border:0; box-shadow:none; transition:color 0.2s ease; }
+    .status-inline-label { display:none; }
     .status-inline-dot {
-      width:8px;
-      height:8px;
-      border-radius:999px;
+      width:6px;
+      height:6px;
+      border-radius:50%;
       background:#6b7280;
-      box-shadow:0 0 0 1px rgba(255,255,255,0.08), 0 0 0 rgba(107,114,128,0);
+      box-shadow:none;
       flex:0 0 auto;
     }
-    .status-inline-value { font-size:12px; font-weight:800; letter-spacing:-0.15px; }
+    .status-inline-value { font-size:13px; font-weight:500; letter-spacing:0.3px; }
     .panel-actions { display:flex; align-items:center; justify-content:flex-end; gap:8px; flex-wrap:wrap; }
     .target-control { display:none; align-items:center; gap:6px; padding:4px 6px; border:1px solid rgba(255,255,255,0.06); border-radius:8px; background:rgba(255,255,255,0.025); }
     .target-label { color:#8f98a7; font-size:9px; font-weight:800; white-space:nowrap; }
@@ -167,14 +215,21 @@
     @keyframes blink-bg { 0% { opacity:0.7; } 100% { opacity:1; } }
     @keyframes statusPulseSoft { 0% { transform:scale(0.96); opacity:0.78; } 100% { transform:scale(1.08); opacity:1; } }
     @keyframes statusPulseAlarm { 0% { transform:scale(0.9); opacity:0.72; box-shadow:0 0 0 1px rgba(255,255,255,0.08), 0 0 0 rgba(239,68,68,0.14); } 100% { transform:scale(1.14); opacity:1; box-shadow:0 0 0 1px rgba(255,255,255,0.08), 0 0 14px rgba(239,68,68,0.52); } }
-    .accent-run .status-inline-dot { background:var(--st-run); box-shadow:0 0 0 1px rgba(16,185,129,0.18), 0 0 10px rgba(16,185,129,0.32); animation:statusPulseSoft 1.8s ease-in-out infinite alternate; }
-    .accent-stop .status-inline-dot { background:var(--st-stop); box-shadow:0 0 0 1px rgba(251,191,36,0.18), 0 0 8px rgba(251,191,36,0.22); animation:statusPulseSoft 2.8s ease-in-out infinite alternate; }
-    .accent-alarm .status-inline-dot { background:var(--st-alarm); animation:statusPulseAlarm 0.85s ease-in-out infinite alternate; }
-    .accent-online .status-inline-dot { background:var(--st-online); box-shadow:0 0 0 1px rgba(56,189,248,0.18), 0 0 10px rgba(56,189,248,0.28); animation:statusPulseSoft 2.1s ease-in-out infinite alternate; }
+    .accent-run .status-inline-dot { background:var(--emtes-status-run); box-shadow:0 0 6px rgba(74,222,128,0.5); animation:none; }
+    .accent-stop .status-inline-dot { background:var(--emtes-status-stop); box-shadow:0 0 6px rgba(245,158,11,0.5); animation:none; }
+    .accent-idle .status-inline-dot { background:var(--emtes-status-idle); box-shadow:0 0 6px rgba(245,158,11,0.5); animation:none; }
+    .accent-alarm .status-inline-dot { background:var(--emtes-status-alarm); box-shadow:0 0 6px rgba(239,68,68,0.5); animation:none; }
+    .accent-online .status-inline-dot { background:var(--emtes-status-run); box-shadow:0 0 6px rgba(74,222,128,0.5); animation:none; }
     .accent-offline .status-inline-dot { background:var(--st-offline); opacity:0.75; }
+    .ctx-status-panel.accent-run,
+    .ctx-status-panel.accent-stop,
+    .ctx-status-panel.accent-idle,
+    .ctx-status-panel.accent-alarm,
+    .ctx-status-panel.accent-online,
+    .ctx-status-panel.accent-offline { background:transparent; border-left-color:transparent; }
     .ctx-label { font-size:10px; color:var(--text-secondary); font-weight:700; margin-bottom:2px; letter-spacing:0.6px; }
     .ctx-val-base { font-size:15px; font-weight:800; letter-spacing:-0.3px; }
-    .tx-run { color:var(--st-run); } .tx-stop { color:var(--st-stop); } .tx-alarm { color:var(--st-alarm); } .tx-online { color:var(--st-online); } .tx-offline { color:var(--st-offline); }
+    .tx-run { color:var(--emtes-status-run); } .tx-stop { color:var(--emtes-status-stop); } .tx-idle { color:var(--emtes-status-idle); } .tx-alarm { color:var(--emtes-status-alarm); } .tx-online { color:var(--emtes-status-run); } .tx-offline { color:var(--emtes-text-secondary); }
     .tx-model, .tx-total { color:var(--c-model); font-weight:600; }
     .kpi-section { padding:0 20px 18px; border-bottom:none; background:#111113; }
     .kpi-section-head { display:flex; align-items:center; justify-content:space-between; gap:12px; margin:12px -20px 0; padding:10px 20px 8px; background:transparent; border-bottom:none; box-shadow:none; position:relative; }
@@ -188,8 +243,10 @@
     .legend-dot { width:6px; height:6px; border-radius:999px; flex:0 0 auto; }
     .legend-dot-good { background:#0a84ff; box-shadow:0 0 8px rgba(10,132,255,0.22); }
     .legend-dot-bad { background:#ff453a; box-shadow:0 0 8px rgba(255,69,58,0.2); }
-    .kpi-row { display:grid; grid-template-columns:minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr); gap:12px; padding:14px 0 0; }
-    .kpi-card { display:flex; flex-direction:column; justify-content:flex-start; position:relative; min-width:0; border:1px solid rgba(255,255,255,0.1); border-radius:12px; background:linear-gradient(180deg, rgba(255,255,255,0.065), rgba(255,255,255,0.022) 48%, rgba(0,0,0,0.08)); padding:10px 10px 8px; min-height:106px; box-shadow:inset 0 1px 0 rgba(255,255,255,0.08), 0 1px 0 rgba(255,255,255,0.025), 0 8px 18px rgba(0,0,0,0.2); }
+    .kpi-row { display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:12px; padding:14px 0 0; }
+    .kpi-card { display:flex; flex-direction:column; justify-content:flex-start; position:relative; min-width:0; border:1px solid rgba(255,255,255,0.1); border-radius:12px; background:linear-gradient(180deg, rgba(255,255,255,0.065), rgba(255,255,255,0.022) 48%, rgba(0,0,0,0.08)); padding:12px 12px 10px; min-height:132px; box-shadow:inset 0 1px 0 rgba(255,255,255,0.08), 0 1px 0 rgba(255,255,255,0.025), 0 8px 18px rgba(0,0,0,0.2); }
+    .kpi-card-production { border-color:rgba(10,132,255,0.2); background:linear-gradient(180deg, rgba(10,132,255,0.105), rgba(255,255,255,0.026) 48%, rgba(0,0,0,0.08)); }
+    .kpi-card-fault { border-color:rgba(239,68,68,0.2); background:linear-gradient(180deg, rgba(239,68,68,0.1), rgba(255,255,255,0.024) 48%, rgba(0,0,0,0.08)); }
     .kpi-card-action {
       cursor:pointer;
       transition:transform 0.18s ease, border-color 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
@@ -228,6 +285,16 @@
       outline-offset:2px;
     }
     .kpi-label { font-size:13px; color:var(--text-secondary); margin-bottom:0; font-weight:600; transition:color 0.18s ease; }
+    .kpi-card-title { font-size:13px; color:#e5e7eb; font-weight:900; letter-spacing:0.1px; }
+    .kpi-card-subtitle { font-size:10px; color:#7b8492; font-weight:800; white-space:nowrap; }
+    .kpi-summary-grid { display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:12px; margin-top:auto; padding-top:10px; border-top:1px solid rgba(255,255,255,0.07); }
+    .kpi-summary-item { min-width:0; padding:0; border-radius:0; background:transparent; border:none; }
+    .kpi-summary-label { display:block; color:#9ca3af; font-size:10px; font-weight:800; line-height:1.2; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .kpi-summary-value { display:flex; align-items:flex-end; justify-content:flex-end; gap:4px; min-width:0; margin-top:5px; white-space:nowrap; }
+    .kpi-summary-value .compare-main-value { font-size:15px; }
+    .kpi-summary-value .compare-main-unit { font-size:10px; padding-bottom:1px; }
+    .kpi-summary-item > .compare-delta-value { display:block; margin-top:4px; font-size:11px; text-align:right; }
+    .kpi-summary-item > .compare-delta-meta { display:none; }
     .donut-chart { width:100px; height:100px; transform:rotate(-90deg); }
     .donut-bg { fill:none; stroke:#2c2c2e; stroke-width:7; }
     .donut-fill { fill:none; stroke-width:7; stroke-linecap:round; transition:stroke-dashoffset 0.8s ease; }
@@ -239,8 +306,12 @@
     .sd-label { color:#6b7280; font-weight:500; font-size:11px; }
     .sd-val { color:#fff; font-weight:700; font-size:13px; }
     .compare-head { display:flex; align-items:flex-start; justify-content:space-between; gap:10px; margin-bottom:2px; }
+    .compare-head-stacked { margin-bottom:8px; }
     .compare-main { display:flex; align-items:flex-end; justify-content:flex-end; gap:5px; margin-bottom:8px; text-align:right; white-space:nowrap; }
     .compare-main-value { font-size:18px; font-weight:800; color:#fff; line-height:1; letter-spacing:-0.35px; transition:color 0.18s ease, text-shadow 0.18s ease; }
+    .compare-main-value.metric-state-good { color:#34d399; text-shadow:0 0 12px rgba(52,211,153,0.16); }
+    .compare-main-value.metric-state-warn { color:#facc15; text-shadow:0 0 12px rgba(250,204,21,0.14); }
+    .compare-main-value.metric-state-bad { color:#fb7185; text-shadow:0 0 12px rgba(251,113,133,0.14); }
     .compare-main-unit { font-size:12px; color:#8e8e93; font-weight:700; padding-bottom:2px; transition:color 0.18s ease; }
     .compare-delta-list { display:grid; gap:4px; min-width:0; }
     .compare-delta { display:grid; grid-template-columns:minmax(0, 1fr) auto; align-items:center; gap:8px; min-width:0; padding:6px 8px; border-radius:8px; background:#1a1a1d; border:1px solid #2c2c2f; transition:background 0.18s ease, border-color 0.18s ease; }
@@ -330,6 +401,53 @@
     .chart-mode-tab { border:1px solid rgba(10,132,255,0.24); background:#1a1a1c; color:#aeb6c5; border-radius:6px; padding:3px 8px; font-size:10px; font-weight:800; cursor:pointer; }
     .chart-mode-tab:hover { border-color:rgba(10,132,255,0.38); background:#1d1d22; color:#dbeafe; }
     .chart-mode-tab.active { color:#dbeafe; border-color:rgba(10,132,255,0.52); background:linear-gradient(180deg, rgba(10,132,255,0.14), rgba(255,255,255,0.035) 48%, rgba(0,0,0,0.06)); }
+    .mobile-summary { display:none; flex-direction:column; gap:16px; padding:10px 14px 18px; background:#111113; }
+    .summary-section { display:flex; flex-direction:column; gap:7px; }
+    .summary-section-head,
+    .summary-chart-head,
+    .summary-alarm-head { display:flex; align-items:center; justify-content:space-between; gap:12px; min-height:22px; }
+    .summary-section-title,
+    .summary-chart-title,
+    .summary-alarm-title { margin:0; color:var(--emtes-text-primary); font-size:16px; font-weight:500; letter-spacing:-0.2px; line-height:1.05; }
+    .summary-link { border:0; background:transparent; color:#8b95a3; padding:0; font:inherit; font-size:11px; font-weight:800; line-height:1.2; cursor:pointer; white-space:nowrap; }
+    .summary-link:hover { color:#dbeafe; }
+    .summary-card { width:100%; background:rgba(28,28,30,0.78); border:1px solid rgba(255,255,255,0.055); border-radius:10px; overflow:hidden; }
+    .summary-metrics-grid { display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); }
+    .summary-metric { min-width:0; padding:13px 10px 12px; text-align:center; }
+    .summary-metric + .summary-metric { border-left:1px solid rgba(255,255,255,0.025); }
+    .summary-label { display:block; color:#8f98a7; font-size:10px; font-weight:800; line-height:1.2; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .summary-value { display:flex; align-items:baseline; justify-content:center; gap:3px; margin-top:6px; min-width:0; white-space:nowrap; }
+    .summary-value .compare-main-value,
+    .summary-value-text { color:#fff; font-size:20px; font-weight:950; line-height:1; letter-spacing:0; }
+    .summary-value .compare-main-unit,
+    .summary-unit { color:#7f8794; font-size:9px; font-weight:800; line-height:1; }
+    .summary-value .compare-main-value.metric-state-good,
+    .kpi-summary-value .compare-main-value.metric-state-good { color:#34d399; text-shadow:0 0 12px rgba(52,211,153,0.16); }
+    .summary-value .compare-main-value.metric-state-warn,
+    .kpi-summary-value .compare-main-value.metric-state-warn { color:#facc15; text-shadow:0 0 12px rgba(250,204,21,0.14); }
+    .summary-value .compare-main-value.metric-state-bad,
+    .kpi-summary-value .compare-main-value.metric-state-bad { color:#fb7185; text-shadow:0 0 12px rgba(251,113,133,0.14); }
+    .summary-chart-card { width:100%; background:rgba(28,28,30,0.78); border:1px solid rgba(255,255,255,0.055); border-radius:10px; overflow:hidden; padding:9px 10px 7px; }
+    .summary-chart-head { margin-bottom:4px; }
+    .summary-chart-legend { display:flex; align-items:center; gap:8px; color:#8f98a7; font-size:9px; font-weight:800; white-space:nowrap; }
+    .summary-chart-legend-item { display:inline-flex; align-items:center; gap:4px; }
+    .summary-chart-line { width:12px; height:2px; border-radius:999px; background:linear-gradient(90deg, #7DD3DC, #5EE3A8); }
+    .summary-chart-line-yesterday { height:0; border-top:1px dashed var(--c-yest); background:transparent; }
+    .summary-chart-canvas-wrap { position:relative; height:104px; background:#111113; border-radius:7px; overflow:hidden; }
+    .summary-chart-canvas-wrap canvas { width:100%; height:100%; display:block; }
+    .summary-alarm-block { display:none; }
+    .summary-alarm-label { color:#f5f5f7; font-size:12px; font-weight:900; line-height:1.2; margin-bottom:8px; }
+    .summary-alarm-card { width:100%; background:rgba(28,28,30,0.78); border:1px solid rgba(255,255,255,0.055); border-radius:10px; overflow:hidden; padding:9px 10px 10px; }
+    .summary-alarm-head { margin-bottom:7px; }
+    .summary-alarm-state { display:flex; flex-direction:column; align-items:flex-start; justify-content:center; gap:6px; min-height:68px; padding:10px 14px; color:#e5e7eb; font-size:15px; font-weight:600; background:#111113; border:1px solid rgba(255,255,255,0.035); border-radius:7px; }
+    .summary-alarm-text { min-width:0; max-width:100%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:15px; font-weight:600; line-height:1.2; }
+    .summary-alarm-text.active { color:#f87171; }
+    .summary-alarm-meta-row { display:flex; align-items:center; gap:12px; color:#9ca3af; font-size:12px; font-weight:600; line-height:1.2; white-space:nowrap; }
+    .summary-alarm-meta { display:inline-flex; align-items:center; gap:4px; }
+    .summary-alarm-meta-label { color:#7f8794; }
+    .summary-alarm-meta-value { color:#d1d5db; font-variant-numeric:tabular-nums; }
+    .summary-chevron { display:none; }
+    .metric-hidden { display:none !important; }
     .hourly-compare-panel { display:none; position:absolute; top:-46px; right:20px; z-index:24; padding:8px 10px; background:rgba(17,17,19,0.96); border:1px solid rgba(10,132,255,0.24); border-radius:8px; box-shadow:0 12px 28px rgba(0,0,0,0.36), inset 0 1px 0 rgba(255,255,255,0.06); backdrop-filter:blur(6px); }
     .hourly-compare-panel.open { display:flex; align-items:center; justify-content:flex-end; }
     .chart-overlay-legend {
@@ -785,13 +903,866 @@
       .compare-delta-label, .compare-delta-meta { font-size:11px; }
       .compare-delta-value { font-size:12px; }
     }
+    @media (min-width:641px) {
+      body {
+        background:
+          radial-gradient(circle at 50% -180px, rgba(125,211,220,0.10), transparent 340px),
+          linear-gradient(180deg, #090b12 0%, var(--ds-bg-base) 52%, #05070b 100%);
+        color:var(--ds-text-primary);
+      }
+      .app-header {
+        margin:14px 18px 0;
+        padding:14px 16px 15px;
+        background:linear-gradient(180deg, rgba(7,9,15,0.96), rgba(7,9,15,0.88)) !important;
+        border:1px solid rgba(255,255,255,0.06);
+        border-radius:14px;
+        box-shadow:0 14px 32px rgba(0,0,0,0.24), inset 0 1px 0 rgba(255,255,255,0.04);
+        backdrop-filter:blur(14px);
+      }
+      .brand-lockup::after {
+        content:none;
+      }
+      .brand-main {
+        font-size:23px;
+      }
+      .brand-sub,
+      .header-compare-time {
+        color:var(--ds-text-tertiary);
+        font-family:var(--font-mono);
+      }
+      .mobile-line-tabs {
+        display:none;
+      }
+      main#dashboardGrid {
+        padding:18px;
+        gap:16px;
+        background:transparent !important;
+      }
+      .dashboard-card {
+        height:calc(100vh - 112px) !important;
+        min-height:620px;
+        align-self:stretch;
+        display:flex;
+        flex-direction:column;
+        background:transparent;
+        border:0;
+        border-radius:0;
+        box-shadow:none;
+        overflow:visible;
+      }
+      .dashboard-card.mobile-hidden {
+        display:flex;
+      }
+      .panel-header {
+        min-height:0;
+        margin:0 0 18px;
+        padding:14px 15px;
+        align-items:center;
+        background:
+          linear-gradient(135deg, rgba(255,255,255,0.035), rgba(255,255,255,0.010) 48%, rgba(125,211,220,0.025)),
+          var(--ds-bg-card);
+        border:1px solid var(--ds-border-subtle);
+        border-radius:13px;
+        box-shadow:0 10px 26px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.035);
+      }
+      .panel-title-wrap {
+        gap:9px;
+      }
+      .panel-title {
+        color:var(--ds-text-secondary);
+        font-size:13px;
+        font-weight:700;
+        background:none;
+        -webkit-text-fill-color:currentColor;
+        text-shadow:none;
+      }
+      .panel-meta-row {
+        flex-direction:row;
+        align-items:center;
+        gap:8px;
+      }
+      .panel-model-label {
+        color:var(--ds-text-tertiary);
+        font-family:var(--font-mono);
+        font-size:8px;
+        font-weight:500;
+        letter-spacing:0.16em;
+      }
+      .panel-model-value {
+        color:var(--ds-text-primary);
+        font-size:21px;
+        font-weight:800;
+        letter-spacing:-0.4px;
+        background:none;
+        -webkit-text-fill-color:currentColor;
+        text-shadow:none;
+      }
+      .panel-actions {
+        align-self:center;
+      }
+      .target-control {
+        display:none;
+      }
+      .status-inline {
+        top:0;
+        min-height:22px;
+        padding:0;
+        border:0;
+        border-radius:0;
+        background:transparent;
+        box-shadow:none;
+      }
+      .status-inline-value {
+        color:var(--ds-text-secondary);
+        font-family:var(--font-mono);
+        font-size:10px;
+        font-weight:700;
+        letter-spacing:0.04em;
+      }
+      .status-inline-dot {
+        width:6px;
+        height:6px;
+      }
+      .accent-run .status-inline-value,
+      .accent-online .status-inline-value {
+        color:var(--ds-run-green);
+      }
+      .accent-stop .status-inline-value,
+      .accent-idle .status-inline-value {
+        color:var(--ds-accent-amber);
+      }
+      .accent-alarm .status-inline-value {
+        color:var(--ds-accent-coral);
+      }
+      .kpi-section,
+      .middle-section,
+      .chart-section {
+        display:none;
+      }
+      .mobile-summary {
+        display:flex;
+        flex:1 1 auto;
+        gap:clamp(14px, 1.6vh, 20px);
+        justify-content:space-between;
+        min-height:0;
+        padding:0;
+        background:transparent;
+      }
+      .summary-section {
+        gap:10px;
+        min-height:0;
+      }
+      .summary-section[aria-label="시간대별 생산수량"] {
+        flex:1 1 auto;
+      }
+      .summary-section[aria-label="실시간 알람"] {
+        flex:0 0 auto;
+      }
+      .summary-section-head,
+      .summary-chart-head,
+      .summary-alarm-head {
+        min-height:28px;
+      }
+      .summary-section-title {
+        color:var(--ds-text-primary);
+        font-size:clamp(15px, 1.05vw, 18px);
+        font-weight:800;
+        letter-spacing:-0.2px;
+      }
+      .summary-chart-title,
+      .summary-alarm-title {
+        color:var(--ds-text-secondary);
+        font-size:12px;
+        font-weight:700;
+        letter-spacing:0.02em;
+      }
+      .summary-link {
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+        color:var(--ds-text-tertiary);
+        font-size:11px;
+        font-weight:700;
+      }
+      .summary-card,
+      .summary-chart-card,
+      .summary-alarm-card {
+        background:
+          linear-gradient(180deg, rgba(255,255,255,0.042), rgba(255,255,255,0.012)),
+          var(--ds-bg-card);
+        border:1px solid var(--ds-border-soft);
+        border-radius:15px;
+        box-shadow:0 14px 32px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.045);
+      }
+      .summary-section[aria-label="생산 지표"] .summary-card,
+      .summary-section[aria-label="설비 고장"] .summary-card {
+        border-color:rgba(125,211,220,0.10);
+      }
+      .summary-metric {
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        justify-content:center;
+        min-height:clamp(70px, 8vh, 96px);
+        padding:11px 7px 12px;
+      }
+      .summary-label {
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+        gap:5px;
+        color:var(--ds-text-secondary);
+        font-size:clamp(10px, 0.72vw, 12px);
+        font-weight:700;
+      }
+      .summary-label::before {
+        content:"";
+        width:5px;
+        height:5px;
+        border-radius:999px;
+        background:var(--ds-accent-cyan);
+        opacity:0.9;
+      }
+      .summary-metric:nth-child(2) .summary-label::before {
+        background:var(--ds-accent-amber);
+      }
+      .summary-metric:nth-child(3) .summary-label::before {
+        background:var(--ds-accent-emerald);
+      }
+      .summary-value {
+        margin-top:9px;
+      }
+      .summary-value .compare-main-value,
+      .summary-value-text {
+        color:var(--ds-text-primary);
+        font-size:clamp(20px, 1.65vw, 28px);
+        font-weight:950;
+      }
+      .summary-value .compare-main-unit,
+      .summary-unit {
+        color:var(--ds-text-tertiary);
+        font-size:clamp(9px, 0.72vw, 11px);
+        font-weight:700;
+      }
+      .summary-chart-card,
+      .summary-alarm-card {
+        padding:14px;
+      }
+      .summary-chart-card {
+        display:flex;
+        flex:1 1 auto;
+        flex-direction:column;
+        min-height:0;
+      }
+      .summary-chart-canvas-wrap {
+        flex:1 1 auto;
+        min-height:clamp(150px, 23vh, 240px);
+        background:rgba(7,9,15,0.58);
+        border:1px solid var(--ds-border-subtle);
+        border-radius:11px;
+      }
+      .summary-alarm-state {
+        min-height:clamp(88px, 11vh, 126px);
+        padding:12px 14px;
+        background:rgba(7,9,15,0.58);
+        border:1px solid var(--ds-border-subtle);
+        border-radius:11px;
+      }
+      .summary-alarm-text {
+        display:-webkit-box;
+        max-height:2.5em;
+        white-space:normal;
+        -webkit-line-clamp:2;
+        -webkit-box-orient:vertical;
+        font-size:clamp(13px, 0.95vw, 16px);
+      }
+      .summary-alarm-meta-row {
+        max-width:100%;
+        flex-wrap:wrap;
+        gap:6px 10px;
+        font-size:clamp(10px, 0.72vw, 12px);
+      }
+    }
+    @media (max-width:640px) {
+      .app-header {
+        position:sticky;
+        top:0;
+        z-index:90;
+        height:auto !important;
+        min-height:0;
+        margin:18px 0 0;
+        padding:18px 18px 0;
+        gap:8px;
+        background:#000 !important;
+        border-top:0;
+        border-left:0;
+        border-right:0;
+        border-bottom:0;
+        border-radius:12px 12px 0 0;
+      }
+      .app-title {
+        font-size:16px;
+        font-weight:700;
+        letter-spacing:-0.2px;
+        line-height:1.05;
+        white-space:nowrap;
+      }
+      .summary-section-title {
+        font-size:16px;
+        font-weight:700;
+      }
+      .summary-chart-title,
+      .summary-alarm-title {
+        color:#a8b3c7;
+        font-size:11px;
+        font-weight:700;
+        letter-spacing:0;
+      }
+      .summary-label {
+        font-size:11px;
+        font-weight:700;
+      }
+      .summary-value .compare-main-value,
+      .summary-value-text {
+        font-size:20px;
+        font-weight:950;
+      }
+      .summary-value .compare-main-unit,
+      .summary-unit {
+        font-size:10px;
+        font-weight:700;
+      }
+      .summary-link {
+        font-size:11px;
+        font-weight:600;
+      }
+      .header-status-wrap {
+        gap:7px;
+        flex:0 0 auto;
+      }
+      .header-compare-time {
+        font-size:12px;
+        font-weight:500;
+      }
+      .header-viewer-inline {
+        font-size:12px;
+        font-weight:500;
+      }
+      .header-status-wrap .header-divider {
+        font-size:12px;
+      }
+      .mobile-line-tabs {
+        position:sticky;
+        top:72px;
+        z-index:89;
+        display:grid;
+        grid-template-columns:repeat(3, minmax(0, 1fr));
+        gap:20px;
+        margin:0;
+        padding:18px 18px 0;
+        background:#000;
+        border-left:0;
+        border-right:0;
+        border-bottom:0;
+      }
+      .mobile-line-tab {
+        height:auto;
+        padding:0 0 10px;
+        border-right:0;
+        border-bottom:1.5px solid transparent;
+        margin-bottom:-0.5px;
+        color:var(--emtes-text-secondary);
+        font-size:13px;
+        font-weight:700;
+        line-height:1.15;
+        white-space:nowrap;
+        overflow:hidden;
+        text-overflow:ellipsis;
+      }
+      .mobile-line-tab:last-child {
+        border-right:0;
+      }
+      .mobile-line-tab.active {
+        color:var(--emtes-accent);
+        background:transparent;
+        border-bottom-color:var(--emtes-accent);
+        font-weight:700;
+      }
+      main#dashboardGrid { padding:20px 0 0; gap:0; }
+      .dashboard-card {
+        border-top:0;
+        border-left:0;
+        border-right:0;
+        border-bottom:0;
+        border-radius:0;
+        box-shadow:none;
+        background:#000;
+        position:relative;
+      }
+      .dashboard-card.mobile-hidden {
+        display:none;
+      }
+      .dashboard-card + .dashboard-card {
+        margin-top:0;
+        border-top:0;
+      }
+      .dashboard-card + .dashboard-card::before {
+        display:none;
+      }
+      .panel-header,
+      .kpi-section,
+      .list-header,
+      .chart-header-bar {
+        padding-left:14px;
+        padding-right:14px;
+      }
+      .kpi-section {
+        background:#000;
+      }
+      .panel-header {
+        min-height:0;
+        padding:18px;
+        gap:18px;
+        margin:0 0 16px;
+        align-items:center;
+        background:#000;
+        border-left:0;
+        border-right:0;
+        border-bottom:0;
+        border-radius:0 0 12px 12px;
+      }
+      .panel-title-wrap {
+        gap:18px;
+      }
+      .panel-title-row {
+        display:none;
+      }
+      .panel-title {
+        font-size:15px;
+        color:#cbd5e1;
+        background:none;
+        -webkit-text-fill-color:currentColor;
+        text-shadow:none;
+      }
+      .panel-meta-row {
+        flex-direction:row;
+        align-items:center;
+        gap:8px;
+        min-height:0;
+        line-height:1;
+      }
+      .panel-model-label,
+      .panel-model-value {
+        line-height:1;
+      }
+      .panel-actions {
+        align-self:center;
+        align-items:center;
+        padding-bottom:0;
+        transform:none;
+      }
+      .status-inline {
+        padding:0;
+        align-items:center;
+        line-height:1;
+        min-height:18px;
+        position:relative;
+        top:5px;
+      }
+      .status-inline-value {
+        font-size:18px;
+        line-height:1;
+      }
+      .kpi-section,
+      .middle-section {
+        display:none;
+      }
+      .chart-section {
+        display:none;
+      }
+      .mobile-summary {
+        display:flex;
+        padding-top:0;
+        padding-left:14px;
+        padding-right:14px;
+        padding-bottom:22px;
+        background:#000;
+      }
+      .kpi-section-head {
+        margin-left:-14px;
+        margin-right:-14px;
+        padding-left:14px;
+        padding-right:14px;
+      }
+      .list-item {
+        padding-left:14px;
+        padding-right:14px;
+      }
+      body {
+        background:
+          radial-gradient(circle at 50% -120px, rgba(244,123,107,0.10), transparent 290px),
+          linear-gradient(180deg, #090b12 0%, var(--ds-bg-base) 48%, #05070b 100%);
+        color:var(--ds-text-primary);
+      }
+      .app-header {
+        margin:0;
+        padding:14px 16px 15px;
+        gap:12px;
+        background:linear-gradient(180deg, rgba(7,9,15,0.96), rgba(7,9,15,0.88)) !important;
+        border:0;
+        border-radius:0;
+        backdrop-filter:blur(14px);
+      }
+      .app-header::after {
+        content:"";
+        position:absolute;
+        left:16px;
+        right:16px;
+        bottom:14px;
+        height:2px;
+        border-radius:999px;
+        background:linear-gradient(90deg, rgba(37,99,150,0.95), rgba(30,58,95,0.56) 44%, rgba(30,58,95,0.14));
+        box-shadow:0 0 14px rgba(37,99,150,0.34);
+        pointer-events:none;
+      }
+      .brand-lockup {
+        align-items:flex-end;
+        gap:9px;
+        padding-bottom:7px;
+      }
+      .brand-lockup::after {
+        content:none;
+      }
+      .brand-main {
+        font-size:23px;
+        font-weight:800;
+      }
+      .brand-main::after {
+        content:none;
+      }
+      .brand-sub {
+        padding-bottom:2px;
+        color:var(--ds-text-tertiary);
+        font-size:9px;
+        letter-spacing:0.18em;
+      }
+      .header-compare-time {
+        color:var(--ds-text-secondary);
+        font-family:var(--font-mono);
+        font-size:9px;
+        font-weight:500;
+        letter-spacing:0.14em;
+        text-transform:uppercase;
+      }
+      .header-status-wrap .header-divider {
+        display:none;
+      }
+      .header-viewer-inline {
+        width:10px;
+        height:10px;
+        padding:0;
+        gap:0;
+        border:0;
+        border-radius:0;
+        background:transparent;
+        color:var(--ds-text-secondary);
+        font-family:var(--font-mono);
+        font-size:10px;
+        font-weight:500;
+      }
+      .header-viewer-dot {
+        width:7px;
+        height:7px;
+        margin-left:0;
+        box-shadow:0 0 12px var(--ds-run-green-glow);
+      }
+      .mobile-line-tabs {
+        top:64px;
+        gap:6px;
+        margin:0 12px 16px;
+        padding:10px;
+        background:
+          linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.014)),
+          rgba(7,9,15,0.88);
+        border:1px solid rgba(255,255,255,0.07);
+        border-radius:12px;
+        box-shadow:
+          inset 0 1px 0 rgba(255,255,255,0.055),
+          0 10px 28px rgba(0,0,0,0.22);
+        backdrop-filter:blur(14px);
+      }
+      .mobile-line-tab {
+        position:relative;
+        height:36px;
+        padding:0 10px;
+        border-bottom:0;
+        border-radius:9px;
+        color:var(--ds-text-tertiary);
+        font-size:12px;
+        font-weight:650;
+        letter-spacing:0;
+        line-height:36px;
+        transition:color 0.18s ease, background 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
+      }
+      .mobile-line-tab:hover {
+        color:var(--ds-text-secondary);
+        background:rgba(255,255,255,0.026);
+      }
+      .mobile-line-tab.active {
+        color:var(--ds-text-primary);
+        background:
+          linear-gradient(180deg, rgba(125,211,220,0.105), rgba(255,255,255,0.028)),
+          rgba(30,58,95,0.24);
+        border-bottom-color:transparent;
+        box-shadow:
+          inset 0 0 0 1px rgba(125,211,220,0.22),
+          inset 0 1px 0 rgba(255,255,255,0.09),
+          0 8px 18px rgba(0,0,0,0.18);
+        transform:translateY(-1px);
+      }
+      .mobile-line-tab.active::after {
+        content:"";
+        position:absolute;
+        left:50%;
+        bottom:4px;
+        width:28px;
+        height:1px;
+        border-radius:999px;
+        background:var(--ds-accent-cyan);
+        transform:translateX(-50%) scaleX(0.86);
+        box-shadow:0 0 12px rgba(125,211,220,0.46);
+      }
+      main#dashboardGrid {
+        padding:0 14px 0;
+        background:transparent !important;
+      }
+      .dashboard-card {
+        background:transparent;
+      }
+      .panel-header {
+        margin:0 0 14px;
+        padding:11px 13px;
+        background:
+          linear-gradient(135deg, rgba(255,255,255,0.035), rgba(255,255,255,0.010) 48%, rgba(125,211,220,0.025)),
+          var(--ds-bg-card);
+        border:1px solid var(--ds-border-subtle);
+        border-radius:13px;
+        box-shadow:0 10px 26px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.035);
+      }
+      .panel-meta-row {
+        gap:8px;
+      }
+      .panel-model-label {
+        color:var(--ds-text-tertiary);
+        font-family:var(--font-mono);
+        font-size:8px;
+        font-weight:500;
+        letter-spacing:0.16em;
+      }
+      .panel-model-value {
+        color:var(--ds-text-primary);
+        font-size:18px;
+        font-weight:800;
+        letter-spacing:-0.4px;
+      }
+      .status-inline {
+        top:0;
+        min-height:22px;
+        padding:0;
+        border:0;
+        border-radius:0;
+        background:transparent;
+        box-shadow:none;
+      }
+      .status-inline-value {
+        color:var(--ds-text-secondary);
+        font-family:var(--font-mono);
+        font-size:10px;
+        font-weight:700;
+        letter-spacing:0.04em;
+      }
+      .status-inline-dot {
+        width:6px;
+        height:6px;
+      }
+      .accent-run .status-inline-value,
+      .accent-online .status-inline-value {
+        color:var(--ds-run-green);
+      }
+      .accent-stop .status-inline-value,
+      .accent-idle .status-inline-value {
+        color:var(--ds-accent-amber);
+      }
+      .accent-alarm .status-inline-value {
+        color:var(--ds-accent-coral);
+      }
+      .mobile-summary {
+        gap:18px;
+        padding:0 0 22px;
+        background:transparent;
+      }
+      .summary-section {
+        gap:8px;
+      }
+      .summary-section-head {
+        min-height:24px;
+      }
+      .summary-section-title {
+        display:flex;
+        align-items:center;
+        color:var(--ds-text-primary);
+        font-size:16px;
+        font-weight:800;
+        letter-spacing:-0.2px;
+      }
+      .summary-link {
+        color:var(--ds-text-tertiary);
+        font-size:11px;
+        font-weight:700;
+      }
+      .summary-card,
+      .summary-chart-card,
+      .summary-alarm-card {
+        background:
+          linear-gradient(180deg, rgba(255,255,255,0.042), rgba(255,255,255,0.012)),
+          var(--ds-bg-card);
+        border:1px solid var(--ds-border-soft);
+        border-radius:15px;
+        box-shadow:0 14px 32px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.045);
+      }
+      .summary-section[aria-label="생산 지표"] .summary-card,
+      .summary-section[aria-label="설비 고장"] .summary-card {
+        border-color:rgba(125,211,220,0.10);
+      }
+      .summary-card {
+        overflow:hidden;
+      }
+      .summary-metric {
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        justify-content:center;
+        min-height:56px;
+        padding:8px 7px 9px;
+      }
+      .summary-metric + .summary-metric {
+        border-left:1px solid rgba(255,255,255,0.045);
+      }
+      .summary-label {
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+        gap:5px;
+        color:var(--ds-text-secondary);
+        font-size:11px;
+        font-weight:700;
+      }
+      .summary-label::before {
+        content:"";
+        width:5px;
+        height:5px;
+        border-radius:999px;
+        background:var(--ds-accent-cyan);
+        opacity:0.9;
+      }
+      .summary-metric:nth-child(2) .summary-label::before {
+        background:var(--ds-accent-amber);
+      }
+      .summary-metric:nth-child(3) .summary-label::before {
+        background:var(--ds-accent-emerald);
+      }
+      .summary-value {
+        margin-top:5px;
+      }
+      .summary-chart-card,
+      .summary-alarm-card {
+        padding:12px;
+      }
+      .summary-chart-head,
+      .summary-alarm-head {
+        margin-bottom:8px;
+      }
+      .summary-chart-title,
+      .summary-alarm-title {
+        color:var(--ds-text-secondary);
+        font-size:11px;
+        font-weight:700;
+        letter-spacing:0.02em;
+      }
+      .summary-chart-legend {
+        color:var(--ds-text-tertiary);
+        font-family:var(--font-mono);
+        font-size:9px;
+        font-weight:500;
+      }
+      .summary-chart-canvas-wrap {
+        height:108px;
+        background:rgba(7,9,15,0.58);
+        border:1px solid var(--ds-border-subtle);
+        border-radius:12px;
+      }
+      .summary-alarm-state {
+        min-height:72px;
+        padding:11px 12px;
+        border-radius:11px;
+        background:rgba(7,9,15,0.52);
+        border:1px dashed var(--ds-border-soft);
+      }
+      .summary-alarm-state.empty {
+        align-items:center;
+        text-align:center;
+      }
+      .summary-alarm-state.active {
+        background:rgba(244,123,107,0.07);
+        border-style:solid;
+        border-color:rgba(244,123,107,0.23);
+        box-shadow:inset 2px 0 0 var(--ds-accent-coral);
+      }
+      .summary-alarm-empty-icon {
+        display:grid;
+        place-items:center;
+        width:28px;
+        height:28px;
+        margin-bottom:2px;
+        border-radius:999px;
+        color:var(--ds-run-green);
+        background:rgba(74,222,128,0.09);
+        border:1px solid rgba(74,222,128,0.18);
+        font-weight:800;
+      }
+      .summary-alarm-text {
+        color:var(--ds-text-primary);
+        font-size:15px;
+        font-weight:600;
+      }
+      .summary-alarm-empty-sub {
+        color:var(--ds-text-tertiary);
+        font-family:var(--font-mono);
+        font-size:9px;
+        font-weight:500;
+        letter-spacing:0.14em;
+      }
+      .summary-alarm-meta-row {
+        margin-top:2px;
+        gap:14px;
+        color:var(--ds-text-secondary);
+      }
+      .summary-alarm-meta-label {
+        color:var(--ds-text-tertiary);
+      }
+      .summary-alarm-meta-value {
+        color:var(--ds-text-primary);
+        font-family:var(--font-mono);
+      }
+    }
   </style>
 </head>
 <body class="min-h-screen flex flex-col overflow-auto">
-  <header class="h-14 flex items-center justify-between px-6 border-b border-[#2C2C2E] bg-[#1C1C1E] shrink-0">
-    <div class="flex items-center gap-2"><span class="text-xl font-bold tracking-tight app-title">EMTES 설비 모니터링</span></div>
-    <div class="header-status-wrap"><div class="header-status header-status-offline" id="serverState">OFFLINE</div><div class="header-compare-time" id="headerCompareTime">동일 시간 기준 비교 중</div></div>
+  <header class="app-header h-14 flex items-center justify-between px-6 border-b border-[#2C2C2E] bg-[#1C1C1E] shrink-0">
+    <div class="flex items-center gap-2 brand-lockup"><span class="brand-main">EMTES</span><span class="brand-sub">MONITORING</span></div>
+    <div class="header-status-wrap"><div class="header-compare-time" id="headerCompareTime">--/-- --:--:--</div><span class="header-divider" aria-hidden="true">·</span><div class="header-viewer-inline" id="serverState" aria-label="서버 상태"><span class="header-viewer-dot" aria-hidden="true"></span><span class="header-viewer-count"></span></div></div>
   </header>
+  <nav class="mobile-line-tabs" id="mobileLineTabs" aria-label="라인 선택"></nav>
   <main class="flex-1 p-4 grid grid-cols-1 lg:grid-cols-3 gap-4 overflow-auto bg-black" id="dashboardGrid"></main>
   <div id="historyModal" class="modal-overlay">
     <div class="modal-content">
@@ -800,7 +1771,7 @@
     </div>
   </div>
   <script>
-    const C_CHART = '#66D4CF';
+    const C_CHART = '#7DD3DC';
     const C_TEAL = '#14b8a6';
     const ST_COLORS = { YEST: '#6B7280' };
     const TL_COLORS = {
@@ -842,10 +1813,13 @@
     let ALARM_DAY_DETAIL_CACHE = {};
     let PRODUCTION_DAY_DETAIL_CACHE = {};
     let HISTORY_SUMMARY_CACHE = {};
+    let ACTIVE_MOBILE_LINE_ID = null;
+    let MOBILE_SWIPE_STATE = null;
 
     document.addEventListener('DOMContentLoaded', async () => {
       startClock();
       startViewerHeartbeat();
+      setupMobileSwipeNavigation();
       await loadDashboard();
       setInterval(loadDashboard, 2000);
     });
@@ -888,12 +1862,9 @@
       const serverStateEl = document.getElementById('serverState');
       if (!serverStateEl) return;
       if (online) {
-        const count = Number(viewerCount || 0);
-        serverStateEl.textContent = count > 0 ? `ONLINE · ${count}명` : 'ONLINE';
-        serverStateEl.className = 'header-status header-status-online';
+        serverStateEl.className = 'header-viewer-inline online';
       } else {
-        serverStateEl.textContent = 'OFFLINE';
-        serverStateEl.className = 'header-status header-status-offline';
+        serverStateEl.className = 'header-viewer-inline';
       }
     }
 
@@ -974,10 +1945,12 @@
 
     function currentAsOfLabel() {
       const now = new Date();
+      const month = String(now.getMonth() + 1).padStart(2, '0');
+      const day = String(now.getDate()).padStart(2, '0');
       const hh = String(now.getHours()).padStart(2, '0');
       const mm = String(now.getMinutes()).padStart(2, '0');
       const ss = String(now.getSeconds()).padStart(2, '0');
-      return `동일 시간 기준 비교 중 ${hh}:${mm}:${ss}`;
+      return `${month}/${day} ${hh}:${mm}:${ss}`;
     }
 
     function formatProdSecond(seconds, startMinute = DAY_START_MINUTE) {
@@ -1106,11 +2079,27 @@
       });
     }
 
+    function buildCompletedTodayPlotSeries(values, timeline) {
+      const nowSec = latestDataSecond(timeline);
+      return Array.from({ length: 24 }, (_, idx) => {
+        const slotEnd = (idx + 1) * 3600;
+        if (slotEnd > nowSec) return null;
+        if (isNoDataSlot(timeline, idx)) return null;
+        return Number((values || [])[idx] || 0);
+      });
+    }
+
     function lastValidPoint(series, pointFactory) {
       for (let i = series.length - 1; i >= 0; i--) {
         if (series[i] !== null && series[i] !== undefined) return { index: i, value: Number(series[i]), point: pointFactory(i, Number(series[i])) };
       }
       return null;
+    }
+
+    function axisTextAlign(hour) {
+      if (hour <= 0) return 'left';
+      if (hour >= 24) return 'right';
+      return 'center';
     }
 
     function roundedRectPath(ctx, x, y, width, height, radius) {
@@ -1126,6 +2115,92 @@
       ctx.quadraticCurveTo(x, y, x + r, y);
     }
 
+    function displayLineName(name) {
+      const value = String(name || '').trim();
+      const aliases = {
+        'ECU Housing1': 'ECU 1',
+        'ECU Housing 1': 'ECU 1',
+        'ECU Housing2': 'ECU 2',
+        'ECU Housing 2': 'ECU 2',
+        'LP EGR-V/V': 'LP EGR'
+      };
+      return aliases[value] || value;
+    }
+
+    function renderMobileLineTabs(lines) {
+      const tabs = document.getElementById('mobileLineTabs');
+      if (!tabs) return;
+      if (!ACTIVE_MOBILE_LINE_ID && lines.length) ACTIVE_MOBILE_LINE_ID = String(lines[0].id);
+      tabs.innerHTML = lines.map(line => `
+        <button class="mobile-line-tab" type="button" data-line-tab="${line.id}" onclick="selectMobileLine(${line.id})" aria-label="${line.name}">${displayLineName(line.name)}</button>
+      `).join('');
+      applyMobileLineSelection();
+    }
+
+    function selectMobileLine(lineId) {
+      ACTIVE_MOBILE_LINE_ID = String(lineId);
+      applyMobileLineSelection();
+      const data = CHART_DATA[lineId];
+      if (data) {
+        requestAnimationFrame(() => {
+          drawMobileProductionChart(lineId, data.yest || [], data.today || [], data.timeline_yesterday || [], data.timeline_today || []);
+        });
+      }
+    }
+
+    function selectAdjacentMobileLine(direction) {
+      if (!LINES.length) return;
+      const currentIndex = Math.max(0, LINES.findIndex(line => String(line.id) === String(ACTIVE_MOBILE_LINE_ID)));
+      const nextIndex = Math.max(0, Math.min(LINES.length - 1, currentIndex + direction));
+      if (nextIndex === currentIndex) return;
+      selectMobileLine(LINES[nextIndex].id);
+    }
+
+    function setupMobileSwipeNavigation() {
+      const grid = document.getElementById('dashboardGrid');
+      if (!grid) return;
+      grid.addEventListener('touchstart', event => {
+        if (window.innerWidth > 640 || event.touches.length !== 1) return;
+        const touch = event.touches[0];
+        MOBILE_SWIPE_STATE = { x: touch.clientX, y: touch.clientY, swiped: false };
+      }, { passive: true });
+      grid.addEventListener('touchmove', event => {
+        if (!MOBILE_SWIPE_STATE || event.touches.length !== 1) return;
+        const touch = event.touches[0];
+        const dx = touch.clientX - MOBILE_SWIPE_STATE.x;
+        const dy = touch.clientY - MOBILE_SWIPE_STATE.y;
+        if (Math.abs(dx) > 18 && Math.abs(dx) > Math.abs(dy) * 1.35) {
+          MOBILE_SWIPE_STATE.swiped = true;
+        }
+      }, { passive: true });
+      grid.addEventListener('touchend', event => {
+        if (!MOBILE_SWIPE_STATE || window.innerWidth > 640) {
+          MOBILE_SWIPE_STATE = null;
+          return;
+        }
+        const touch = event.changedTouches[0];
+        const dx = touch.clientX - MOBILE_SWIPE_STATE.x;
+        const dy = touch.clientY - MOBILE_SWIPE_STATE.y;
+        const horizontal = Math.abs(dx) >= 54 && Math.abs(dx) > Math.abs(dy) * 1.35;
+        if (horizontal) selectAdjacentMobileLine(dx < 0 ? 1 : -1);
+        MOBILE_SWIPE_STATE = null;
+      }, { passive: true });
+      grid.addEventListener('touchcancel', () => {
+        MOBILE_SWIPE_STATE = null;
+      }, { passive: true });
+    }
+
+    function applyMobileLineSelection() {
+      if (!ACTIVE_MOBILE_LINE_ID && LINES.length) ACTIVE_MOBILE_LINE_ID = String(LINES[0].id);
+      document.querySelectorAll('[data-line-tab]').forEach(button => {
+        button.classList.toggle('active', String(button.dataset.lineTab) === String(ACTIVE_MOBILE_LINE_ID));
+      });
+      document.querySelectorAll('.dashboard-card[id^="panel-"]').forEach(panel => {
+        const lineId = panel.id.replace('panel-', '');
+        panel.classList.toggle('mobile-hidden', String(lineId) !== String(ACTIVE_MOBILE_LINE_ID));
+      });
+    }
+
     function renderPanels(lines) {
       const grid = document.getElementById('dashboardGrid');
       grid.innerHTML = lines.map(line => `
@@ -1133,7 +2208,7 @@
           <div class="panel-header">
             <div class="panel-title-wrap">
               <div class="panel-title-row">
-                <h2 class="panel-title">${line.name}</h2>
+                <h2 class="panel-title">${displayLineName(line.name)}</h2>
               </div>
               <div class="panel-meta-row">
                 <span class="panel-model-label">MODEL</span>
@@ -1146,8 +2221,83 @@
                 <input class="target-input" type="number" min="0" step="1" inputmode="numeric" data-ref="target-input" onkeydown="handleTargetKey(event, ${line.id})" aria-label="${line.name} 일일 목표 수량">
                 <button class="target-save" type="button" data-ref="target-save" onclick="saveLineTarget(${line.id})">저장</button>
               </div>
-              <div class="status-inline" data-ref="ctx-panel"><span class="status-inline-label">STATUS</span><span class="status-inline-dot" aria-hidden="true"></span><span class="status-inline-value" data-ref="ctx-status">-</span></div>
+              <div class="status-inline" data-ref="ctx-panel"><span class="status-inline-dot" aria-hidden="true"></span><span class="status-inline-value" data-ref="ctx-status">-</span></div>
             </div>
+          </div>
+          <div class="mobile-summary">
+            <section class="summary-section" aria-label="생산 지표">
+              <div class="summary-section-head">
+                <h3 class="summary-section-title">생산 지표</h3>
+                <button class="summary-link" type="button" onclick="openKpiHistory(${line.id}, 'production')">상세 &gt;</button>
+              </div>
+              <div class="summary-card">
+                <div class="summary-metrics-grid">
+                  <div class="summary-metric">
+                    <span class="summary-label">생산수량</span>
+                    <span class="summary-value"><span class="compare-main-value" data-ref="cmp-production-today">0</span><span class="compare-main-unit">EA</span></span>
+                    <span class="metric-hidden" data-ref="cmp-production-yesterday">-</span><span class="compare-delta-value metric-hidden" data-ref="cmp-production-delta-yesterday">-</span>
+                  </div>
+                  <div class="summary-metric">
+                    <span class="summary-label">가동률</span>
+                    <span class="summary-value"><span class="compare-main-value" data-ref="cmp-run-today">0</span><span class="compare-main-unit">%</span></span>
+                    <span class="metric-hidden" data-ref="cmp-run-yesterday">-</span><span class="compare-delta-value metric-hidden" data-ref="cmp-run-delta-yesterday">-</span>
+                  </div>
+                  <div class="summary-metric">
+                    <span class="summary-label">직행률</span>
+                    <span class="summary-value"><span class="compare-main-value" data-ref="cmp-direct-yield-today">-</span><span class="compare-main-unit">%</span></span>
+                    <span class="metric-hidden" data-ref="cmp-direct-yield-yesterday">-</span><span class="compare-delta-value metric-hidden" data-ref="cmp-direct-yield-delta-yesterday">-</span>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section class="summary-section" aria-label="시간대별 생산수량">
+              <div class="summary-chart-card">
+                <div class="summary-chart-head">
+                  <div class="summary-chart-title">시간대별 생산수량</div>
+                  <div class="summary-chart-legend" aria-hidden="true">
+                    <span class="summary-chart-legend-item"><span class="summary-chart-line"></span>금일</span>
+                    <span class="summary-chart-legend-item"><span class="summary-chart-line summary-chart-line-yesterday"></span>전일</span>
+                  </div>
+                </div>
+                <div class="summary-chart-canvas-wrap">
+                  <canvas id="canvas-mobile-production-${line.id}"></canvas>
+                </div>
+              </div>
+            </section>
+            <section class="summary-section" aria-label="설비 고장">
+              <div class="summary-section-head">
+                <h3 class="summary-section-title">설비 고장</h3>
+                <button class="summary-link" type="button" onclick="openKpiHistory(${line.id}, 'alarm', 'alarmLoss')">상세 &gt;</button>
+              </div>
+              <div class="summary-card">
+                <div class="summary-metrics-grid">
+                  <div class="summary-metric">
+                    <span class="summary-label">고장률</span>
+                    <span class="summary-value"><span class="compare-main-value" data-ref="cmp-alarm-today">0</span><span class="compare-main-unit">%</span></span>
+                    <span class="metric-hidden" data-ref="cmp-alarm-yesterday">-</span><span class="compare-delta-value metric-hidden" data-ref="cmp-alarm-delta-yesterday">-</span>
+                  </div>
+                  <div class="summary-metric">
+                    <span class="summary-label">알람 발생수</span>
+                    <span class="summary-value"><span class="summary-value-text" data-ref="summary-alarm-count">0</span><span class="summary-unit">건</span></span>
+                  </div>
+                  <div class="summary-metric">
+                    <span class="summary-label">최근 발생</span>
+                    <span class="summary-value"><span class="summary-value-text" data-ref="summary-latest-alarm">-</span></span>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section class="summary-section" aria-label="실시간 알람">
+              <div class="summary-alarm-card">
+                <div class="summary-alarm-head">
+                  <div class="summary-alarm-title">실시간 알람</div>
+                  <button class="summary-link" type="button" onclick="openKpiHistory(${line.id}, 'alarmDetail')">상세 &gt;</button>
+                </div>
+                <div class="summary-alarm-state" data-ref="alarm-list">
+                  <span class="summary-alarm-text">현재 활성 알람 없음</span>
+                </div>
+              </div>
+            </section>
           </div>
           <div class="kpi-section">
             <div class="kpi-section-head">
@@ -1155,52 +2305,22 @@
               <span class="kpi-section-legend"><span class="legend-good"><span class="legend-dot legend-dot-good"></span>Good</span><span class="legend-bad"><span class="legend-dot legend-dot-bad"></span>Bad</span></span>
             </div>
             <div class="kpi-row">
-            <div class="kpi-card kpi-card-action" role="button" tabindex="0" onclick="openKpiHistory(${line.id}, 'production')" onkeydown="handleKpiLinkKey(event, () => openKpiHistory(${line.id}, 'production'))" aria-label="생산 수량 이력 보기">
-              <div class="compare-head"><span class="kpi-label">생산 수량</span></div>
+            <div class="kpi-card kpi-card-action kpi-card-production" role="button" tabindex="0" onclick="openKpiHistory(${line.id}, 'production')" onkeydown="handleKpiLinkKey(event, () => openKpiHistory(${line.id}, 'production'))" aria-label="생산현황 이력 보기">
+              <div class="compare-head compare-head-stacked"><span class="kpi-card-title">생산현황</span><span class="kpi-card-subtitle">생산 / 품질 / 가동</span></div>
               <div class="compare-main"><span class="compare-main-value" data-ref="cmp-production-today">0</span><span class="compare-main-unit">EA</span></div>
               <div class="compare-delta-list">
-                <div class="compare-delta"><span class="compare-delta-left"><span class="compare-delta-label">전일</span><span class="compare-delta-meta" data-ref="cmp-production-yesterday">-</span></span><span class="compare-delta-value delta-neutral" data-ref="cmp-production-delta-yesterday">-</span></div>
-                <div class="compare-delta"><span class="compare-delta-left"><span class="compare-delta-label">주간</span><span class="compare-delta-meta" data-ref="cmp-production-week">-</span></span><span class="compare-delta-value delta-neutral" data-ref="cmp-production-delta-week">-</span></div>
+                <div class="compare-delta"><span class="compare-delta-left"><span class="compare-delta-label">전일 생산</span><span class="compare-delta-meta" data-ref="cmp-production-yesterday">-</span></span><span class="compare-delta-value delta-neutral" data-ref="cmp-production-delta-yesterday">-</span></div>
+              </div>
+              <div class="kpi-summary-grid">
+                <div class="kpi-summary-item"><span class="kpi-summary-label">직행률</span><span class="kpi-summary-value"><span class="compare-main-value" data-ref="cmp-direct-yield-today">-</span><span class="compare-main-unit">%</span></span><span class="compare-delta-value delta-neutral" data-ref="cmp-direct-yield-delta-yesterday">-</span><span class="compare-delta-meta" data-ref="cmp-direct-yield-yesterday">-</span></div>
+                <div class="kpi-summary-item"><span class="kpi-summary-label">가동률</span><span class="kpi-summary-value"><span class="compare-main-value" data-ref="cmp-run-today">0</span><span class="compare-main-unit">%</span></span><span class="compare-delta-value delta-neutral" data-ref="cmp-run-delta-yesterday">-</span><span class="compare-delta-meta" data-ref="cmp-run-yesterday">-</span></div>
               </div>
             </div>
-            <div class="kpi-card kpi-card-action" role="button" tabindex="0" onclick="openKpiHistory(${line.id}, 'yield')" onkeydown="handleKpiLinkKey(event, () => openKpiHistory(${line.id}, 'yield'))" aria-label="직행률 이력 보기">
-              <div class="compare-head"><span class="kpi-label">직행률</span></div>
-              <div class="compare-main"><span class="compare-main-group"><span class="compare-main-value" data-ref="cmp-direct-yield-today">-</span><span class="compare-main-unit">%</span></span></div>
-              <div class="compare-delta-list">
-                <div class="compare-delta"><span class="compare-delta-left"><span class="compare-delta-label">전일</span><span class="compare-delta-meta" data-ref="cmp-direct-yield-yesterday">-</span></span><span class="compare-delta-value delta-neutral" data-ref="cmp-direct-yield-delta-yesterday">-</span></div>
-                <div class="compare-delta"><span class="compare-delta-left"><span class="compare-delta-label">주간</span><span class="compare-delta-meta" data-ref="cmp-direct-yield-week">-</span></span><span class="compare-delta-value delta-neutral" data-ref="cmp-direct-yield-delta-week">-</span></div>
-              </div>
-            </div>
-            <div class="kpi-card kpi-card-action" role="button" tabindex="0" onclick="openKpiHistory(${line.id}, 'availability')" onkeydown="handleKpiLinkKey(event, () => openKpiHistory(${line.id}, 'availability'))" aria-label="가동률 이력 보기">
-              <div class="compare-head"><span class="kpi-label">가동률</span></div>
-              <div class="compare-main"><span class="compare-main-value" data-ref="cmp-run-today">0</span><span class="compare-main-unit">%</span></div>
-              <div class="compare-delta-list">
-                <div class="compare-delta"><span class="compare-delta-left"><span class="compare-delta-label">전일</span><span class="compare-delta-meta" data-ref="cmp-run-yesterday">-</span></span><span class="compare-delta-value delta-neutral" data-ref="cmp-run-delta-yesterday">-</span></div>
-                <div class="compare-delta"><span class="compare-delta-left"><span class="compare-delta-label">주간</span><span class="compare-delta-meta" data-ref="cmp-run-week">-</span></span><span class="compare-delta-value delta-neutral" data-ref="cmp-run-delta-week">-</span></div>
-              </div>
-            </div>
-            <div class="kpi-card kpi-card-action" role="button" tabindex="0" onclick="openKpiHistory(${line.id}, 'alarm', 'mttr')" onkeydown="handleKpiLinkKey(event, () => openKpiHistory(${line.id}, 'alarm', 'mttr'))" aria-label="MTTR 알람 이력 보기">
-              <div class="compare-head"><span class="kpi-label">MTTR</span></div>
-              <div class="compare-main"><span class="compare-main-value" data-ref="cmp-mttr-today">-</span><span class="compare-main-unit">hr</span></div>
-              <div class="compare-delta-list">
-                <div class="compare-delta"><span class="compare-delta-left"><span class="compare-delta-label">전일</span><span class="compare-delta-meta" data-ref="cmp-mttr-yesterday">-</span></span><span class="compare-delta-value delta-neutral" data-ref="cmp-mttr-delta-yesterday">-</span></div>
-                <div class="compare-delta"><span class="compare-delta-left"><span class="compare-delta-label">주간</span><span class="compare-delta-meta" data-ref="cmp-mttr-week">-</span></span><span class="compare-delta-value delta-neutral" data-ref="cmp-mttr-delta-week">-</span></div>
-              </div>
-            </div>
-            <div class="kpi-card kpi-card-action" role="button" tabindex="0" onclick="openKpiHistory(${line.id}, 'alarm', 'mtbf')" onkeydown="handleKpiLinkKey(event, () => openKpiHistory(${line.id}, 'alarm', 'mtbf'))" aria-label="MTBF 알람 이력 보기">
-              <div class="compare-head"><span class="kpi-label">MTBF</span></div>
-              <div class="compare-main"><span class="compare-main-value" data-ref="cmp-mtbf-today">-</span><span class="compare-main-unit">hr</span></div>
-              <div class="compare-delta-list">
-                <div class="compare-delta"><span class="compare-delta-left"><span class="compare-delta-label">전일</span><span class="compare-delta-meta" data-ref="cmp-mtbf-yesterday">-</span></span><span class="compare-delta-value delta-neutral" data-ref="cmp-mtbf-delta-yesterday">-</span></div>
-                <div class="compare-delta"><span class="compare-delta-left"><span class="compare-delta-label">주간</span><span class="compare-delta-meta" data-ref="cmp-mtbf-week">-</span></span><span class="compare-delta-value delta-neutral" data-ref="cmp-mtbf-delta-week">-</span></div>
-              </div>
-            </div>
-            <div class="kpi-card kpi-card-action" role="button" tabindex="0" onclick="openKpiHistory(${line.id}, 'alarm', 'alarmLoss')" onkeydown="handleKpiLinkKey(event, () => openKpiHistory(${line.id}, 'alarm', 'alarmLoss'))" aria-label="고장률 알람 이력 보기">
-              <div class="compare-head"><span class="kpi-label">고장률</span></div>
+            <div class="kpi-card kpi-card-action kpi-card-fault" role="button" tabindex="0" onclick="openKpiHistory(${line.id}, 'alarm', 'alarmLoss')" onkeydown="handleKpiLinkKey(event, () => openKpiHistory(${line.id}, 'alarm', 'alarmLoss'))" aria-label="설비 고장 이력 보기">
+              <div class="compare-head compare-head-stacked"><span class="kpi-card-title">설비 고장</span><span class="kpi-card-subtitle">고장률</span></div>
               <div class="compare-main"><span class="compare-main-value" data-ref="cmp-alarm-today">0</span><span class="compare-main-unit">%</span></div>
               <div class="compare-delta-list">
-                <div class="compare-delta"><span class="compare-delta-left"><span class="compare-delta-label">전일</span><span class="compare-delta-meta" data-ref="cmp-alarm-yesterday">-</span></span><span class="compare-delta-value delta-neutral" data-ref="cmp-alarm-delta-yesterday">-</span></div>
-                <div class="compare-delta"><span class="compare-delta-left"><span class="compare-delta-label">주간</span><span class="compare-delta-meta" data-ref="cmp-alarm-week">-</span></span><span class="compare-delta-value delta-neutral" data-ref="cmp-alarm-delta-week">-</span></div>
+                <div class="compare-delta"><span class="compare-delta-left"><span class="compare-delta-label">전일 고장률</span><span class="compare-delta-meta" data-ref="cmp-alarm-yesterday">-</span></span><span class="compare-delta-value delta-neutral" data-ref="cmp-alarm-delta-yesterday">-</span></div>
               </div>
             </div>
             </div>
@@ -1224,12 +2344,14 @@
           </div>
         </div>`).join('');
       lines.forEach(line => setupInteractions(line.id));
+      renderMobileLineTabs(lines);
     }
 
     function getStatusStyle(label) {
       if (label === 'ALARM') return { textClass: 'tx-alarm', accentClass: 'accent-alarm' };
       if (label === 'RUN') return { textClass: 'tx-run', accentClass: 'accent-run' };
       if (label === 'STOP') return { textClass: 'tx-stop', accentClass: 'accent-stop' };
+      if (label === 'IDLE') return { textClass: 'tx-idle', accentClass: 'accent-idle' };
       if (label === 'ONLINE') return { textClass: 'tx-online', accentClass: 'accent-online' };
       return { textClass: 'tx-offline', accentClass: 'accent-offline' };
     }
@@ -1322,18 +2444,36 @@
       return good ? 'delta-good' : 'delta-bad';
     }
 
+    function getPercentStateClass(value) {
+      if (value === null || value === undefined || Number.isNaN(Number(value))) return '';
+      const numeric = Number(value);
+      if (numeric >= 95) return 'metric-state-good';
+      if (numeric >= 85) return 'metric-state-warn';
+      return 'metric-state-bad';
+    }
+
+    function setMetricStateClass(el, stateClass) {
+      el.classList.remove('metric-state-good', 'metric-state-warn', 'metric-state-bad');
+      if (stateClass) el.classList.add(stateClass);
+    }
+
     function updateCompareMetric(panelEl, key, metric, unit, betterWhenLower = false) {
-      panelEl.querySelector(`[data-ref="cmp-${key}-today"]`).textContent = formatCompareValue(metric.today, unit);
-      panelEl.querySelector(`[data-ref="cmp-${key}-yesterday"]`).textContent = formatCompareRowValue(metric.yesterday, unit);
-      panelEl.querySelector(`[data-ref="cmp-${key}-week"]`).textContent = formatCompareRowValue(metric.week, unit);
+      const todayEls = panelEl.querySelectorAll(`[data-ref="cmp-${key}-today"]`);
+      const yesterdayEls = panelEl.querySelectorAll(`[data-ref="cmp-${key}-yesterday"]`);
+      const yestEls = panelEl.querySelectorAll(`[data-ref="cmp-${key}-delta-yesterday"]`);
+      if (!todayEls.length || !yesterdayEls.length || !yestEls.length) return;
+      const stateClass = key === 'run' || key === 'direct-yield' ? getPercentStateClass(metric.today) : '';
+      todayEls.forEach(el => {
+        el.textContent = formatCompareValue(metric.today, unit);
+        setMetricStateClass(el, stateClass);
+      });
+      yesterdayEls.forEach(el => { el.textContent = formatCompareRowValue(metric.yesterday, unit); });
 
-      const yestEl = panelEl.querySelector(`[data-ref="cmp-${key}-delta-yesterday"]`);
-      yestEl.textContent = formatDeltaDisplay(metric.deltaYesterday, unit, betterWhenLower);
-      yestEl.className = `compare-delta-value ${getDeltaClass(metric.deltaYesterday, betterWhenLower)}`;
-
-      const weekEl = panelEl.querySelector(`[data-ref="cmp-${key}-delta-week"]`);
-      weekEl.textContent = formatDeltaDisplay(metric.deltaWeek, unit, betterWhenLower);
-      weekEl.className = `compare-delta-value ${getDeltaClass(metric.deltaWeek, betterWhenLower)}`;
+      yestEls.forEach(el => {
+        el.textContent = formatDeltaDisplay(metric.deltaYesterday, unit, betterWhenLower);
+        const hidden = el.classList.contains('metric-hidden') ? ' metric-hidden' : '';
+        el.className = `compare-delta-value ${getDeltaClass(metric.deltaYesterday, betterWhenLower)}${hidden}`;
+      });
     }
 
     function formatDeltaDisplay(value, unit, betterWhenLower = false) {
@@ -1495,74 +2635,66 @@
       if (mtbfUnitEl) mtbfUnitEl.textContent = 'hr';
       const today = comparisons.today || {};
       const yesterday = comparisons.yesterday || {};
-      const weekAvg = comparisons.week_avg || {};
       const availabilityHistory = comparisons.availability_history || {};
       const elapsedMinutes = Number(comparisons.elapsed_minutes || 0);
       const runTodayRate = toRate(today.run_minutes, elapsedMinutes);
       const runYesterdayRate = toRate(yesterday.run_minutes, elapsedMinutes);
-      const runWeekRate = toRate(weekAvg.run_minutes, elapsedMinutes);
       const alarmTodayRate = historySummary?.today?.alarm_loss ?? alarmLossRate(Number(today.alarm_minutes || 0) * 60, 1);
       const alarmYesterdayRate = historySummary?.yesterday?.alarm_loss ?? alarmLossRate(Number(yesterday.alarm_minutes || 0) * 60, 1);
-      const alarmWeekRate = historySummary?.week?.alarm_loss ?? alarmLossRate(Number(weekAvg.alarm_minutes || 0) * 60, Number(weekAvg.sample_size || 1));
       const productionToday = today.production;
       const productionYesterday = yesterday.production;
       const availabilityToday = historySummary?.today?.availability ?? availabilityHistory.today?.availability ?? runTodayRate;
       const availabilityYesterday = historySummary?.yesterday?.availability ?? availabilityHistory.yesterday?.availability ?? runYesterdayRate;
-      const availabilityWeek = historySummary?.week?.availability ?? availabilityHistory.week_avg?.availability ?? runWeekRate;
       const alarmLossToday = alarmTodayRate;
       const alarmLossYesterday = alarmYesterdayRate;
-      const alarmLossWeek = alarmWeekRate;
       const mttrToday = today.mttr_min;
       const mttrYesterday = yesterday.mttr_min;
       const mtbfToday = today.mtbf_min;
       const mtbfYesterday = yesterday.mtbf_min;
       const directYieldToday = today.direct_yield;
       const directYieldYesterday = yesterday.direct_yield;
+      const alarmCountEl = panelEl.querySelector('[data-ref="summary-alarm-count"]');
+      if (alarmCountEl) alarmCountEl.textContent = formatCompareValue(today.alarm_count ?? 0, 'ea');
+      const latestAlarmEl = panelEl.querySelector('[data-ref="summary-latest-alarm"]');
+      if (latestAlarmEl) {
+        const latestActiveAlarm = [...(data.active_alarms || [])]
+          .filter(item => item.started_at)
+          .sort((a, b) => String(b.started_at || '').localeCompare(String(a.started_at || '')))[0];
+        latestAlarmEl.textContent = latestActiveAlarm ? formatTimeOnly(latestActiveAlarm.started_at).slice(0, 5) : '-';
+      }
 
       updateCompareMetric(panelEl, 'production', {
         as_of: asOf,
         today: productionToday,
         yesterday: productionYesterday,
-        week: weekAvg.production,
-        deltaYesterday: productionToday === null || productionToday === undefined || productionYesterday === null || productionYesterday === undefined ? null : productionToday - productionYesterday,
-        deltaWeek: productionToday === null || productionToday === undefined || weekAvg.production === null || weekAvg.production === undefined ? null : productionToday - weekAvg.production
+        deltaYesterday: productionToday === null || productionToday === undefined || productionYesterday === null || productionYesterday === undefined ? null : productionToday - productionYesterday
       }, 'ea');
       updateCompareMetric(panelEl, 'run', {
         as_of: asOf,
         today: availabilityToday,
         yesterday: availabilityYesterday,
-        week: availabilityWeek,
-        deltaYesterday: availabilityToday === null || availabilityYesterday === null ? null : availabilityToday - availabilityYesterday,
-        deltaWeek: availabilityToday === null || availabilityWeek === null ? null : availabilityToday - availabilityWeek
+        deltaYesterday: availabilityToday === null || availabilityYesterday === null ? null : availabilityToday - availabilityYesterday
       }, 'pct');
       updateCompareMetric(panelEl, 'alarm', {
         as_of: asOf,
         today: alarmLossToday,
         yesterday: alarmLossYesterday,
-        week: alarmLossWeek,
-        deltaYesterday: alarmLossToday === null || alarmLossYesterday === null ? null : alarmLossToday - alarmLossYesterday,
-        deltaWeek: alarmLossToday === null || alarmLossWeek === null ? null : alarmLossToday - alarmLossWeek
+        deltaYesterday: alarmLossToday === null || alarmLossYesterday === null ? null : alarmLossToday - alarmLossYesterday
       }, 'pct2', true);
       updateCompareMetric(panelEl, 'mttr', {
         today: mttrToday,
         yesterday: mttrYesterday,
-        week: weekAvg.mttr_min,
-        deltaYesterday: mttrToday === null || mttrYesterday === null ? null : mttrToday - mttrYesterday,
-        deltaWeek: mttrToday === null || weekAvg.mttr_min === null || weekAvg.mttr_min === undefined ? null : mttrToday - weekAvg.mttr_min
+        deltaYesterday: mttrToday === null || mttrYesterday === null ? null : mttrToday - mttrYesterday
       }, 'hour', true);
       updateCompareMetric(panelEl, 'mtbf', {
         today: mtbfToday,
         yesterday: mtbfYesterday,
-        week: weekAvg.mtbf_min,
-        deltaYesterday: mtbfToday === null || mtbfYesterday === null ? null : mtbfToday - mtbfYesterday,
-        deltaWeek: mtbfToday === null || weekAvg.mtbf_min === null || weekAvg.mtbf_min === undefined ? null : mtbfToday - weekAvg.mtbf_min
+        deltaYesterday: mtbfToday === null || mtbfYesterday === null ? null : mtbfToday - mtbfYesterday
       }, 'hour');
       updateCompareMetric(panelEl, 'direct-yield', {
         today: directYieldToday,
         yesterday: directYieldYesterday,
-        week: weekAvg.direct_yield,
-        deltaYesterday: directYieldToday === null || directYieldYesterday === null ? null : directYieldToday - directYieldYesterday,
-        deltaWeek: directYieldToday === null || weekAvg.direct_yield === null || weekAvg.direct_yield === undefined ? null : directYieldToday - weekAvg.direct_yield
+        deltaYesterday: directYieldToday === null || directYieldYesterday === null ? null : directYieldToday - directYieldYesterday
       }, 'pct');
     }
 
@@ -1620,24 +2752,42 @@
       } else {
         drawCombinedChart(id, CHART_DATA[id].yest, CHART_DATA[id].today, data.timeline_yesterday || [], data.timeline_today || []);
       }
+      drawMobileProductionChart(id, CHART_DATA[id].yest, CHART_DATA[id].today, data.timeline_yesterday || [], data.timeline_today || []);
     }
 
     function renderAlarmList(panelEl, alarms) {
-      const listEl = panelEl.querySelector('[data-ref="alarm-list"]');
-      if (!listEl) return;
-      if (!alarms.length) {
-        listEl.innerHTML = '<li class="list-item justify-center text-[#5E6673] border-none">현재 활성 알람 없음</li>';
-        return;
-      }
-      listEl.innerHTML = alarms.slice(0, 10).map(alarm => `
-        <li class="list-item alarm-item">
-          <span class="alarm-name" title="${alarm.label || '-'}">${alarm.label || '-'}</span>
-          <span class="alarm-meta-group">
-            <span class="alarm-meta"><span class="alarm-meta-label">발생</span><span class="alarm-meta-value">${formatTimeOnly(alarm.started_at)}</span></span>
-            <span class="alarm-meta"><span class="alarm-meta-label">경과</span><span class="alarm-meta-value">${formatElapsedSince(alarm.started_at)}</span></span>
-          </span>
-        </li>
-      `).join('');
+      const listEls = panelEl.querySelectorAll('[data-ref="alarm-list"]');
+      if (!listEls.length) return;
+      listEls.forEach(listEl => {
+        const compact = listEl.classList.contains('summary-alarm-state');
+        if (compact) {
+          const firstAlarm = alarms[0];
+          listEl.classList.toggle('active', Boolean(firstAlarm));
+          listEl.classList.toggle('empty', !firstAlarm);
+          listEl.innerHTML = `
+            ${firstAlarm ? '' : '<span class="summary-alarm-empty-icon" aria-hidden="true">✓</span>'}
+            <span class="summary-alarm-text ${firstAlarm ? 'active' : ''}">${firstAlarm ? (firstAlarm.label || '활성 알람 확인 필요') : '현재 활성 알람 없음'}</span>
+            ${firstAlarm ? `<span class="summary-alarm-meta-row">
+              <span class="summary-alarm-meta"><span class="summary-alarm-meta-label">발생</span><span class="summary-alarm-meta-value">${formatTimeOnly(firstAlarm.started_at)}</span></span>
+              <span class="summary-alarm-meta"><span class="summary-alarm-meta-label">경과</span><span class="summary-alarm-meta-value">${formatElapsedSince(firstAlarm.started_at)}</span></span>
+            </span>` : ''}
+          `;
+          return;
+        }
+        if (!alarms.length) {
+          listEl.innerHTML = '<li class="list-item justify-center text-[#5E6673] border-none">현재 활성 알람 없음</li>';
+          return;
+        }
+        listEl.innerHTML = alarms.slice(0, 10).map(alarm => `
+          <li class="list-item alarm-item">
+            <span class="alarm-name" title="${alarm.label || '-'}">${alarm.label || '-'}</span>
+            <span class="alarm-meta-group">
+              <span class="alarm-meta"><span class="alarm-meta-label">발생</span><span class="alarm-meta-value">${formatTimeOnly(alarm.started_at)}</span></span>
+              <span class="alarm-meta"><span class="alarm-meta-label">경과</span><span class="alarm-meta-value">${formatElapsedSince(alarm.started_at)}</span></span>
+            </span>
+          </li>
+        `).join('');
+      });
     }
 
     function setChartMode(id, mode) {
@@ -1845,6 +2995,7 @@
         DAY_START_HOUR = Math.floor(DAY_START_MINUTE / 60);
         if (!LINES.length) {
           LINES = payload.lines.map(line => ({ id: line.id, name: line.name, cycle_time_sec: line.cycle_time_sec }));
+          if (!ACTIVE_MOBILE_LINE_ID && LINES.length) ACTIVE_MOBILE_LINE_ID = String(LINES[0].id);
           renderPanels(LINES);
         }
         payload.lines.forEach(line => {
@@ -1854,10 +3005,27 @@
             console.error(`Line render failed: ${line.name || line.id}`, lineError);
           }
         });
+        applyMobileLineSelection();
         updateServerState(true, payload.viewer_count);
       } catch (error) {
+        showDashboardLoadError(error);
         updateServerState(false);
       }
+    }
+
+    function showDashboardLoadError(error) {
+      if (LINES.length) return;
+      const grid = document.getElementById('dashboardGrid');
+      if (!grid) return;
+      const message = error?.message ? ` (${error.message})` : '';
+      grid.innerHTML = `
+        <div class="dashboard-card" style="grid-column:1 / -1; min-height:220px; display:flex; align-items:center; justify-content:center; text-align:center;">
+          <div>
+            <div class="panel-title" style="margin-bottom:10px;">서버 연결 대기 중</div>
+            <div style="color:#8A93A3; font-size:14px;">데이터 API에 연결하지 못했습니다${message}. 잠시 후 자동으로 다시 시도합니다.</div>
+          </div>
+        </div>
+      `;
     }
 
     function startClock() {
@@ -3600,7 +4768,7 @@
             drawCombinedChart(id, d.yest, d.today, d.timeline_yesterday || [], d.timeline_today || []);
           }
           const yestSeries = buildPlotSeries(d.yest, d.timeline_yesterday || [], false);
-          const todaySeries = buildPlotSeries(d.today, d.timeline_today || [], true);
+          const todaySeries = buildCompletedTodayPlotSeries(d.today, d.timeline_today || []);
           const yestValue = yestSeries[h];
           const todayValue = todaySeries[h];
           const prod = todayValue === null || todayValue === undefined ? 0 : Number(todayValue);
@@ -3639,6 +4807,166 @@
       });
     }
 
+    function drawMobileProductionChart(id, yest, today, tYest, tToday) {
+      const cvs = document.getElementById(`canvas-mobile-production-${id}`);
+      if (!cvs) return;
+      const chartState = CHART_DATA[id] || {};
+      if (chartState.mobilePulseTimer) {
+        clearTimeout(chartState.mobilePulseTimer);
+        chartState.mobilePulseTimer = null;
+      }
+      const rect = cvs.parentElement.getBoundingClientRect();
+      if (rect.width <= 0 || rect.height <= 0) return;
+      const ctx = cvs.getContext('2d');
+      const dpr = window.devicePixelRatio || 1;
+      cvs.width = Math.round(rect.width * dpr);
+      cvs.height = Math.round(rect.height * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      const W = rect.width;
+      const H = rect.height;
+      const padL = 10;
+      const padR = 8;
+      const padT = 10;
+      const padB = 17;
+      const plotW = Math.max(W - padL - padR, 1);
+      const plotH = Math.max(H - padT - padB, 1);
+      const yestSeries = buildPlotSeries(yest || [], tYest || [], false);
+      const todaySeries = buildCompletedTodayPlotSeries(today || [], tToday || []);
+      const maxValue = fixedYAxisMax(id);
+      const startMinute = CHART_DATA[id]?.dayStartMinute ?? DAY_START_MINUTE;
+      const xFor = index => padL + ((index / 23) * plotW);
+      const yFor = value => {
+        const ratio = Math.max(0, Math.min(1, Number(value || 0) / maxValue));
+        return padT + plotH - (ratio * plotH);
+      };
+
+      ctx.clearRect(0, 0, W, H);
+      ctx.fillStyle = '#0D1119';
+      ctx.fillRect(0, 0, W, H);
+
+      ctx.save();
+      ctx.strokeStyle = 'rgba(255,255,255,0.055)';
+      ctx.lineWidth = 1;
+      [0, 1].forEach(ratio => {
+        const y = padT + (plotH * (1 - ratio));
+        ctx.beginPath();
+        ctx.moveTo(padL, y);
+        ctx.lineTo(W - padR, y);
+        ctx.stroke();
+      });
+      ctx.restore();
+
+      function buildPoints(series) {
+        return series.map((value, index) => {
+          if (value === null || value === undefined) return null;
+          return { x: xFor(index), y: yFor(value), value:Number(value) };
+        });
+      }
+
+      function drawArea(points) {
+        const valid = points.filter(Boolean);
+        if (valid.length < 2) return;
+        const gradient = ctx.createLinearGradient(0, padT, 0, padT + plotH);
+        gradient.addColorStop(0, 'rgba(125,211,220,0.24)');
+        gradient.addColorStop(1, 'rgba(125,211,220,0)');
+        ctx.save();
+        ctx.beginPath();
+        valid.forEach((point, index) => {
+          if (index === 0) ctx.moveTo(point.x, point.y);
+          else ctx.lineTo(point.x, point.y);
+        });
+        ctx.lineTo(valid[valid.length - 1].x, padT + plotH);
+        ctx.lineTo(valid[0].x, padT + plotH);
+        ctx.closePath();
+        ctx.fillStyle = gradient;
+        ctx.fill();
+        ctx.restore();
+      }
+
+      function drawSeries(series, color, dash = [], alpha = 1, width = 1.7, glow = false) {
+        ctx.save();
+        ctx.beginPath();
+        ctx.strokeStyle = color;
+        ctx.globalAlpha = alpha;
+        ctx.lineWidth = width;
+        ctx.lineJoin = 'round';
+        ctx.lineCap = 'round';
+        ctx.setLineDash(dash);
+        if (glow) {
+          ctx.shadowColor = 'rgba(125,211,220,0.42)';
+          ctx.shadowBlur = 7;
+        }
+        let drawing = false;
+        series.forEach((value, index) => {
+          if (value === null || value === undefined) {
+            drawing = false;
+            return;
+          }
+          const x = xFor(index);
+          const y = yFor(value);
+          if (!drawing) {
+            ctx.moveTo(x, y);
+            drawing = true;
+          } else {
+            ctx.lineTo(x, y);
+          }
+        });
+        ctx.stroke();
+        ctx.restore();
+      }
+
+      const todayPoints = buildPoints(todaySeries);
+      const lineGradient = ctx.createLinearGradient(padL, 0, W - padR, 0);
+      lineGradient.addColorStop(0, '#7DD3DC');
+      lineGradient.addColorStop(1, '#5EE3A8');
+      drawSeries(yestSeries, 'rgba(107,114,131,0.44)', [4, 4], 1, 1.35);
+      drawArea(todayPoints);
+      drawSeries(todaySeries, lineGradient, [], 1, 2.3, true);
+
+      const latestPoint = lastValidPoint(todaySeries, (index, value) => ({ x: xFor(index), y: yFor(value), value }))?.point;
+      if (latestPoint) {
+        const pulse = 8 + (Math.sin(Date.now() / 220) * 1.8);
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(latestPoint.x, latestPoint.y, pulse, 0, Math.PI * 2);
+        ctx.strokeStyle = 'rgba(94,227,168,0.42)';
+        ctx.lineWidth = 1.4;
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(latestPoint.x, latestPoint.y, 4, 0, Math.PI * 2);
+        ctx.fillStyle = '#5EE3A8';
+        ctx.strokeStyle = '#0D1119';
+        ctx.lineWidth = 1.5;
+        ctx.fill();
+        ctx.stroke();
+        ctx.restore();
+      }
+
+      ctx.save();
+      ctx.strokeStyle = 'rgba(255,255,255,0.055)';
+      ctx.fillStyle = '#6B7283';
+      ctx.font = '8px JetBrains Mono, monospace';
+      ctx.textBaseline = 'top';
+      [0, 12, 24].forEach(hour => {
+        const x = padL + ((hour / 24) * plotW);
+        ctx.beginPath();
+        ctx.moveTo(x, padT + plotH + 3);
+        ctx.lineTo(x, padT + plotH + 5);
+        ctx.stroke();
+        ctx.textAlign = axisTextAlign(hour);
+        ctx.fillText(slotLabel(hour, startMinute), x, padT + plotH + 7);
+      });
+      ctx.restore();
+
+      if (latestPoint && CHART_DATA[id]) {
+        CHART_DATA[id].mobilePulseTimer = setTimeout(() => {
+          CHART_DATA[id].mobilePulseTimer = null;
+          drawMobileProductionChart(id, yest, today, tYest, tToday);
+        }, 140);
+      }
+    }
+
     function drawCombinedChart(id, yest, today, tYest, tToday) {
       const cvs = document.getElementById(`canvas-main-${id}`);
       if (!cvs) return;
@@ -3659,10 +4987,40 @@
       const gp = (i, v) => ({ x: plotX + (i * step), y: 10 + cH - ((v / max) * cH) });
 
       const yestSeries = buildPlotSeries(yest, tYest, false);
-      const todaySeries = buildPlotSeries(today, tToday, true);
+      const todaySeries = buildCompletedTodayPlotSeries(today, tToday);
       const gpv = (i, v) => ({ x: plotX + (i * step), y: 10 + cH - ((v / max) * cH) });
 
-      function drawLineSeries(series, color, width, alpha, dash = []) {
+      function buildLinePoints(series) {
+        return series.map((value, i) => {
+          if (value === null || value === undefined) return null;
+          const numeric = Number(value);
+          if (!Number.isFinite(numeric)) return null;
+          const p = gpv(i, numeric);
+          return { ...p, value:numeric };
+        });
+      }
+
+      function drawArea(points) {
+        const valid = points.filter(Boolean);
+        if (valid.length < 2) return;
+        const gradient = ctx.createLinearGradient(0, 10, 0, 10 + cH);
+        gradient.addColorStop(0, 'rgba(125,211,220,0.22)');
+        gradient.addColorStop(1, 'rgba(125,211,220,0)');
+        ctx.save();
+        ctx.beginPath();
+        valid.forEach((point, index) => {
+          if (index === 0) ctx.moveTo(point.x, point.y);
+          else ctx.lineTo(point.x, point.y);
+        });
+        ctx.lineTo(valid[valid.length - 1].x, 10 + cH);
+        ctx.lineTo(valid[0].x, 10 + cH);
+        ctx.closePath();
+        ctx.fillStyle = gradient;
+        ctx.fill();
+        ctx.restore();
+      }
+
+      function drawLineSeries(series, color, width, alpha, dash = [], glow = false) {
         ctx.save();
         ctx.beginPath();
         ctx.strokeStyle = color;
@@ -3671,6 +5029,10 @@
         ctx.lineJoin = 'round';
         ctx.lineCap = 'round';
         ctx.setLineDash(dash);
+        if (glow) {
+          ctx.shadowColor = 'rgba(125,211,220,0.42)';
+          ctx.shadowBlur = 8;
+        }
         let drawing = false;
         series.forEach((value, i) => {
           if (value === null || value === undefined) {
@@ -3689,8 +5051,32 @@
         ctx.restore();
       }
 
-      drawLineSeries(yestSeries, '#8E8E93', 1.35, 0.72, [4, 3]);
-      drawLineSeries(todaySeries, C_CHART, 1.75, 0.75);
+      const todayPoints = buildLinePoints(todaySeries);
+      const lineGradient = ctx.createLinearGradient(plotX, 0, plotX + plotW, 0);
+      lineGradient.addColorStop(0, '#7DD3DC');
+      lineGradient.addColorStop(1, '#5EE3A8');
+      drawLineSeries(yestSeries, 'rgba(107,114,131,0.46)', 1.35, 1, [4, 3]);
+      drawArea(todayPoints);
+      drawLineSeries(todaySeries, lineGradient, 2.35, 1, [], true);
+
+      const latestPoint = lastValidPoint(todaySeries, (index, value) => gpv(index, value))?.point;
+      if (latestPoint) {
+        const pulse = 8 + (Math.sin(Date.now() / 220) * 1.8);
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(latestPoint.x, latestPoint.y, pulse, 0, Math.PI * 2);
+        ctx.strokeStyle = 'rgba(94,227,168,0.42)';
+        ctx.lineWidth = 1.4;
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(latestPoint.x, latestPoint.y, 4, 0, Math.PI * 2);
+        ctx.fillStyle = '#5EE3A8';
+        ctx.strokeStyle = '#0D1119';
+        ctx.lineWidth = 1.5;
+        ctx.fill();
+        ctx.stroke();
+        ctx.restore();
+      }
 
       ctx.save();
       ctx.font = '10px sans-serif';
@@ -3753,7 +5139,6 @@
       CHART_DATA[id].stripMeta = { yesterdayY: yestStripY, todayY: todayStripY };
 
       ctx.font = '9px sans-serif';
-      ctx.textAlign = 'center';
       ctx.textBaseline = 'top';
       ctx.fillStyle = '#6b7280';
       ctx.strokeStyle = '#3a3a3c';
@@ -3765,6 +5150,7 @@
         ctx.moveTo(x, axisBaseY + 2);
         ctx.lineTo(x, axisBaseY + 6);
         ctx.stroke();
+        ctx.textAlign = axisTextAlign(hour);
         ctx.fillText(slotLabel(hour, startMinute), x, axisBaseY + 7);
       }
 
@@ -3850,6 +5236,7 @@
         ctx.moveTo(x, H - STATUS_AXIS_HEIGHT + 2);
         ctx.lineTo(x, H - STATUS_AXIS_HEIGHT + 6);
         ctx.stroke();
+        ctx.textAlign = axisTextAlign(hour);
         ctx.fillText(slotLabel(hour, startMinute), x, H - STATUS_AXIS_HEIGHT + 7);
       }
       const wrapper = cvs.parentElement;
@@ -3858,6 +5245,19 @@
       CHART_DATA[id].stripMeta = {};
     }
 
+    window.addEventListener('resize', () => {
+      Object.entries(CHART_DATA).forEach(([id, data]) => {
+        drawMobileProductionChart(id, data.yest || [], data.today || [], data.timeline_yesterday || [], data.timeline_today || []);
+      });
+    });
+
+  </script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js?v=20260519-chart-gradient-1').catch(() => {});
+      });
+    }
   </script>
 </body>
 </html>

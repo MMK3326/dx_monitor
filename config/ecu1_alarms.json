@@ -1084,6 +1084,22 @@
         "label":  "#50 Door Pass On"
     },
     {
+        "device":  "L545",
+        "label":  "리벳-1 Alarm"
+    },
+    {
+        "device":  "L546",
+        "label":  "리벳-2 Alarm"
+    },
+    {
+        "device":  "L547",
+        "label":  "리벳-3 Alarm"
+    },
+    {
+        "device":  "L548",
+        "label":  "리벳-4 Alarm"
+    },
+    {
         "device":  "L601",
         "label":  "#60 검사공정 OP 비상정지"
     },

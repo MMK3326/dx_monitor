@@ -1,7 +1,9 @@
 from __future__ import annotations
 
 import csv
+import ipaddress
 import json
+import os
 import sqlite3
 import threading
 import time
@@ -1157,6 +1159,7 @@ class Storage:
 
     def export_day_csv(self, line_name: str, line_id: int, day_key: str) -> None:
         safe_name = safe_file_name(line_name, f"line_{line_id}")
+        self.history_dir.mkdir(parents=True, exist_ok=True)
         hourly_path = self.history_dir / f"{day_key}_{safe_name}_hourly.csv"
         uph_path = self.history_dir / f"{day_key}_{safe_name}_uph.csv"
 
@@ -2176,6 +2179,7 @@ monitors = [LineMonitor(config=line_cfg, storage=storage, poll_interval_sec=POLL
 viewer_lock = threading.Lock()
 viewer_heartbeats: dict[str, float] = {}
 VIEWER_TTL_SEC = 15
+ALLOW_REMOTE_WRITES = os.environ.get("DX_MONITOR_ALLOW_REMOTE_WRITES", "").strip().lower() in {"1", "true", "yes", "on"}
 
 app = Flask(__name__, static_folder=str(DASHBOARD_DIR), static_url_path="")
 
@@ -2187,6 +2191,25 @@ def active_viewer_count(now: float | None = None) -> int:
         for client_id in expired:
             viewer_heartbeats.pop(client_id, None)
         return len(viewer_heartbeats)
+
+
+def client_ip() -> str:
+    forwarded_for = request.headers.get("X-Forwarded-For", "").split(",", 1)[0].strip()
+    cloudflare_ip = request.headers.get("CF-Connecting-IP", "").strip()
+    return cloudflare_ip or forwarded_for or request.remote_addr or ""
+
+
+def is_loopback_request() -> bool:
+    try:
+        return ipaddress.ip_address(client_ip()).is_loopback
+    except ValueError:
+        return False
+
+
+def require_local_write_access():
+    if ALLOW_REMOTE_WRITES or is_loopback_request():
+        return None
+    return jsonify({"error": "write access is allowed only from the server PC"}), 403
 
 
 @app.after_request
@@ -2206,6 +2229,7 @@ def index():
 def dashboard_api():
     return jsonify({
         "build": int(time.time()),
+        "read_only": not (ALLOW_REMOTE_WRITES or is_loopback_request()),
         "day_start_hour": DAY_START_HOUR,
         "day_start_minute": DAY_START_MINUTE,
         "day_start_time": minute_time_label(DAY_START_MINUTE),
@@ -2229,6 +2253,9 @@ def viewers_heartbeat_api():
 
 @app.route("/api/lines/<int:line_id>/target", methods=["POST"])
 def line_target_api(line_id: int):
+    denied = require_local_write_access()
+    if denied is not None:
+        return denied
     payload = request.get_json(silent=True) or {}
     target_raw = payload.get("daily")
     try:
@@ -2271,6 +2298,9 @@ def history_api(line_id: int):
 
 @app.route("/api/history/<int:line_id>/production-export", methods=["POST"])
 def production_export_api(line_id: int):
+    denied = require_local_write_access()
+    if denied is not None:
+        return denied
     monitor = next((item for item in monitors if item.config["id"] == line_id), None)
     if monitor is None:
         return jsonify({"error": "unknown line"}), 404
@@ -2321,6 +2351,9 @@ def hourly_comparison_api(line_id: int):
 
 @app.route("/api/alarm-events/delete", methods=["POST"])
 def alarm_events_delete_api():
+    denied = require_local_write_access()
+    if denied is not None:
+        return denied
     payload = request.get_json(silent=True) or {}
     line_id = safe_int(payload.get("line_id"))
     event_ids = payload.get("event_ids") or []
